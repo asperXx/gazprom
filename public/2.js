@@ -81,7 +81,7 @@ __webpack_require__.r(__webpack_exports__);
         headers: {
           'X-CSRF-TOKEN': window.Laravel.csrfToken
         }
-      }); // .then(res => console.log(res))
+      });
     },
     deleteProp: function deleteProp(title) {
       var _this2 = this;
@@ -119,9 +119,10 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm._l(_vm.getProps, function(getProp, index) {
+      _vm._l(_vm.getProps, function(getProp, id) {
         return _c(
           "div",
+          { key: getProp.id },
           [
             _c(
               "router-link",

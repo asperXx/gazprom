@@ -24,10 +24,6 @@ export default {
 	methods: {
 		getAnswer() {
 			console.log(JSON.stringify(this.answers))
-
-			/*
-			Обработка
-			*/
 		}
 	},
 

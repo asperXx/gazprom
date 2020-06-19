@@ -44,10 +44,12 @@ const store = new Vuex.Store({
           const token = resp.data.token
           const user = JSON.stringify(resp.data.user[0])
           const user_dep = JSON.stringify(resp.data.user_dep[0])
+          const user_pos = JSON.stringify(resp.data.user_pos[0])
 
           localStorage.setItem('token', token)
           localStorage.setItem('user', user)
           localStorage.setItem('user_dep', user_dep)
+          localStorage.setItem('user_pos', user_pos)
           localStorage.setItem('isLoggedIn', true)
 
           commit('auth_success', token)
@@ -62,7 +64,7 @@ const store = new Vuex.Store({
           localStorage.removeItem('user')
           localStorage.removeItem('isLoggedIn')
           localStorage.removeItem('user_dep')
-
+          localStorage.removeItem('user_pos')
           reject(err)
         })
       })
@@ -75,7 +77,7 @@ const store = new Vuex.Store({
         localStorage.removeItem('user')
         localStorage.removeItem('isLoggedIn')
         localStorage.removeItem('user_dep')
-        
+        localStorage.removeItem('user_pos')
         delete axios.defaults.headers.common['Authorization']
         resolve()
       })

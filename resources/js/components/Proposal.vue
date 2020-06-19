@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="(getProp, index) in getProps">
+        <div v-for="(getProp, id) in getProps" :key="getProp.id">
             <router-link :to="{ name: 'showTicket', params: { title: getProp.title } }">
             <h3>{{ getProp.title }}</h3>
             </router-link>
@@ -72,7 +72,6 @@ export default {
                     'X-CSRF-TOKEN': window.Laravel.csrfToken
                 }
             })
-            // .then(res => console.log(res))
         },
         deleteProp(title) {
             axios.get('/api/auth/deleteProp/' + title, {

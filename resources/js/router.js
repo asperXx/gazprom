@@ -14,18 +14,6 @@ const router = new Router({
       meta: { requiresAuth: true, layout: 'main' }
     },
     {
-      path: '/rules',
-      name: 'rules',
-      component: () => import('./components/Rules.vue'),
-      meta: { requiresAuth: true, layout: 'main' }
-    },
-    {
-      path: '/culture',
-      name: 'culture',
-      component: () => import('./components/Culture.vue'),
-      meta: { requiresAuth: true, layout: 'main' }
-    },
-    {
       path: '/proposal',
       name: 'proposal',
       component: () => import('./components/Proposal.vue'),
@@ -38,21 +26,15 @@ const router = new Router({
       meta: { requiresAuth: true, layout: 'main' }
     },
     {
-      path: '/questioning',
-      name: 'questioning',
-      component: () => import('./components/Questioning.vue'),
-      meta: { requiresAuth: true, layout: 'main' }
-    },
-    {
       path: '/profile',
       name: 'profile',
       component: () => import('./components/Profile.vue'),
       meta: { requiresAuth: true, layout: 'main' }
     },
     {
-      path: '/shop',
-      name: 'shop',
-      component: () => import('./components/Shop.vue'),
+      path: '/support',
+      name: 'support',
+      component: () => import('./components/Support.vue'),
       meta: { requiresAuth: true, layout: 'main' }
     },
     {

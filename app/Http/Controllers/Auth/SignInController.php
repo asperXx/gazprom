@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\JWTAuth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Department;
+use App\Position;
 
 class SignInController extends Controller
 {
@@ -22,10 +23,11 @@ class SignInController extends Controller
         // dd($user->toArray());
 
         $user_dep = Department::where('id', $user->toArray()[0]['department_id'])->get();
+        $user_pos = Position::where('id', $user->toArray()[0]['position_id'])->get();
 
         // dd($user_dep);
 
-        return response()->json(compact('token', 'user', 'user_dep'));
+        return response()->json(compact('token', 'user', 'user_dep', 'user_pos'));
     }
 
 }

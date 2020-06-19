@@ -34,9 +34,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getAnswer: function getAnswer() {
       console.log(JSON.stringify(this.answers));
-      /*
-      Обработка
-      */
     }
   },
   data: function data() {
