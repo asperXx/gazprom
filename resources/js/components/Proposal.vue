@@ -78,8 +78,10 @@ export default {
                     'X-CSRF-TOKEN': window.Laravel.csrfToken
                 }
             })
-            .then(res => console.log(res))
-            .then(this.$forceUpdate())
+            .then(res => {
+                console.log(res)
+                this.$router.push("/proposal").catch(()=>{});
+            })
         }
     }
 }

@@ -82,13 +82,17 @@ __webpack_require__.r(__webpack_exports__);
       }); // .then(res => console.log(res))
     },
     deleteProp: function deleteProp(title) {
+      var _this2 = this;
+
       axios.get('/api/auth/deleteProp/' + title, {
         headers: {
           'X-CSRF-TOKEN': window.Laravel.csrfToken
         }
       }).then(function (res) {
-        return console.log(res);
-      }).then(this.$forceUpdate());
+        console.log(res);
+
+        _this2.$router.push("/proposal")["catch"](function () {});
+      });
     }
   }
 });

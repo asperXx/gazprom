@@ -12,3 +12,10 @@ Route::group(['prefix' => 'auth'], function() {
     Route::get('getMyProps/{id}', 'TicketController@index');
     Route::get('deleteProp/{title}', 'TicketController@destroy');
 });
+
+
+Route::group(['prefix' => 'auth'], function() {
+    Route::post('createPost', 'BlogController@store');
+    Route::get('getMyPosts/{id}', 'BlogController@index');
+    Route::get('deletePost/{title}', 'BlogController@destroy');
+});

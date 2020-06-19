@@ -45,7 +45,13 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = new Blog;
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->status = 0;
+        $post->user_id = $request->user_id;
+
+        $post->save();
     }
 
     /**
