@@ -1,5 +1,13 @@
 <template>
     <div>
+        <div v-for="(getProp, index) in getProps">
+            <h3> {{ getProp.title }}</h3>
+            <p>{{ getProp.body }}</p>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" @click="deleteProp(getProp.title)">Удалить</v-btn>
+            </v-card-actions>
+        </div>
         <v-card-text>
         <v-form>
             <v-text-field
@@ -33,8 +41,25 @@ export default {
                 title: '',
                 body: '',
                 user_id: '',
-            }
+            },
+            getProps: {
+                title: '',
+                body: '',
+            },
+            user_id: '',
         }
+    },
+
+    created() {
+        const user_id = JSON.parse(localStorage.getItem('user')).id
+        axios.get('/api/auth/getMyProps/' + user_id, {
+            headers: {
+                'X-CSRF-TOKEN': window.Laravel.csrfToken
+            }
+        })
+        .then(res => {
+            this.getProps = res.data.tickets;
+        })
     },
     methods: {
         create() {
@@ -46,6 +71,15 @@ export default {
                 }
             })
             // .then(res => console.log(res))
+        },
+        deleteProp(title) {
+            axios.get('/api/auth/deleteProp/' + title, {
+                headers: {
+                    'X-CSRF-TOKEN': window.Laravel.csrfToken
+                }
+            })
+            .then(res => console.log(res))
+            .then(this.$forceUpdate())
         }
     }
 }

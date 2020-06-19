@@ -9,4 +9,6 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
 
 Route::group(['prefix' => 'auth'], function() {
     Route::post('createProp', 'TicketController@store');
+    Route::get('getMyProps/{id}', 'TicketController@index');
+    Route::get('deleteProp/{title}', 'TicketController@destroy');
 });

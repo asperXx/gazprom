@@ -12,9 +12,11 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        // dd($id);
+        $tickets = Ticket::where('user_id', $id)->get();
+        return response()->json(compact('tickets'));
     }
 
     /**
@@ -84,8 +86,8 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($title)
     {
-        //
+        Ticket::where('title', $title)->delete();
     }
 }

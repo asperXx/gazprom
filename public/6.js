@@ -36,6 +36,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -43,8 +51,25 @@ __webpack_require__.r(__webpack_exports__);
         title: '',
         body: '',
         user_id: ''
-      }
+      },
+      getProps: {
+        title: '',
+        body: ''
+      },
+      user_id: ''
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    var user_id = JSON.parse(localStorage.getItem('user')).id;
+    axios.get('/api/auth/getMyProps/' + user_id, {
+      headers: {
+        'X-CSRF-TOKEN': window.Laravel.csrfToken
+      }
+    }).then(function (res) {
+      _this.getProps = res.data.tickets;
+    });
   },
   methods: {
     create: function create() {
@@ -55,6 +80,15 @@ __webpack_require__.r(__webpack_exports__);
           'X-CSRF-TOKEN': window.Laravel.csrfToken
         }
       }); // .then(res => console.log(res))
+    },
+    deleteProp: function deleteProp(title) {
+      axios.get('/api/auth/deleteProp/' + title, {
+        headers: {
+          'X-CSRF-TOKEN': window.Laravel.csrfToken
+        }
+      }).then(function (res) {
+        return console.log(res);
+      }).then(this.$forceUpdate());
     }
   }
 });
@@ -79,6 +113,39 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm._l(_vm.getProps, function(getProp, index) {
+        return _c(
+          "div",
+          [
+            _c("h3", [_vm._v(" " + _vm._s(getProp.title))]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(getProp.body))]),
+            _vm._v(" "),
+            _c(
+              "v-card-actions",
+              [
+                _c("v-spacer"),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "primary" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteProp(getProp.title)
+                      }
+                    }
+                  },
+                  [_vm._v("Удалить")]
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      }),
+      _vm._v(" "),
       _c(
         "v-card-text",
         [
@@ -146,7 +213,7 @@ var render = function() {
         1
       )
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
