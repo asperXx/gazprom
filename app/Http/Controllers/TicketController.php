@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Ticket;
 
 class TicketController extends Controller
 {
@@ -34,7 +35,13 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ticket = new Ticket;
+        $ticket->title = $request->title;
+        $ticket->body = $request->body;
+        $ticket->status = 0;
+        $ticket->user_id = $request->user_id;
+
+        $ticket->save();
     }
 
     /**
