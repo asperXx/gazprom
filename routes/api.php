@@ -10,6 +10,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
 Route::group(['prefix' => 'auth'], function() {
     Route::post('createProp', 'TicketController@store');
     Route::get('getMyProps/{id}', 'TicketController@index');
+    Route::get('showProp/{title}', 'TicketController@show');
     Route::get('deleteProp/{title}', 'TicketController@destroy');
 });
 
@@ -17,5 +18,6 @@ Route::group(['prefix' => 'auth'], function() {
 Route::group(['prefix' => 'auth'], function() {
     Route::post('createPost', 'BlogController@store');
     Route::get('getMyPosts/{id}', 'BlogController@index');
+    Route::get('showPost/{title}', 'BlogController@show');
     Route::get('deletePost/{title}', 'BlogController@destroy');
 });

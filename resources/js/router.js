@@ -67,6 +67,18 @@ const router = new Router({
       component: () => import('./views/Logout.vue'),
       meta: { requiresAuth: true, layout: 'main' }
     },
+    {
+      path: '/post/:title',
+      name: 'showPost',
+      component: () => import('./components/ShowPost.vue'),
+      meta: { requiresAuth: true, layout: 'main' }
+    },
+    {
+      path: '/ticket/:title',
+      name: 'showTicket',
+      component: () => import('./components/ShowTicket.vue'),
+      meta: { requiresAuth: true, layout: 'main' }
+    },
   ]
 });
 

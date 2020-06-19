@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Blog;
 
 class BlogController extends Controller
 {
@@ -11,9 +12,10 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $posts = Blog::where('user_id', $id)->get();
+        return response()->json(compact('posts'));
     }
 
     /**
@@ -34,7 +36,14 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Blog;
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->description = "";
+        $post->status = 0;
+        $post->user_id = $request->user_id;
+
+        $post->save();
     }
 
     /**
@@ -43,15 +52,10 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($title)
     {
-        $post = new Blog;
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->status = 0;
-        $post->user_id = $request->user_id;
-
-        $post->save();
+        $post = Blog::where('title', $title)->get();
+        return response()->json(compact('post'));
     }
 
     /**
@@ -83,8 +87,8 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($title)
     {
-        //
+        Blog::where('title', $title)->delete();
     }
 }

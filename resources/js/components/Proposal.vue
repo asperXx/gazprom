@@ -1,7 +1,9 @@
 <template>
     <div>
         <div v-for="(getProp, index) in getProps">
-            <h3> {{ getProp.title }}</h3>
+            <router-link :to="{ name: 'showTicket', params: { title: getProp.title } }">
+            <h3>{{ getProp.title }}</h3>
+            </router-link>
             <p>{{ getProp.body }}</p>
             <v-card-actions>
                 <v-spacer></v-spacer>

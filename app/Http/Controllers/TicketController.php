@@ -52,9 +52,10 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($title)
     {
-        //
+        $ticket = Ticket::where('title', $title)->get();
+        return response()->json(compact('ticket'));
     }
 
     /**
