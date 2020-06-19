@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\JWTAuth;
 use Illuminate\Http\Request;
 use App\User;
+use App\Department;
 
 class SignInController extends Controller
 {
@@ -17,13 +18,14 @@ class SignInController extends Controller
             return response("Попытка не удалась!", 401);
         }
         
-        $user = User::where('email', $request->input('email'))->first()->get();
-        dd($user->toArray()[0]->id);
-        // $user_dep = User::find($user->id)->department;
+        $user = User::where('email', $request->input('email'))->get();
+        // dd($user->toArray());
 
-        // dd('user_dep');
+        $user_dep = Department::where('id', $user->toArray()[0]['department_id'])->get();
 
-        // return response()->json(compact('token', 'user'));
+        // dd($user_dep);
+
+        return response()->json(compact('token', 'user', 'user_dep'));
     }
 
 }

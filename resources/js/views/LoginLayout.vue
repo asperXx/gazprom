@@ -37,7 +37,7 @@ flat
     </v-card-actions>
   </v-card>
 </div>
-</div class="conatiner">
+</div>
 </template>
 
 <script>
@@ -59,7 +59,7 @@ methods: {
 
     this.$store.dispatch('login', { email, password })
 
-   .then(() => this.$router.push('/'))
+   .then(() => this.$router.push({name: 'profile'}))
    .catch(err => console.log(err))
   },
 },
@@ -70,6 +70,6 @@ props: {
 </script>
 
 <style>
-.container {display: flex; align-items: center; justify-content: center; height: 100vh}
-.block {max-width: 500px; width: 100%}
+  .container {display: flex; align-items: center; justify-content: center; height: 100vh}
+  .block {max-width: 500px; width: 100%}
 </style>

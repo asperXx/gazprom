@@ -9,7 +9,7 @@
           </v-avatar>
           <v-list-item-content>
             <v-list-item-title class="title"> {{ user.last_name}} {{ user.name }}</v-list-item-title>
-            <v-list-item-subtitle>{{ user.position }}</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ user_dep.department }}</v-list-item-subtitle>
             <!-- Уровень -->
             <v-progress-linear 
               class="mt-4" 
@@ -131,6 +131,7 @@ export default {
     drawer: null,
     skill: 20,
     user: {},
+    user_dep: {},
     email: '',
     isLoggedIn: ''
   }),
@@ -141,10 +142,11 @@ export default {
 
   mounted() {
     this.isLoggedIn = store.state.isLoggedIn
+    
     this.user = JSON.parse(localStorage.getItem('user'))
+    this.user_dep = JSON.parse(localStorage.getItem('user_dep'))
 
-    console.log(this.isLoggedIn)
-    console.log(this.user.email)
+    console.log(this.user_dep)
   },
 
   methods: {

@@ -18,6 +18,7 @@
         .then(res => console.log(res))
 
         this.$store.dispatch('logout')
+        
         .then(() => {
           this.$router.push('/login')
         })
