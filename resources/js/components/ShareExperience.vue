@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <v-card width="95%" class="pa-6">
         <h2>Мои статьи</h2>
-        <div v-for="(getPost, index) in getPosts">
+        <div v-for="(getPost, id) in getPosts" :key="getPost.id">
             <router-link :to="{ name: 'showPost', params: { title: getPost.title } }">
                 <h3> {{ getPost.title }}</h3>
             </router-link>
@@ -36,7 +36,7 @@
             <v-spacer></v-spacer>
             <v-btn color="primary" @click="create" v-on:keypress.enter="login">Создать</v-btn>
         </v-card-actions>
-    </div>
+    </v-card>
 </template>
 
 <script>

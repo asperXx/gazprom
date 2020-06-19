@@ -264,6 +264,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -302,7 +304,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       user: JSON.parse(localStorage.getItem('user')),
       user_pos: JSON.parse(localStorage.getItem('user_pos')),
-      user_dep: JSON.parse(localStorage.getItem('user_dep')),
+      user_dep: JSON.parse(localStorage.getItem('user_dep')).department,
+      user_deps: ['Газпромбанк', 'Другой'],
       select: null,
       disabled: true,
       items: ['HR', 'IT', 'Финансовый отдел', 'Кредитный отдел'],
@@ -612,6 +615,10 @@ var render = function() {
                   [
                     _c("v-select", {
                       attrs: {
+                        value: _vm.user_dep,
+                        items: _vm.user_deps,
+                        "item-value": "id",
+                        "item-text": "name",
                         "error-messages": _vm.filialErrors,
                         label: "Филиал",
                         "prepend-inner-icon": "mdi-laptop",
@@ -619,7 +626,6 @@ var render = function() {
                         disabled: _vm.disabled
                       },
                       on: {
-                        input: _vm.user_dep.department,
                         change: function($event) {
                           return _vm.$v.filial.$touch()
                         },
@@ -628,11 +634,11 @@ var render = function() {
                         }
                       },
                       model: {
-                        value: _vm.user_dep.department,
+                        value: _vm.user_dep,
                         callback: function($$v) {
-                          _vm.$set(_vm.user_dep, "department", $$v)
+                          _vm.user_dep = $$v
                         },
-                        expression: "user_dep.department"
+                        expression: "user_dep"
                       }
                     }),
                     _vm._v(" "),
@@ -704,13 +710,6 @@ var render = function() {
                         blur: function($event) {
                           return _vm.$v.code.$touch()
                         }
-                      },
-                      model: {
-                        value: _vm.code,
-                        callback: function($$v) {
-                          _vm.code = $$v
-                        },
-                        expression: "code"
                       }
                     })
                   ],
@@ -723,7 +722,6 @@ var render = function() {
                   [
                     _c("v-text-field", {
                       attrs: {
-                        value: "True PHP/JS developer",
                         clearable: "",
                         "prepend-inner-icon": "mdi-information-variant",
                         "clear-icon": "mdi-cancel",
@@ -731,11 +729,11 @@ var render = function() {
                         disabled: _vm.disabled
                       },
                       model: {
-                        value: _vm.about,
+                        value: _vm.user.desc,
                         callback: function($$v) {
-                          _vm.about = $$v
+                          _vm.$set(_vm.user, "desc", $$v)
                         },
-                        expression: "about"
+                        expression: "user.desc"
                       }
                     })
                   ],

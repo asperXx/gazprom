@@ -65,8 +65,12 @@
           <v-col cols="12" sm="6">
               
             <v-select
-              v-model="user_dep.department"
-              @input="user_dep.department"
+              v-model="user_dep"
+              :value="user_dep"
+              :items="user_deps" 
+              item-value="id" 
+              item-text="name"
+              
               :error-messages="filialErrors"
               label="Филиал"
               prepend-inner-icon="mdi-laptop"
@@ -100,7 +104,6 @@
             ></v-text-field>
 
             <v-text-field
-              v-model="code"
               label="Код авторизации"
               prepend-inner-icon="mdi-barcode"
               :error-messages="codeErrors"
@@ -116,8 +119,7 @@
 
           <v-col cols="12">
             <v-text-field
-              value="True PHP/JS developer"
-              v-model="about"
+              v-model="user.desc"
               clearable
               prepend-inner-icon="mdi-information-variant"
               clear-icon="mdi-cancel"
@@ -274,7 +276,12 @@
     data: () => ({
       user: JSON.parse(localStorage.getItem('user')),
       user_pos: JSON.parse(localStorage.getItem('user_pos')),
-      user_dep: JSON.parse(localStorage.getItem('user_dep')),
+      user_dep: JSON.parse(localStorage.getItem('user_dep')).department,
+
+        user_deps: [
+            'Газпромбанк',
+            'Другой'
+        ],
 
       select: null,
       disabled: true,
