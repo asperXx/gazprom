@@ -1,47 +1,62 @@
 <template>
-	<div>
-		<h2>Викторина</h2>
-		<form v-for="question in questions" @submit.prevent="getAnswer">
-				<h2>{{ question.title }}</h2>
-				<div v-for="(answer, index) in question.answers">
-					<input type="radio" v-model="answer1" :value="answer" />{{ answer }}</p>
-				</div>
-			
-			<input type="submit" class="btn btn-primary" value="Ответить" />
+<div>
 
-		</form>
+	<div v-for="(question, id) in questions" :key="question.id">
+		<h3>{{ question.title }}</h3>
+		<p>{{ question.text }}</p>
+		<input type="radio" value=1 v-model="answers[id]">
+		<label>Да</label>
+		<br>
+		<input type="radio" value=0 v-model="answers[id]">
+		<label>Нет</label>
+		<hr>
 	</div>
+
+	<div>
+		<button @click="getAnswer" class="btn btn-primary">Ответить</button>
+	</div>
+
+</div>
 </template>
 
 <script type="text/javascript">
-	export default {
-		data() {
-			return {
-				answer1: '',
-				questions: [
-					{
-						title: 'Q1',
-						answers: [
-							'A1',
-							'A2'
-						]
-					},
-					{
-						title: 'Q2',
-						answers: [
-							'A12',
-							'A22'
-						]
-					},
-				],
-			}
-		},
-		methods: {
-			getAnswer() {
-				console.log(this.answer1)
-			}
+export default {
+	methods: {
+		getAnswer() {
+			console.log(JSON.stringify(this.answers))
+
+			/*
+			Обработка
+			*/
 		}
+	},
 
+	data () {
+		return {
+			answers: [],
+			questions: [
+				{
+					id: '1',
+					title:'Вопрос 1',
+					text: 'gdfgdfsgdfsg',
+				},
+				{
+					id: '2',
+					title:'Вопрос 2',
+					text: 'gdfgdfsgdfsg',
+				},
+				{
+					id: '3',
+					title:'Вопрос 3',
+					text: 'gdfgdfsgdfsg',
+				},
+				{
+					id: '4',
+					title:'Вопрос 4',
+					text: 'gdfgdfsgdfsg',
+				},
+			]
+		}
 	}
-
+}
 </script>
