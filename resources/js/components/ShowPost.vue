@@ -2,6 +2,8 @@
     <div>
         <p>Post</p>
         <p>{{ post }}</p>
+        <p>{{ likes }}</p>
+        <p>{{ countLikes }}</p>
     </div>
 </template>
 
@@ -9,7 +11,9 @@
     export default {
         data() {
             return {
-                post: {}
+                post: {},
+                likes: {},
+                countLikes: 0,
             }
         },
 
@@ -24,6 +28,8 @@
             .then(res => {
                 console.log(res)
                 this.post = res.data.post[0]
+                this.likes = res.data.likes
+                this.countLikes = this.likes.length
             })
         }
     }

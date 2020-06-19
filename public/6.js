@@ -16,10 +16,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      post: {}
+      post: {},
+      likes: {},
+      countLikes: 0
     };
   },
   created: function created() {
@@ -34,6 +38,8 @@ __webpack_require__.r(__webpack_exports__);
     }).then(function (res) {
       console.log(res);
       _this.post = res.data.post[0];
+      _this.likes = res.data.likes;
+      _this.countLikes = _this.likes.length;
     });
   }
 });
@@ -58,7 +64,11 @@ var render = function() {
   return _c("div", [
     _c("p", [_vm._v("Post")]),
     _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.post))])
+    _c("p", [_vm._v(_vm._s(_vm.post))]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.likes))]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.countLikes))])
   ])
 }
 var staticRenderFns = []

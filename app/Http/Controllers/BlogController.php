@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Blog;
+use DB;
 
 class BlogController extends Controller
 {
@@ -12,10 +13,12 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index(Request $request, $id)
     {
-        $posts = Blog::where('user_id', $id)->get();
-        return response()->json(compact('posts'));
+        // dd($request->get('user'));
+        $posts = Blog::orderBy('created_at', 'desc')->get();
+        $likes = DB::table('likes')->where('user_id', $request->get('user'))->get();
+        return response()->json(compact('posts', 'likes'));
     }
 
     /**
@@ -55,7 +58,11 @@ class BlogController extends Controller
     public function show($title)
     {
         $post = Blog::where('title', $title)->get();
-        return response()->json(compact('post'));
+
+        $likes = DB::table('likes')->where('post_id', $title)->get();
+
+        // dd(response()->json(compact('post', 'likes')));
+        return response()->json(compact('post', 'likes'));
     }
 
     /**
@@ -90,5 +97,10 @@ class BlogController extends Controller
     public function destroy($title)
     {
         Blog::where('title', $title)->delete();
+    }
+
+    public function like(Request $request) {
+        // dd($request->get('user'));
+        DB::table('likes')->insert(['user_id' => $request->get('user'), 'post_id' => $request->get('post')]);
     }
 }

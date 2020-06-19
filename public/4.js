@@ -50,6 +50,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -60,32 +67,53 @@ __webpack_require__.r(__webpack_exports__);
       },
       getPosts: {
         title: '',
-        body: ''
+        body: '',
+        user_id: ''
       },
-      user_id: ''
+      user_id: '',
+      likes: {}
     };
   },
   created: function created() {
     var _this = this;
 
-    var user_id = JSON.parse(localStorage.getItem('user')).id;
-    axios.get('/api/auth/getMyPosts/' + user_id, {
+    this.user_id = JSON.parse(localStorage.getItem('user')).id;
+    console.log("USer id " + this.user_id);
+    axios.put('/api/auth/getMyPosts/' + this.user_id, {
+      'user': this.user_id
+    }, {
       headers: {
         'X-CSRF-TOKEN': window.Laravel.csrfToken
       }
     }).then(function (res) {
       _this.getPosts = res.data.posts;
+      _this.likes = res.data.likes;
     });
   },
   methods: {
+    checkLikes: function checkLikes(title) {
+      for (var i = 0; i < this.likes.length; i++) {
+        if (this.likes[i].post_id == title) {
+          return false;
+        }
+      }
+
+      return true;
+    },
     create: function create() {
+      var _this2 = this;
+
       this.post.user_id = JSON.parse(localStorage.getItem('user')).id;
       console.log(this.prop);
       axios.post('/api/auth/createPost', this.post, {
         headers: {
           'X-CSRF-TOKEN': window.Laravel.csrfToken
         }
-      }); // .then(res => console.log(res))
+      });
+      then(function (res) {
+        _this2.post.title = "";
+        _this2.post.body = "";
+      });
     },
     deletePost: function deletePost(title) {
       axios.get('/api/auth/deletePost/' + title, {
@@ -96,7 +124,20 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res);
       });
     },
-    editPost: function editPost(title) {}
+    editPost: function editPost(title) {},
+    like: function like(title) {
+      console.log(this.user_id);
+      axios.post('/api/auth/like', {
+        'user': this.user_id,
+        'post': title
+      }, {
+        headers: {
+          'X-CSRF-TOKEN': window.Laravel.csrfToken
+        }
+      }).then(function (res) {
+        return console.log(res);
+      });
+    }
   }
 });
 
@@ -121,65 +162,6 @@ var render = function() {
     "v-card",
     { staticClass: "pa-6", attrs: { width: "95%" } },
     [
-      _c("h2", [_vm._v("Мои статьи")]),
-      _vm._v(" "),
-      _vm._l(_vm.getPosts, function(getPost, id) {
-        return _c(
-          "div",
-          { key: getPost.id },
-          [
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: { name: "showPost", params: { title: getPost.title } }
-                }
-              },
-              [_c("h3", [_vm._v(" " + _vm._s(getPost.title))])]
-            ),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(getPost.body))]),
-            _vm._v(" "),
-            _c(
-              "v-card-actions",
-              [
-                _c("v-spacer"),
-                _vm._v(" "),
-                _c(
-                  "v-btn",
-                  {
-                    attrs: { color: "primary" },
-                    on: {
-                      click: function($event) {
-                        return _vm.deletePost(getPost.title)
-                      }
-                    }
-                  },
-                  [_vm._v("Удалить")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "v-btn",
-                  {
-                    attrs: { color: "primary" },
-                    on: {
-                      click: function($event) {
-                        return _vm.editPost(getPost.title)
-                      }
-                    }
-                  },
-                  [_vm._v("Изменить")]
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      }),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
       _c("h2", [_vm._v("Создать статью")]),
       _vm._v(" "),
       _c(
@@ -199,7 +181,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("v-text-field", {
+              _c("v-textarea", {
                 attrs: {
                   id: "body",
                   label: "Текст",
@@ -247,7 +229,96 @@ var render = function() {
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("hr"),
+      _c("br"),
+      _vm._v(" "),
+      _c("h2", [_vm._v("Мои статьи")]),
+      _vm._v(" "),
+      _vm._l(_vm.getPosts, function(getPost, id) {
+        return _c(
+          "div",
+          { key: getPost.id },
+          [
+            _c(
+              "router-link",
+              {
+                attrs: {
+                  to: { name: "showPost", params: { title: getPost.title } }
+                }
+              },
+              [_c("h3", [_vm._v(" " + _vm._s(getPost.title))])]
+            ),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(getPost.body))]),
+            _vm._v(" "),
+            _c(
+              "v-card-actions",
+              [
+                _c("v-spacer"),
+                _vm._v(" "),
+                getPost.user_id == _vm.user_id
+                  ? _c(
+                      "div",
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { color: "primary" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deletePost(getPost.title)
+                              }
+                            }
+                          },
+                          [_vm._v("Удалить")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { color: "primary" },
+                            on: {
+                              click: function($event) {
+                                return _vm.editPost(getPost.title)
+                              }
+                            }
+                          },
+                          [_vm._v("Изменить")]
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.checkLikes(getPost.title)
+                  ? _c(
+                      "div",
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { color: "primary" },
+                            on: {
+                              click: function($event) {
+                                return _vm.like(getPost.title)
+                              }
+                            }
+                          },
+                          [_vm._v("Лайк (xx)")]
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ],
+              1
+            )
+          ],
+          1
+        )
+      })
     ],
     2
   )
@@ -278,6 +349,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VForm */ "./node_modules/vuetify/lib/components/VForm/index.js");
 /* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
 /* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
+/* harmony import */ var vuetify_lib_components_VTextarea__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VTextarea */ "./node_modules/vuetify/lib/components/VTextarea/index.js");
 
 
 
@@ -305,7 +377,8 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_6__["VForm"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__["VTextField"]})
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_6__["VForm"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__["VTextField"],VTextarea: vuetify_lib_components_VTextarea__WEBPACK_IMPORTED_MODULE_9__["VTextarea"]})
 
 
 /* hot reload */
