@@ -158,110 +158,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -300,8 +196,14 @@ __webpack_require__.r(__webpack_exports__);
     return {
       user: JSON.parse(localStorage.getItem('user')),
       user_pos: JSON.parse(localStorage.getItem('user_pos')),
-      user_dep: JSON.parse(localStorage.getItem('user_dep')).department,
-      user_deps: ['Газпромбанк', 'Другой'],
+      user_dep: JSON.parse(localStorage.getItem('user_dep')),
+      dep_all: [// 'Газпромбанк',
+        // 'Газпромбанк СПб'
+      ],
+      // user_deps: [
+      //       'Газпромбанк',
+      //       'Другой'
+      //   ],
       select: null,
       disabled: true,
       items: ['HR', 'IT', 'Финансовый отдел', 'Кредитный отдел'],
@@ -320,9 +222,6 @@ __webpack_require__.r(__webpack_exports__);
       colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
       names: ['Встреча', 'Праздник', 'PTO', 'Пустешествие', 'Событие', 'День рождения', 'Конференция', 'Вечеринка']
     };
-  },
-  mounted: function mounted() {
-    this.$refs.calendar.checkChange();
   },
   computed: {
     selectErrors: function selectErrors() {
@@ -370,75 +269,35 @@ __webpack_require__.r(__webpack_exports__);
       return errors;
     }
   },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/api/auth/depAll').then(function (res) {
+      console.log(res.data.dep_all);
+
+      for (var i = 0; i < res.data.dep_all.length; i++) {
+        _this.dep_all.push(res.data.dep_all[i].department);
+      } // console.log(this.dep_all)
+
+    });
+    this.user_deps.length = 0;
+
+    for (var i = 0; i < this.user_dep.length; i++) {
+      this.user_deps.push(this.user_dep[i].department);
+    }
+  },
   methods: {
-    viewDay: function viewDay(_ref) {
-      var date = _ref.date;
-      this.focus = date;
-      this.type = 'day';
-    },
-    getEventColor: function getEventColor(event) {
-      return event.color;
-    },
-    setToday: function setToday() {
-      this.focus = '';
-    },
-    prev: function prev() {
-      this.$refs.calendar.prev();
-    },
-    next: function next() {
-      this.$refs.calendar.next();
-    },
-    showEvent: function showEvent(_ref2) {
-      var _this = this;
-
-      var nativeEvent = _ref2.nativeEvent,
-          event = _ref2.event;
-
-      var open = function open() {
-        _this.selectedEvent = event;
-        _this.selectedElement = nativeEvent.target;
-        setTimeout(function () {
-          return _this.selectedOpen = true;
-        }, 10);
+    updateUser: function updateUser() {
+      // console.log(this.user_dep.id)
+      var data = {
+        user: this.user,
+        user_dep: this.user_dep,
+        user_pos: this.user_pos
       };
-
-      if (this.selectedOpen) {
-        this.selectedOpen = false;
-        setTimeout(open, 10);
-      } else {
-        open();
-      }
-
-      nativeEvent.stopPropagation();
-    },
-    updateRange: function updateRange(_ref3) {
-      var start = _ref3.start,
-          end = _ref3.end;
-      var events = [];
-      var min = new Date("".concat(start.date, "T00:00:00"));
-      var max = new Date("".concat(end.date, "T23:59:59"));
-      var days = (max.getTime() - min.getTime()) / 86400000;
-      var eventCount = this.rnd(days, days + 20);
-
-      for (var i = 0; i < eventCount; i++) {
-        var allDay = this.rnd(0, 3) === 0;
-        var firstTimestamp = this.rnd(min.getTime(), max.getTime());
-        var first = new Date(firstTimestamp - firstTimestamp % 900000);
-        var secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000;
-        var second = new Date(first.getTime() + secondTimestamp);
-        events.push({
-          name: this.names[this.rnd(0, this.names.length - 1)],
-          start: first,
-          end: second,
-          color: this.colors[this.rnd(0, this.colors.length - 1)],
-          timed: !allDay
-        });
-      }
-
-      this.events = events;
-    },
-    rnd: function rnd(a, b) {
-      return Math.floor((b - a + 1) * Math.random()) + a;
+      axios.put('/api/auth/updateUser/' + this.user.id, data).then(function (res) {
+        console.log(JSON.parse(res.config.data));
+        localStorage.setItem('user', JSON.stringify(res.data.user[0]));
+      });
     }
   }
 });
@@ -612,8 +471,8 @@ var render = function() {
                 [
                   _c("v-select", {
                     attrs: {
-                      value: _vm.user_dep,
-                      items: _vm.user_deps,
+                      value: _vm.user_dep.id,
+                      items: _vm.dep_all,
                       "item-value": "id",
                       "item-text": "name",
                       "error-messages": _vm.filialErrors,
@@ -631,11 +490,11 @@ var render = function() {
                       }
                     },
                     model: {
-                      value: _vm.user_dep,
+                      value: _vm.user_dep.id,
                       callback: function($$v) {
-                        _vm.user_dep = $$v
+                        _vm.$set(_vm.user_dep, "id", $$v)
                       },
-                      expression: "user_dep"
+                      expression: "user_dep.id"
                     }
                   }),
                   _vm._v(" "),
@@ -760,11 +619,11 @@ var render = function() {
                   _c(
                     "v-btn",
                     {
-                      staticClass: "mr-4 mb-2",
+                      staticClass: "mr-4 mb-12",
                       attrs: { color: "primary" },
                       on: {
                         click: function($event) {
-                          _vm.submit
+                          _vm.updateUser()
                           _vm.disabled = true
                         }
                       }

@@ -63,12 +63,12 @@
           <v-col cols="12" sm="6">
               
             <v-select
-              v-model="user_dep"
-              :value="user_dep"
-              :items="user_deps" 
+              v-model="user_dep.id"
+              :value="user_dep.id"
+              :items="dep_all" 
               item-value="id" 
               item-text="name"
-              
+
               :error-messages="filialErrors"
               label="Филиал"
               prepend-inner-icon="mdi-laptop"
@@ -132,114 +132,10 @@
       
       <v-btn class="mr-4 mb-12" @click="disabled=false" v-if="disabled" color="primary">Изменить</v-btn>
       <div v-else>
-        <v-btn class="mr-4 mb-2" @click="submit; disabled=true" color="primary">Заполнить</v-btn>
+        <v-btn class="mr-4 mb-12" @click="updateUser(); disabled=true" color="primary">Заполнить</v-btn>
         <v-btn class="mr-4 mb-12" @click="disabled=true">Отменить</v-btn>
       </div>      
     </form>
-
-    <!-- <div class="mt-4">
-      <v-row class="fill-height">
-        <v-col>
-          <v-sheet height="64" outlined>
-            <v-toolbar flat color="white">
-              <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday">
-                Сегодня
-              </v-btn>
-              <v-btn fab text small color="grey darken-2" @click="prev">
-                <v-icon small>mdi-chevron-left</v-icon>
-              </v-btn>
-              <v-btn fab text small color="grey darken-2" @click="next">
-                <v-icon small>mdi-chevron-right</v-icon>
-              </v-btn>
-              <v-toolbar-title v-if="$refs.calendar">
-                {{ $refs.calendar.title }}
-              </v-toolbar-title>
-              <v-spacer></v-spacer>
-              <v-menu bottom right>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    outlined
-                    color="grey darken-2"
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-                    <span>{{ typeToLabel[type] }}</span>
-                    <v-icon right>mdi-menu-down</v-icon>
-                  </v-btn>
-                </template>
-                <v-list>
-                  <v-list-item @click="type = 'day'">
-                    <v-list-item-title>День</v-list-item-title>
-                  </v-list-item>
-                  <v-list-item @click="type = 'week'">
-                    <v-list-item-title>Неделя</v-list-item-title>
-                  </v-list-item>
-                  <v-list-item @click="type = 'month'">
-                    <v-list-item-title>Месяц</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-menu>
-            </v-toolbar>
-          </v-sheet>
-          <v-sheet height="600">
-            <v-calendar
-              ref="calendar"
-              v-model="focus"
-              color="primary"
-              :events="events"
-              :event-color="getEventColor"
-              :type="type"
-              @click:event="showEvent"
-              @click:more="viewDay"
-              @click:date="viewDay"
-              @change="updateRange"
-            ></v-calendar>
-            <v-menu
-              v-model="selectedOpen"
-              :close-on-content-click="false"
-              :activator="selectedElement"
-              offset-x
-            >
-              <v-card
-                color="grey lighten-4"
-                min-width="350px"
-                flat
-              >
-                <v-toolbar
-                  :color="selectedEvent.color"
-                  dark
-                >
-                  <v-btn icon>
-                    <v-icon>mdi-pencil</v-icon>
-                  </v-btn>
-                  <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-                  <v-spacer></v-spacer>
-                  <v-btn icon>
-                    <v-icon>mdi-heart</v-icon>
-                  </v-btn>
-                  <v-btn icon>
-                    <v-icon>mdi-dots-vertical</v-icon>
-                  </v-btn>
-                </v-toolbar>
-                <v-card-text>
-                  <span v-html="selectedEvent.details"></span>
-                </v-card-text>
-                <v-card-actions>
-                  <v-btn
-                    text
-                    color="secondary"
-                    @click="selectedOpen = false"
-                  >
-                    Отмена
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-menu>
-          </v-sheet>
-        </v-col>
-      </v-row>
-    </div> -->
-
     <div>
       
     </div>
@@ -272,12 +168,17 @@
     data: () => ({
       user: JSON.parse(localStorage.getItem('user')),
       user_pos: JSON.parse(localStorage.getItem('user_pos')),
-      user_dep: JSON.parse(localStorage.getItem('user_dep')).department,
+      user_dep: JSON.parse(localStorage.getItem('user_dep')),
 
-        user_deps: [
-            'Газпромбанк',
-            'Другой'
-        ],
+      dep_all: [
+        // 'Газпромбанк',
+        // 'Газпромбанк СПб'
+      ],
+
+      // user_deps: [
+      //       'Газпромбанк',
+      //       'Другой'
+      //   ],
 
       select: null,
       disabled: true,
@@ -307,9 +208,6 @@
       colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
       names: ['Встреча', 'Праздник', 'PTO', 'Пустешествие', 'Событие', 'День рождения', 'Конференция', 'Вечеринка'],
     }),
-    mounted () {
-      this.$refs.calendar.checkChange()
-    },
     computed: {
       selectErrors () {
         const errors = []
@@ -357,68 +255,42 @@
       },
     },
 
-    methods: {
-      viewDay ({ date }) {
-        this.focus = date
-        this.type = 'day'
-      },
-      getEventColor (event) {
-        return event.color
-      },
-      setToday () {
-        this.focus = ''
-      },
-      prev () {
-        this.$refs.calendar.prev()
-      },
-      next () {
-        this.$refs.calendar.next()
-      },
-      showEvent ({ nativeEvent, event }) {
-        const open = () => {
-          this.selectedEvent = event
-          this.selectedElement = nativeEvent.target
-          setTimeout(() => this.selectedOpen = true, 10)
+    created() {
+      axios.get('/api/auth/depAll')
+      .then(res => {
+        console.log(res.data.dep_all)
+
+        for (let i = 0; i < res.data.dep_all.length; i++) {
+          this.dep_all.push(res.data.dep_all[i].department)
         }
 
-        if (this.selectedOpen) {
-          this.selectedOpen = false
-          setTimeout(open, 10)
-        } else {
-          open()
-        }
+        // console.log(this.dep_all)
+      });
 
-        nativeEvent.stopPropagation()
-      },
-      updateRange ({ start, end }) {
-        const events = []
+      this.user_deps.length = 0;
 
-        const min = new Date(`${start.date}T00:00:00`)
-        const max = new Date(`${end.date}T23:59:59`)
-        const days = (max.getTime() - min.getTime()) / 86400000
-        const eventCount = this.rnd(days, days + 20)
-
-        for (let i = 0; i < eventCount; i++) {
-          const allDay = this.rnd(0, 3) === 0
-          const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-          const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-          const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-          const second = new Date(first.getTime() + secondTimestamp)
-
-          events.push({
-            name: this.names[this.rnd(0, this.names.length - 1)],
-            start: first,
-            end: second,
-            color: this.colors[this.rnd(0, this.colors.length - 1)],
-            timed: !allDay,
-          })
-        }
-
-        this.events = events
-      },
-      rnd (a, b) {
-        return Math.floor((b - a + 1) * Math.random()) + a
-      },
+      for (let i = 0; i < this.user_dep.length; i++) {
+        this.user_deps.push(this.user_dep[i].department);
+      }
     },
+
+    methods: {
+      updateUser() {
+
+        // console.log(this.user_dep.id)
+
+        var data = {
+          user: this.user,
+          user_dep: this.user_dep,
+          user_pos: this.user_pos
+        }
+
+        axios.put('/api/auth/updateUser/' + this.user.id, data)
+        .then(res => {
+          console.log(JSON.parse(res.config.data))
+          localStorage.setItem('user', JSON.stringify(res.data.user[0]))
+        })
+      }
+    }
   }
 </script>

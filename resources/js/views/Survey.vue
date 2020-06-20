@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <v-card>
     <!-- If you want to hide survey, comment the lines below -->
     <!-- <h2>SurveyJS Library - a sample survey below</h2> -->
     <survey :survey="survey"></survey>
     <div id="surveyResult"></div>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -78,7 +78,8 @@ export default {
 
 
     var model = new SurveyVue.Model(json);
-  model.completeText = "Завершить"
+    model.completeText = "Завершить"
+
     model.onComplete.add(function(result) {
       console.log(result.data);
     model.onComplete

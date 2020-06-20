@@ -28,4 +28,7 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('like', 'BlogController@like');
 
     Route::post('storeSurvey', 'SurveyController');
+
+    Route::get('depAll', 'UserController@depAll');
+    Route::put('updateUser/{id}', 'UserController@update');
 });

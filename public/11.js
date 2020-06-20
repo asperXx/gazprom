@@ -187,6 +187,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     like: function like(id) {
+      var _this4 = this;
+
       axios.post('/api/auth/propLike/', {
         'user_id': JSON.parse(localStorage.getItem('user')).id,
         'ticket_id': id
@@ -194,6 +196,13 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res.data.user[0]);
         var user = JSON.stringify(res.data.user[0]);
         localStorage.setItem('user', user);
+        axios.get('/api/auth/getMyProps/', {
+          headers: {
+            'X-CSRF-TOKEN': window.Laravel.csrfToken
+          }
+        }).then(function (res) {
+          _this4.getProps = res.data.tickets;
+        });
       });
     }
   }
@@ -224,7 +233,7 @@ var render = function() {
         ? _c(
             "v-btn",
             {
-              staticClass: "align-self-start ml-5",
+              staticClass: "align-self-center",
               on: {
                 click: function($event) {
                   _vm.isCreate = true
@@ -388,24 +397,13 @@ var render = function() {
                       "v-card",
                       {
                         staticClass: "mt-5 pa-6",
-                        attrs: { "min-width": "80%" }
+                        attrs: { "max-width": "900" }
                       },
                       [
                         _c(
                           "div",
                           [
-                            _c(
-                              "router-link",
-                              {
-                                attrs: {
-                                  to: {
-                                    name: "showProp",
-                                    params: { id: getProp.id }
-                                  }
-                                }
-                              },
-                              [_c("h3", [_vm._v(_vm._s(getProp.title))])]
-                            ),
+                            _c("h3", [_vm._v(_vm._s(getProp.title))]),
                             _vm._v(" "),
                             _c("p", [
                               _c("span", {

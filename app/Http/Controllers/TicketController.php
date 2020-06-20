@@ -15,7 +15,6 @@ class TicketController extends Controller
      */
     public function index()
     {
-        // dd($id);
         $tickets = Ticket::orderBy('created_at', 'desc')->get();
         return response()->json(compact('tickets'));
     }
@@ -99,7 +98,9 @@ class TicketController extends Controller
 
         $user_id = $request->get('user_id');
         $ticket_id = $request->get('ticket_id');
+        
         Ticket::where('id', $ticket_id)->increment('flames');
+
         User::where('id', $user_id)->decrement('flames');
 
         $user = User::where('id', $user_id)->get();

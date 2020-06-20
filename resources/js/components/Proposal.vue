@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="d-flex flex-column justify-start">
-    <v-btn v-if="!isCreate" @click="isCreate=true" class="align-self-start ml-5">Предложить</v-btn>
+    <v-btn v-if="!isCreate" @click="isCreate=true" class="align-self-center">Предложить</v-btn>
     <v-card
       v-if="isCreate"
       width="97%"
@@ -57,11 +57,11 @@
     <div v-for="getProp in getProps" :key="getProp.id">
       <v-row >
         <v-col class="d-flex justify-center align-center sm-col-12">
-          <v-card class="mt-5 pa-6" min-width="80%">
+          <v-card class="mt-5 pa-6" max-width="900">
             <div>
-              <router-link :to="{ name: 'showProp', params: { id: getProp.id } }">
+              
                 <h3>{{ getProp.title }}</h3>
-              </router-link>
+              
               <p>
                 <span v-html="getProp.body"></span>
               </p>
@@ -187,6 +187,14 @@ export default {
             console.log(res.data.user[0])
             var user = JSON.stringify(res.data.user[0])
             localStorage.setItem('user', user)
+            axios.get('/api/auth/getMyProps/', {
+                headers: {
+                    'X-CSRF-TOKEN': window.Laravel.csrfToken
+                }
+            })
+            .then(res => {
+                this.getProps = res.data.tickets;
+            })
         })
     }
   }
