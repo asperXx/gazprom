@@ -9,23 +9,20 @@ use App\User;
 use App\Department;
 use App\Position;
 
+use Auth;
+
 class SignInController extends Controller
 {
     public function __invoke(Request $request) {
         
-        // dd($request);
-
         if (!$token = auth()->attempt($request->only('email', 'password'))) {
             return response("Попытка не удалась!", 401);
         }
         
         $user = User::where('email', $request->input('email'))->get();
-        // dd($user->toArray());
-
+        
         $user_dep = Department::where('id', $user->toArray()[0]['department_id'])->get();
         $user_pos = Position::where('id', $user->toArray()[0]['position_id'])->get();
-
-        // dd($user_dep);
 
         return response()->json(compact('token', 'user', 'user_dep', 'user_pos'));
     }

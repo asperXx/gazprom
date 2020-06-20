@@ -59,6 +59,15 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link :to="'/shop'">
+          <v-list-item-action>
+            <v-icon>fa-question-circle</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Магазин</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item link @click="logout">
           <v-list-item-action>
             <v-icon>fa-window-close</v-icon>

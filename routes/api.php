@@ -31,4 +31,10 @@ Route::group(['prefix' => 'auth'], function() {
 
     Route::get('depAll', 'UserController@depAll');
     Route::put('updateUser/{id}', 'UserController@update');
+
+    Route::post('buygood', 'ShopController@buyGood');
+
+    Route::get('getGoods', 'ShopController@index');
+    Route::get('getMyGoods/{id}', 'ShopController@getMyGoods');
+
 });

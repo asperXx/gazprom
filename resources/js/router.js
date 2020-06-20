@@ -67,6 +67,12 @@ const router = new Router({
       component: () => import('./components/ShowTicket.vue'),
       meta: { requiresAuth: true, layout: 'main' }
     },
+    {
+      path: '/shop',
+      name: 'shop',
+      component: () => import('./components/Shop.vue'),
+      meta: { requiresAuth: true, layout: 'main' }
+    },
   ]
 });
 
