@@ -29,7 +29,13 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^19.0.2",
+        "@ckeditor/ckeditor5-vue": "^1.0.1",
+        "@dymantic/vue-trix-editor": "^0.4.0",
+        "@kangc/v-md-editor": "^1.4.0",
         "rich-text-editor-vuetify": "^1.1.6",
+        "v-markdown": "^1.0.2",
+        "v-markdown-editor": "^1.2.5",
         "vue-router": "^3.3.4",
         "vuelidate": "^0.7.5",
         "vuetify": "^2.3.0",

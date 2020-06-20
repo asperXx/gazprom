@@ -9,6 +9,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
+/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -54,27 +56,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      isEdit: 'false',
+      editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
+      editorConfig: {// The configuration of the editor.
+      },
       post: {
         title: '',
         body: '',
-        user_id: ''
+        user_id: '',
+        id: ''
       },
       getPosts: {
         title: '',
         body: '',
-        user_id: ''
+        user_id: '',
+        id: ''
       },
       user_id: '',
       likes: {}
     };
   },
-  created: function created() {
+  mounted: function mounted() {
     var _this = this;
 
     this.user_id = JSON.parse(localStorage.getItem('user')).id;
@@ -91,9 +97,9 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    checkLikes: function checkLikes(title) {
+    checkLikes: function checkLikes(id) {
       for (var i = 0; i < this.likes.length; i++) {
-        if (this.likes[i].post_id == title) {
+        if (this.likes[i].post_id == id) {
           return false;
         }
       }
@@ -109,33 +115,111 @@ __webpack_require__.r(__webpack_exports__);
         headers: {
           'X-CSRF-TOKEN': window.Laravel.csrfToken
         }
-      });
-      then(function (res) {
+      }).then(function (res) {
+        console.log(_this2.getPosts);
         _this2.post.title = "";
         _this2.post.body = "";
+        _this2.user_id = JSON.parse(localStorage.getItem('user')).id;
+        axios.put('/api/auth/getMyPosts/' + _this2.user_id, {
+          'user': _this2.user_id
+        }, {
+          headers: {
+            'X-CSRF-TOKEN': window.Laravel.csrfToken
+          }
+        }).then(function (res) {
+          _this2.getPosts = res.data.posts;
+          _this2.likes = res.data.likes;
+        });
       });
     },
-    deletePost: function deletePost(title) {
-      axios.get('/api/auth/deletePost/' + title, {
+    deletePost: function deletePost(id) {
+      var _this3 = this;
+
+      axios.get('/api/auth/deletePost/' + id, {
         headers: {
           'X-CSRF-TOKEN': window.Laravel.csrfToken
         }
       }).then(function (res) {
         console.log(res);
+        _this3.user_id = JSON.parse(localStorage.getItem('user')).id;
+        axios.put('/api/auth/getMyPosts/' + _this3.user_id, {
+          'user': _this3.user_id
+        }, {
+          headers: {
+            'X-CSRF-TOKEN': window.Laravel.csrfToken
+          }
+        }).then(function (res) {
+          _this3.getPosts = res.data.posts;
+          _this3.likes = res.data.likes;
+        });
       });
     },
-    editPost: function editPost(title) {},
-    like: function like(title) {
-      console.log(this.user_id);
-      axios.post('/api/auth/like', {
-        'user': this.user_id,
-        'post': title
+    editPost: function editPost(id) {
+      var _this4 = this;
+
+      this.isEdit = !this.isEdit;
+      axios.get('/api/auth/showPost/' + id, {
+        headers: {
+          'X-CSRF-TOKEN': window.Laravel.csrfToken
+        }
+      }).then(function (res) {
+        _this4.post.title = res.data.post[0].title;
+        _this4.post.body = res.data.post[0].body;
+        _this4.post.id = res.data.post[0].id;
+        console.log(_this4.post);
+      });
+    },
+    updatePost: function updatePost() {
+      var _this5 = this;
+
+      axios.put('/api/auth/updatePost/' + this.post.id, {
+        'title': this.post.title,
+        'body': this.post.body
       }, {
         headers: {
           'X-CSRF-TOKEN': window.Laravel.csrfToken
         }
       }).then(function (res) {
-        return console.log(res);
+        console.log(res);
+        _this5.post.title = "";
+        _this5.post.body = "";
+        axios.put('/api/auth/getMyPosts/' + _this5.user_id, {
+          'user': _this5.user_id
+        }, {
+          headers: {
+            'X-CSRF-TOKEN': window.Laravel.csrfToken
+          }
+        }).then(function (res) {
+          _this5.getPosts = res.data.posts;
+          _this5.likes = res.data.likes;
+          _this5.isEdit = !_this5.isEdit;
+        });
+      });
+    },
+    like: function like(id) {
+      var _this6 = this;
+
+      console.log(this.user_id);
+      axios.post('/api/auth/like', {
+        'user': this.user_id,
+        'post': id
+      }, {
+        headers: {
+          'X-CSRF-TOKEN': window.Laravel.csrfToken
+        }
+      }).then(function (res) {
+        console.log(res);
+        _this6.user_id = JSON.parse(localStorage.getItem('user')).id;
+        axios.put('/api/auth/getMyPosts/' + _this6.user_id, {
+          'user': _this6.user_id
+        }, {
+          headers: {
+            'X-CSRF-TOKEN': window.Laravel.csrfToken
+          }
+        }).then(function (res) {
+          _this6.getPosts = res.data.posts;
+          _this6.likes = res.data.likes;
+        });
       });
     }
   }
@@ -181,13 +265,8 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("v-textarea", {
-                attrs: {
-                  id: "body",
-                  label: "Текст",
-                  name: "body",
-                  type: "text"
-                },
+              _c("ckeditor", {
+                attrs: { editor: _vm.editor, config: _vm.editorConfig },
                 model: {
                   value: _vm.post.body,
                   callback: function($$v) {
@@ -208,33 +287,33 @@ var render = function() {
         [
           _c("v-spacer"),
           _vm._v(" "),
-          _c(
-            "v-btn",
-            {
-              attrs: { color: "primary" },
-              on: {
-                click: _vm.create,
-                keypress: function($event) {
-                  if (
-                    !$event.type.indexOf("key") &&
-                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                  ) {
-                    return null
-                  }
-                  return _vm.login($event)
-                }
-              }
-            },
-            [_vm._v("Создать")]
-          )
+          !_vm.isEdit
+            ? _c(
+                "v-btn",
+                {
+                  attrs: { color: "primary", to: "/shareExperience" },
+                  on: { click: _vm.updatePost }
+                },
+                [_vm._v("Изменить")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isEdit
+            ? _c(
+                "v-btn",
+                {
+                  attrs: { color: "primary", to: "/shareExperience" },
+                  on: { click: _vm.create }
+                },
+                [_vm._v("Создать")]
+              )
+            : _vm._e()
         ],
         1
       ),
       _vm._v(" "),
       _c("hr"),
       _c("br"),
-      _vm._v(" "),
-      _c("h2", [_vm._v("Мои статьи")]),
       _vm._v(" "),
       _vm._l(_vm.getPosts, function(getPost, id) {
         return _c(
@@ -244,14 +323,14 @@ var render = function() {
             _c(
               "router-link",
               {
-                attrs: {
-                  to: { name: "showPost", params: { title: getPost.title } }
-                }
+                attrs: { to: { name: "showPost", params: { id: getPost.id } } }
               },
-              [_c("h3", [_vm._v(" " + _vm._s(getPost.title))])]
+              [_c("h3", [_vm._v(" " + _vm._s(getPost.title) + " ")])]
             ),
             _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(getPost.body))]),
+            _c("p", [
+              _c("span", { domProps: { innerHTML: _vm._s(getPost.body) } })
+            ]),
             _vm._v(" "),
             _c(
               "v-card-actions",
@@ -268,7 +347,7 @@ var render = function() {
                             attrs: { color: "primary" },
                             on: {
                               click: function($event) {
-                                return _vm.deletePost(getPost.title)
+                                return _vm.deletePost(getPost.id)
                               }
                             }
                           },
@@ -281,7 +360,7 @@ var render = function() {
                             attrs: { color: "primary" },
                             on: {
                               click: function($event) {
-                                return _vm.editPost(getPost.title)
+                                return _vm.editPost(getPost.id)
                               }
                             }
                           },
@@ -292,7 +371,7 @@ var render = function() {
                     )
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.checkLikes(getPost.title)
+                _vm.checkLikes(getPost.id)
                   ? _c(
                       "div",
                       [
@@ -302,7 +381,7 @@ var render = function() {
                             attrs: { color: "primary" },
                             on: {
                               click: function($event) {
-                                return _vm.like(getPost.title)
+                                return _vm.like(getPost.id)
                               }
                             }
                           },
@@ -349,7 +428,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VForm */ "./node_modules/vuetify/lib/components/VForm/index.js");
 /* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
 /* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
-/* harmony import */ var vuetify_lib_components_VTextarea__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VTextarea */ "./node_modules/vuetify/lib/components/VTextarea/index.js");
 
 
 
@@ -377,8 +455,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_6__["VForm"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__["VTextField"],VTextarea: vuetify_lib_components_VTextarea__WEBPACK_IMPORTED_MODULE_9__["VTextarea"]})
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_6__["VForm"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__["VTextField"]})
 
 
 /* hot reload */

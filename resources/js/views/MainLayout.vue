@@ -58,38 +58,12 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-
-        <!-- <v-list-item link :to="'/corpLife'">
-          <v-list-item-action>
-            <v-icon>fa-book</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Корпоративная жизнь</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item> -->
-
-        <!-- <v-list-item link :to="'/shop'">
-          <v-list-item-action>
-            <v-icon>fa-shopping-bag</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Магазин поощрений</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item> -->
-        <!-- <v-list-item>
-          <v-list-item-action>
-            <v-icon>fa-question-circle</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Анкетирование</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item> -->
         
     </v-navigation-drawer>
 
     <v-app-bar app clipped-left class="blue lighten-1">
       <v-app-bar-nav-icon class="white--text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <router-link to="/" class="white--text ml-4"><v-toolbar-title class="logo">Газпромбанк</v-toolbar-title> </router-link>
+      <router-link to="/" class="white--text ml-4"><v-toolbar-title class="logo"><img class="mt-2" src="./../../img/white-logo.svg" width="90%" height="90%"/></v-toolbar-title> </router-link>
     </v-app-bar>
 
     <v-main>

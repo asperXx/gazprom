@@ -19,8 +19,8 @@
 
         created() {
             console.log("Created")
-            console.log(this.$route.params.title)
-            axios.get('/api/auth/showPost/' + this.$route.params.title, {
+            console.log(this.$route.params.id)
+            axios.get('/api/auth/showPost/' + this.$route.params.id, {
                 headers: {
                     'X-CSRF-TOKEN': window.Laravel.csrfToken
                 }

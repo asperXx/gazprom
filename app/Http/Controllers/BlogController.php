@@ -8,35 +8,14 @@ use DB;
 
 class BlogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request, $id)
     {
-        // dd($request->get('user'));
         $posts = Blog::orderBy('created_at', 'desc')->get();
         $likes = DB::table('likes')->where('user_id', $request->get('user'))->get();
         return response()->json(compact('posts', 'likes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $post = new Blog;
@@ -49,58 +28,26 @@ class BlogController extends Controller
         $post->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($title)
+    public function show($id)
     {
-        $post = Blog::where('title', $title)->get();
+        $post = Blog::where('id', $id)->get();
 
-        $likes = DB::table('likes')->where('post_id', $title)->get();
+        $likes = DB::table('likes')->where('post_id', $id)->get();
 
-        // dd(response()->json(compact('post', 'likes')));
         return response()->json(compact('post', 'likes'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update($id, Request $request)
     {
-        //
+        DB::table('blogs')->where('id', $id)->update(['title' => $request->get('title'), 'body' => $request->get('body')]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($title)
-    {
-        Blog::where('title', $title)->delete();
+        Blog::where('id', $id)->delete();
     }
 
     public function like(Request $request) {
-        // dd($request->get('user'));
         DB::table('likes')->insert(['user_id' => $request->get('user'), 'post_id' => $request->get('post')]);
     }
 }

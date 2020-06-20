@@ -10,7 +10,9 @@ const store = new Vuex.Store({
     token: localStorage.getItem('token') || '',
     user : localStorage.getItem('user') || '',
     user_dep : localStorage.getItem('user_dep') || '',
-    isLoggedIn: localStorage.getItem('isLoggedIn')
+    isLoggedIn: localStorage.getItem('isLoggedIn'),
+    posts: localStorage.getItem('posts') || '',
+    likes: localStorage.getItem('likes') || ''
   },
 
   mutations: {
@@ -36,7 +38,22 @@ const store = new Vuex.Store({
   },
 
   actions: {
-    login({commit}, user){
+    posts({commit}) {
+      user_id = JSON.parse(localStorage.getItem('user')).id
+      return new Promise(async (resolve, reject) => {
+        await axios.put('/api/auth/getMyPosts/' + user_id, { 'user': user_id }, {
+          headers: {
+              'X-CSRF-TOKEN': window.Laravel.csrfToken
+          }
+      })
+      .then(res => {
+          localStorage.setItem('posts', res.data.posts)
+          localStorage.setItem('likes', res.data.likes)
+      })
+      })
+    },
+
+    login({commit}, user) {
       return new Promise(async (resolve, reject) => {
         commit('auth_request')
         await axios({url: '/api/auth/signin', data: user, method: 'POST' })

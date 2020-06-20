@@ -50,13 +50,13 @@ const router = new Router({
       meta: { requiresAuth: true, layout: 'main' }
     },
     {
-      path: '/post/:title',
+      path: '/post/:id',
       name: 'showPost',
       component: () => import('./components/ShowPost.vue'),
       meta: { requiresAuth: true, layout: 'main' }
     },
     {
-      path: '/ticket/:title',
+      path: '/ticket/:id',
       name: 'showTicket',
       component: () => import('./components/ShowTicket.vue'),
       meta: { requiresAuth: true, layout: 'main' }

@@ -18,7 +18,9 @@ Route::group(['prefix' => 'auth'], function() {
 Route::group(['prefix' => 'auth'], function() {
     Route::post('createPost', 'BlogController@store');
     Route::put('getMyPosts/{id}', 'BlogController@index');
-    Route::get('showPost/{title}', 'BlogController@show');
+    Route::get('showPost/{id}', 'BlogController@show');
+
+    Route::put('updatePost/{id}', 'BlogController@update');
     Route::get('deletePost/{title}', 'BlogController@destroy');
 
     Route::post('like', 'BlogController@like');
