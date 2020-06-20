@@ -56,40 +56,80 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      isEdit: 'false',
+      isCreate: false,
+      isEdit: "false",
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
       editorConfig: {// The configuration of the editor.
       },
       post: {
-        title: '',
-        body: '',
-        user_id: '',
-        id: ''
+        title: "",
+        body: "",
+        user_id: "",
+        id: ""
       },
       getPosts: {
-        title: '',
-        body: '',
-        user_id: '',
-        id: ''
+        title: "",
+        body: "",
+        user_id: "",
+        id: ""
       },
-      user_id: '',
+      user_id: "",
       likes: {}
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    this.user_id = JSON.parse(localStorage.getItem('user')).id;
+    this.user_id = JSON.parse(localStorage.getItem("user")).id;
     console.log("USer id " + this.user_id);
-    axios.put('/api/auth/getMyPosts/' + this.user_id, {
-      'user': this.user_id
+    axios.put("/api/auth/getMyPosts/" + this.user_id, {
+      user: this.user_id
     }, {
       headers: {
-        'X-CSRF-TOKEN': window.Laravel.csrfToken
+        "X-CSRF-TOKEN": window.Laravel.csrfToken
       }
     }).then(function (res) {
       _this.getPosts = res.data.posts;
@@ -109,22 +149,22 @@ __webpack_require__.r(__webpack_exports__);
     create: function create() {
       var _this2 = this;
 
-      this.post.user_id = JSON.parse(localStorage.getItem('user')).id;
+      this.post.user_id = JSON.parse(localStorage.getItem("user")).id;
       console.log(this.prop);
-      axios.post('/api/auth/createPost', this.post, {
+      axios.post("/api/auth/createPost", this.post, {
         headers: {
-          'X-CSRF-TOKEN': window.Laravel.csrfToken
+          "X-CSRF-TOKEN": window.Laravel.csrfToken
         }
       }).then(function (res) {
         console.log(_this2.getPosts);
         _this2.post.title = "";
         _this2.post.body = "";
-        _this2.user_id = JSON.parse(localStorage.getItem('user')).id;
-        axios.put('/api/auth/getMyPosts/' + _this2.user_id, {
-          'user': _this2.user_id
+        _this2.user_id = JSON.parse(localStorage.getItem("user")).id;
+        axios.put("/api/auth/getMyPosts/" + _this2.user_id, {
+          user: _this2.user_id
         }, {
           headers: {
-            'X-CSRF-TOKEN': window.Laravel.csrfToken
+            "X-CSRF-TOKEN": window.Laravel.csrfToken
           }
         }).then(function (res) {
           _this2.getPosts = res.data.posts;
@@ -135,18 +175,18 @@ __webpack_require__.r(__webpack_exports__);
     deletePost: function deletePost(id) {
       var _this3 = this;
 
-      axios.get('/api/auth/deletePost/' + id, {
+      axios.get("/api/auth/deletePost/" + id, {
         headers: {
-          'X-CSRF-TOKEN': window.Laravel.csrfToken
+          "X-CSRF-TOKEN": window.Laravel.csrfToken
         }
       }).then(function (res) {
         console.log(res);
-        _this3.user_id = JSON.parse(localStorage.getItem('user')).id;
-        axios.put('/api/auth/getMyPosts/' + _this3.user_id, {
-          'user': _this3.user_id
+        _this3.user_id = JSON.parse(localStorage.getItem("user")).id;
+        axios.put("/api/auth/getMyPosts/" + _this3.user_id, {
+          user: _this3.user_id
         }, {
           headers: {
-            'X-CSRF-TOKEN': window.Laravel.csrfToken
+            "X-CSRF-TOKEN": window.Laravel.csrfToken
           }
         }).then(function (res) {
           _this3.getPosts = res.data.posts;
@@ -158,9 +198,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       this.isEdit = !this.isEdit;
-      axios.get('/api/auth/showPost/' + id, {
+      axios.get("/api/auth/showPost/" + id, {
         headers: {
-          'X-CSRF-TOKEN': window.Laravel.csrfToken
+          "X-CSRF-TOKEN": window.Laravel.csrfToken
         }
       }).then(function (res) {
         _this4.post.title = res.data.post[0].title;
@@ -172,22 +212,22 @@ __webpack_require__.r(__webpack_exports__);
     updatePost: function updatePost() {
       var _this5 = this;
 
-      axios.put('/api/auth/updatePost/' + this.post.id, {
-        'title': this.post.title,
-        'body': this.post.body
+      axios.put("/api/auth/updatePost/" + this.post.id, {
+        title: this.post.title,
+        body: this.post.body
       }, {
         headers: {
-          'X-CSRF-TOKEN': window.Laravel.csrfToken
+          "X-CSRF-TOKEN": window.Laravel.csrfToken
         }
       }).then(function (res) {
         console.log(res);
         _this5.post.title = "";
         _this5.post.body = "";
-        axios.put('/api/auth/getMyPosts/' + _this5.user_id, {
-          'user': _this5.user_id
+        axios.put("/api/auth/getMyPosts/" + _this5.user_id, {
+          user: _this5.user_id
         }, {
           headers: {
-            'X-CSRF-TOKEN': window.Laravel.csrfToken
+            "X-CSRF-TOKEN": window.Laravel.csrfToken
           }
         }).then(function (res) {
           _this5.getPosts = res.data.posts;
@@ -200,21 +240,21 @@ __webpack_require__.r(__webpack_exports__);
       var _this6 = this;
 
       console.log(this.user_id);
-      axios.post('/api/auth/like', {
-        'user': this.user_id,
-        'post': id
+      axios.post("/api/auth/like", {
+        user: this.user_id,
+        post: id
       }, {
         headers: {
-          'X-CSRF-TOKEN': window.Laravel.csrfToken
+          "X-CSRF-TOKEN": window.Laravel.csrfToken
         }
       }).then(function (res) {
         console.log(res);
-        _this6.user_id = JSON.parse(localStorage.getItem('user')).id;
-        axios.put('/api/auth/getMyPosts/' + _this6.user_id, {
-          'user': _this6.user_id
+        _this6.user_id = JSON.parse(localStorage.getItem("user")).id;
+        axios.put("/api/auth/getMyPosts/" + _this6.user_id, {
+          user: _this6.user_id
         }, {
           headers: {
-            'X-CSRF-TOKEN': window.Laravel.csrfToken
+            "X-CSRF-TOKEN": window.Laravel.csrfToken
           }
         }).then(function (res) {
           _this6.getPosts = res.data.posts;
@@ -243,77 +283,137 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-card",
-    { staticClass: "pa-6", attrs: { width: "95%" } },
+    "v-container",
+    { staticClass: "d-flex flex-column justify-start", attrs: { fluid: "" } },
     [
-      _c("h2", [_vm._v("Создать статью")]),
+      !_vm.isCreate
+        ? _c(
+            "v-btn",
+            {
+              staticClass: "align-self-start ml-5",
+              on: {
+                click: function($event) {
+                  _vm.isCreate = true
+                }
+              }
+            },
+            [_vm._v("Создать статью")]
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "v-card-text",
-        [
-          _c(
-            "v-form",
+      _vm.isCreate
+        ? _c(
+            "v-card",
+            {
+              staticClass: "d-flex flex-column pa-6 justify-space-between",
+              attrs: { width: "97%", "min-height": "40%" }
+            },
             [
-              _c("v-text-field", {
-                attrs: { label: "Название", name: "title", type: "text" },
-                model: {
-                  value: _vm.post.title,
-                  callback: function($$v) {
-                    _vm.$set(_vm.post, "title", $$v)
-                  },
-                  expression: "post.title"
-                }
-              }),
+              _c("h2", [_vm._v("Создать статью")]),
               _vm._v(" "),
-              _c("ckeditor", {
-                attrs: { editor: _vm.editor, config: _vm.editorConfig },
-                model: {
-                  value: _vm.post.body,
-                  callback: function($$v) {
-                    _vm.$set(_vm.post, "body", $$v)
-                  },
-                  expression: "post.body"
-                }
-              })
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-form",
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Название",
+                          name: "title",
+                          type: "text"
+                        },
+                        model: {
+                          value: _vm.post.title,
+                          callback: function($$v) {
+                            _vm.$set(_vm.post, "title", $$v)
+                          },
+                          expression: "post.title"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("ckeditor", {
+                        attrs: { editor: _vm.editor, config: _vm.editorConfig },
+                        model: {
+                          value: _vm.post.body,
+                          callback: function($$v) {
+                            _vm.$set(_vm.post, "body", $$v)
+                          },
+                          expression: "post.body"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _vm.isEdit
+                    ? _c(
+                        "v-btn",
+                        {
+                          staticClass: "white--text",
+                          attrs: { color: "#0057B6", to: "/shareExperience" },
+                          on: {
+                            click: function($event) {
+                              _vm.isCreate = false
+                            }
+                          }
+                        },
+                        [_vm._v("Закрыть")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.isEdit
+                    ? _c(
+                        "v-btn",
+                        {
+                          staticClass: "white--text",
+                          attrs: { color: "#0057B6", to: "/shareExperience" },
+                          on: {
+                            click: function($event) {
+                              _vm.updatePost()
+                              _vm.isCreate = false
+                            }
+                          }
+                        },
+                        [_vm._v("Изменить")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isEdit
+                    ? _c(
+                        "v-btn",
+                        {
+                          staticClass: "white--text",
+                          attrs: { color: "#0057B6", to: "/shareExperience" },
+                          on: {
+                            click: function($event) {
+                              _vm.create()
+                              _vm.isCreate = false
+                            }
+                          }
+                        },
+                        [_vm._v("Создать")]
+                      )
+                    : _vm._e()
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("br")
             ],
             1
           )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-card-actions",
-        [
-          _c("v-spacer"),
-          _vm._v(" "),
-          !_vm.isEdit
-            ? _c(
-                "v-btn",
-                {
-                  attrs: { color: "primary", to: "/shareExperience" },
-                  on: { click: _vm.updatePost }
-                },
-                [_vm._v("Изменить")]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.isEdit
-            ? _c(
-                "v-btn",
-                {
-                  attrs: { color: "primary", to: "/shareExperience" },
-                  on: { click: _vm.create }
-                },
-                [_vm._v("Создать")]
-              )
-            : _vm._e()
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("hr"),
-      _c("br"),
+        : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.getPosts, function(getPost, id) {
         return _c(
@@ -321,76 +421,189 @@ var render = function() {
           { key: getPost.id },
           [
             _c(
-              "router-link",
-              {
-                attrs: { to: { name: "showPost", params: { id: getPost.id } } }
-              },
-              [_c("h3", [_vm._v(" " + _vm._s(getPost.title) + " ")])]
-            ),
-            _vm._v(" "),
-            _c("p", [
-              _c("span", { domProps: { innerHTML: _vm._s(getPost.body) } })
-            ]),
-            _vm._v(" "),
-            _c(
-              "v-card-actions",
+              "v-row",
               [
-                _c("v-spacer"),
-                _vm._v(" "),
-                getPost.user_id == _vm.user_id
-                  ? _c(
-                      "div",
+                _c(
+                  "v-col",
+                  {
+                    staticClass: "d-flex justify-center align-center sm-col-12 "
+                  },
+                  [
+                    _c(
+                      "v-card",
+                      {
+                        staticClass: "ma-5 pa-10",
+                        attrs: { "max-width": "120vh" }
+                      },
                       [
                         _c(
-                          "v-btn",
-                          {
-                            attrs: { color: "primary" },
-                            on: {
-                              click: function($event) {
-                                return _vm.deletePost(getPost.id)
-                              }
-                            }
-                          },
-                          [_vm._v("Удалить")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: { color: "primary" },
-                            on: {
-                              click: function($event) {
-                                return _vm.editPost(getPost.id)
-                              }
-                            }
-                          },
-                          [_vm._v("Изменить")]
+                          "div",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                attrs: {
+                                  to: {
+                                    name: "showPost",
+                                    params: { id: getPost.id }
+                                  }
+                                }
+                              },
+                              [_c("h3", [_vm._v(_vm._s(getPost.title))])]
+                            ),
+                            _vm._v(" "),
+                            _c("p", [
+                              _c("span", {
+                                domProps: { innerHTML: _vm._s(getPost.body) }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "v-card-actions",
+                              {
+                                staticClass:
+                                  "d-flex flex-column justify-center align-center"
+                              },
+                              [
+                                _c("v-spacer"),
+                                _vm._v(" "),
+                                getPost.user_id == _vm.user_id
+                                  ? _c(
+                                      "div",
+                                      { attrs: { width: "100%" } },
+                                      [
+                                        _c(
+                                          "v-row",
+                                          {
+                                            attrs: {
+                                              justify: "center",
+                                              align: "center"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "v-col",
+                                              {
+                                                attrs: {
+                                                  cols: "12",
+                                                  sm: "4",
+                                                  xs: "4"
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "v-btn",
+                                                  {
+                                                    staticClass: "white--text ",
+                                                    attrs: { color: "#0057B6" },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.deletePost(
+                                                          getPost.id
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [_vm._v("Удалить")]
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-col",
+                                              {
+                                                attrs: {
+                                                  cols: "12",
+                                                  sm: "4",
+                                                  xs: "4"
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "v-btn",
+                                                  {
+                                                    staticClass: "white--text",
+                                                    attrs: { color: "#0057B6" },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.editPost(
+                                                          getPost.id
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [_vm._v("Изменить")]
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-col",
+                                              {
+                                                attrs: {
+                                                  cols: "12",
+                                                  sm: "4",
+                                                  xs: "4"
+                                                }
+                                              },
+                                              [
+                                                _vm.checkLikes(getPost.id)
+                                                  ? _c(
+                                                      "div",
+                                                      [
+                                                        _c(
+                                                          "v-btn",
+                                                          {
+                                                            staticClass:
+                                                              "white--text",
+                                                            attrs: {
+                                                              color: "#0057B6"
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.like(
+                                                                  getPost.id
+                                                                )
+                                                              }
+                                                            }
+                                                          },
+                                                          [
+                                                            _c("v-icon", [
+                                                              _vm._v(
+                                                                "fa-thumbs-up"
+                                                              )
+                                                            ])
+                                                          ],
+                                                          1
+                                                        )
+                                                      ],
+                                                      1
+                                                    )
+                                                  : _vm._e()
+                                              ]
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e()
+                              ],
+                              1
+                            )
+                          ],
+                          1
                         )
-                      ],
-                      1
+                      ]
                     )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.checkLikes(getPost.id)
-                  ? _c(
-                      "div",
-                      [
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: { color: "primary" },
-                            on: {
-                              click: function($event) {
-                                return _vm.like(getPost.id)
-                              }
-                            }
-                          },
-                          [_vm._v("Лайк (xx)")]
-                        )
-                      ],
-                      1
-                    )
-                  : _vm._e()
+                  ],
+                  1
+                )
               ],
               1
             )
@@ -425,9 +638,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VBtn */ "./node_modules/vuetify/lib/components/VBtn/index.js");
 /* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
-/* harmony import */ var vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VForm */ "./node_modules/vuetify/lib/components/VForm/index.js");
-/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
-/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
+/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
+/* harmony import */ var vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VForm */ "./node_modules/vuetify/lib/components/VForm/index.js");
+/* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
 
 
 
@@ -455,7 +669,11 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_6__["VForm"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__["VTextField"]})
+
+
+
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VCol"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VContainer"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_7__["VForm"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_8__["VIcon"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VRow"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_9__["VTextField"]})
 
 
 /* hot reload */

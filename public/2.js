@@ -262,10 +262,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -464,665 +460,341 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-card", { staticClass: "pa-3", attrs: { width: "95%" } }, [
-    _c("h2", [_vm._v("Анкета пользователя")]),
-    _vm._v(" "),
-    _c(
-      "form",
-      { staticClass: "pt-0" },
-      [
-        _c(
-          "v-container",
-          { attrs: { fluid: "" } },
-          [
-            _c(
-              "v-row",
-              [
-                _c(
-                  "v-col",
-                  { attrs: { cols: "12", sm: "6" } },
-                  [
-                    _c("v-text-field", {
-                      attrs: {
-                        "error-messages": _vm.nameErrors,
-                        label: "Имя",
-                        required: "",
-                        disabled: _vm.disabled,
-                        "prepend-inner-icon": "mdi-face"
+  return _c(
+    "v-card",
+    {
+      staticClass: "pa-3 d-flex flex-column justify-center",
+      attrs: { width: "95%" }
+    },
+    [
+      _c("v-card-title", [_vm._v("Анкета пользователя")]),
+      _vm._v(" "),
+      _c(
+        "form",
+        [
+          _c(
+            "v-row",
+            [
+              _c(
+                "v-col",
+                { attrs: { cols: "12", sm: "6" } },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      "error-messages": _vm.nameErrors,
+                      label: "Имя",
+                      required: "",
+                      disabled: _vm.disabled,
+                      "prepend-inner-icon": "mdi-face"
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$v.name.$touch()
                       },
-                      on: {
-                        input: function($event) {
-                          return _vm.$v.name.$touch()
-                        },
-                        blur: function($event) {
-                          return _vm.$v.name.$touch()
-                        }
-                      },
-                      model: {
-                        value: _vm.user.name,
-                        callback: function($$v) {
-                          _vm.$set(_vm.user, "name", $$v)
-                        },
-                        expression: "user.name"
+                      blur: function($event) {
+                        return _vm.$v.name.$touch()
                       }
-                    }),
-                    _vm._v(" "),
-                    _c("v-text-field", {
-                      attrs: {
-                        "error-messages": _vm.secondNameErrors,
-                        label: "Отчество",
-                        "prepend-inner-icon": "mdi-face",
-                        required: "",
-                        disabled: _vm.disabled
+                    },
+                    model: {
+                      value: _vm.user.name,
+                      callback: function($$v) {
+                        _vm.$set(_vm.user, "name", $$v)
                       },
-                      on: {
-                        input: function($event) {
-                          return _vm.$v.second_name.$touch()
-                        },
-                        blur: function($event) {
-                          return _vm.$v.second_name.$touch()
-                        }
+                      expression: "user.name"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: {
+                      "error-messages": _vm.secondNameErrors,
+                      label: "Отчество",
+                      "prepend-inner-icon": "mdi-face",
+                      required: "",
+                      disabled: _vm.disabled
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$v.second_name.$touch()
                       },
-                      model: {
-                        value: _vm.user.second_name,
-                        callback: function($$v) {
-                          _vm.$set(_vm.user, "second_name", $$v)
-                        },
-                        expression: "user.second_name"
+                      blur: function($event) {
+                        return _vm.$v.second_name.$touch()
                       }
-                    }),
-                    _vm._v(" "),
-                    _c("v-text-field", {
-                      attrs: {
-                        "error-messages": _vm.lastNameErrors,
-                        label: "Фамилия",
-                        "prepend-inner-icon": "mdi-face",
-                        required: "",
-                        disabled: _vm.disabled
+                    },
+                    model: {
+                      value: _vm.user.second_name,
+                      callback: function($$v) {
+                        _vm.$set(_vm.user, "second_name", $$v)
                       },
-                      on: {
-                        input: function($event) {
-                          return _vm.$v.last_name.$touch()
-                        },
-                        blur: function($event) {
-                          return _vm.$v.last_name.$touch()
-                        }
+                      expression: "user.second_name"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: {
+                      "error-messages": _vm.lastNameErrors,
+                      label: "Фамилия",
+                      "prepend-inner-icon": "mdi-face",
+                      required: "",
+                      disabled: _vm.disabled
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$v.last_name.$touch()
                       },
-                      model: {
-                        value: _vm.user.last_name,
-                        callback: function($$v) {
-                          _vm.$set(_vm.user, "last_name", $$v)
-                        },
-                        expression: "user.last_name"
+                      blur: function($event) {
+                        return _vm.$v.last_name.$touch()
                       }
-                    }),
-                    _vm._v(" "),
-                    _c("v-text-field", {
-                      attrs: {
-                        "prepend-inner-icon": "mdi-phone",
-                        label: "Номер телефона",
-                        required: "",
-                        disabled: _vm.disabled
+                    },
+                    model: {
+                      value: _vm.user.last_name,
+                      callback: function($$v) {
+                        _vm.$set(_vm.user, "last_name", $$v)
                       },
-                      on: {
-                        change: function($event) {
-                          return _vm.$v.phone.$touch()
-                        },
-                        blur: function($event) {
-                          return _vm.$v.phone.$touch()
-                        }
+                      expression: "user.last_name"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: {
+                      "prepend-inner-icon": "mdi-phone",
+                      label: "Номер телефона",
+                      required: "",
+                      disabled: _vm.disabled
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.$v.phone.$touch()
                       },
-                      model: {
-                        value: _vm.user.phone,
-                        callback: function($$v) {
-                          _vm.$set(_vm.user, "phone", $$v)
-                        },
-                        expression: "user.phone"
+                      blur: function($event) {
+                        return _vm.$v.phone.$touch()
                       }
-                    }),
-                    _vm._v(" "),
-                    _c("v-text-field", {
-                      attrs: {
-                        "error-messages": _vm.emailErrors,
-                        label: "E-mail",
-                        "prepend-inner-icon": "mdi-email",
-                        required: "",
-                        disabled: _vm.disabled
+                    },
+                    model: {
+                      value: _vm.user.phone,
+                      callback: function($$v) {
+                        _vm.$set(_vm.user, "phone", $$v)
                       },
-                      on: {
-                        input: function($event) {
-                          return _vm.$v.email.$touch()
-                        },
-                        blur: function($event) {
-                          return _vm.$v.email.$touch()
-                        }
+                      expression: "user.phone"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: {
+                      "error-messages": _vm.emailErrors,
+                      label: "E-mail",
+                      "prepend-inner-icon": "mdi-email",
+                      required: "",
+                      disabled: _vm.disabled
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$v.email.$touch()
                       },
-                      model: {
-                        value: _vm.user.email,
-                        callback: function($$v) {
-                          _vm.$set(_vm.user, "email", $$v)
-                        },
-                        expression: "user.email"
+                      blur: function($event) {
+                        return _vm.$v.email.$touch()
                       }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "v-col",
-                  { attrs: { cols: "12", sm: "6" } },
-                  [
-                    _c("v-select", {
-                      attrs: {
-                        value: _vm.user_dep,
-                        items: _vm.user_deps,
-                        "item-value": "id",
-                        "item-text": "name",
-                        "error-messages": _vm.filialErrors,
-                        label: "Филиал",
-                        "prepend-inner-icon": "mdi-laptop",
-                        required: "",
-                        disabled: _vm.disabled
+                    },
+                    model: {
+                      value: _vm.user.email,
+                      callback: function($$v) {
+                        _vm.$set(_vm.user, "email", $$v)
                       },
-                      on: {
-                        change: function($event) {
-                          return _vm.$v.filial.$touch()
-                        },
-                        blur: function($event) {
-                          return _vm.$v.filial.$touch()
-                        }
+                      expression: "user.email"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", sm: "6" } },
+                [
+                  _c("v-select", {
+                    attrs: {
+                      value: _vm.user_dep,
+                      items: _vm.user_deps,
+                      "item-value": "id",
+                      "item-text": "name",
+                      "error-messages": _vm.filialErrors,
+                      label: "Филиал",
+                      "prepend-inner-icon": "mdi-laptop",
+                      required: "",
+                      disabled: _vm.disabled
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.$v.filial.$touch()
                       },
-                      model: {
-                        value: _vm.user_dep,
-                        callback: function($$v) {
-                          _vm.user_dep = $$v
-                        },
-                        expression: "user_dep"
+                      blur: function($event) {
+                        return _vm.$v.filial.$touch()
                       }
-                    }),
-                    _vm._v(" "),
-                    _c("v-select", {
-                      attrs: {
-                        items: _vm.items,
-                        "error-messages": _vm.selectErrors,
-                        label: "Отдел",
-                        "prepend-inner-icon": "mdi-domain",
-                        required: "",
-                        disabled: _vm.disabled,
-                        value: "IT"
+                    },
+                    model: {
+                      value: _vm.user_dep,
+                      callback: function($$v) {
+                        _vm.user_dep = $$v
                       },
-                      on: {
-                        change: function($event) {
-                          return _vm.$v.select.$touch()
-                        },
-                        blur: function($event) {
-                          return _vm.$v.select.$touch()
-                        }
+                      expression: "user_dep"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-select", {
+                    attrs: {
+                      items: _vm.items,
+                      "error-messages": _vm.selectErrors,
+                      label: "Отдел",
+                      "prepend-inner-icon": "mdi-domain",
+                      required: "",
+                      disabled: _vm.disabled,
+                      value: "IT"
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.$v.select.$touch()
                       },
-                      model: {
-                        value: _vm.select,
-                        callback: function($$v) {
-                          _vm.select = $$v
-                        },
-                        expression: "select"
+                      blur: function($event) {
+                        return _vm.$v.select.$touch()
                       }
-                    }),
-                    _vm._v(" "),
-                    _c("v-text-field", {
-                      attrs: {
-                        label: "Должность",
-                        "prepend-inner-icon": "mdi-professional-hexagon",
-                        required: "",
-                        disabled: _vm.disabled
+                    },
+                    model: {
+                      value: _vm.select,
+                      callback: function($$v) {
+                        _vm.select = $$v
                       },
-                      on: {
-                        input: function($event) {
-                          return _vm.$v.position.$touch()
-                        },
-                        blur: function($event) {
-                          return _vm.$v.position.$touch()
-                        }
+                      expression: "select"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: {
+                      label: "Должность",
+                      "prepend-inner-icon": "mdi-professional-hexagon",
+                      required: "",
+                      disabled: _vm.disabled
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$v.position.$touch()
                       },
-                      model: {
-                        value: _vm.user_pos.position,
-                        callback: function($$v) {
-                          _vm.$set(_vm.user_pos, "position", $$v)
-                        },
-                        expression: "user_pos.position"
+                      blur: function($event) {
+                        return _vm.$v.position.$touch()
                       }
-                    }),
-                    _vm._v(" "),
-                    _c("v-text-field", {
-                      attrs: {
-                        label: "Код авторизации",
-                        "prepend-inner-icon": "mdi-barcode",
-                        "error-messages": _vm.codeErrors,
-                        counter: "7",
-                        value: "460-001",
-                        required: "",
-                        disabled: _vm.disabled
+                    },
+                    model: {
+                      value: _vm.user_pos.position,
+                      callback: function($$v) {
+                        _vm.$set(_vm.user_pos, "position", $$v)
                       },
-                      on: {
-                        input: function($event) {
-                          return _vm.$v.code.$touch()
-                        },
-                        blur: function($event) {
-                          return _vm.$v.code.$touch()
-                        }
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "v-col",
-                  { attrs: { cols: "12" } },
-                  [
-                    _c("v-text-field", {
-                      attrs: {
-                        clearable: "",
-                        "prepend-inner-icon": "mdi-information-variant",
-                        "clear-icon": "mdi-cancel",
-                        label: "Обо мне",
-                        disabled: _vm.disabled
+                      expression: "user_pos.position"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: {
+                      label: "Код авторизации",
+                      "prepend-inner-icon": "mdi-barcode",
+                      "error-messages": _vm.codeErrors,
+                      counter: "7",
+                      value: "460-001",
+                      required: "",
+                      disabled: _vm.disabled
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$v.code.$touch()
                       },
-                      model: {
-                        value: _vm.user.desc,
-                        callback: function($$v) {
-                          _vm.$set(_vm.user, "desc", $$v)
-                        },
-                        expression: "user.desc"
+                      blur: function($event) {
+                        return _vm.$v.code.$touch()
                       }
-                    })
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm.disabled
-          ? _c(
-              "v-btn",
-              {
-                staticClass: "mr-4",
-                attrs: { color: "primary" },
-                on: {
-                  click: function($event) {
-                    _vm.disabled = false
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12" } },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      clearable: "",
+                      "prepend-inner-icon": "mdi-information-variant",
+                      "clear-icon": "mdi-cancel",
+                      label: "Обо мне",
+                      disabled: _vm.disabled
+                    },
+                    model: {
+                      value: _vm.user.desc,
+                      callback: function($$v) {
+                        _vm.$set(_vm.user, "desc", $$v)
+                      },
+                      expression: "user.desc"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm.disabled
+            ? _c(
+                "v-btn",
+                {
+                  staticClass: "mr-4 mb-12",
+                  attrs: { color: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.disabled = false
+                    }
                   }
-                }
-              },
-              [_vm._v("Изменить")]
-            )
-          : _c(
-              "div",
-              [
-                _c(
-                  "v-btn",
-                  {
-                    staticClass: "mr-4",
-                    attrs: { color: "primary" },
-                    on: {
-                      click: function($event) {
-                        _vm.submit
-                        _vm.disabled = true
-                      }
-                    }
-                  },
-                  [_vm._v("Заполнить")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "v-btn",
-                  {
-                    staticClass: "mr-4",
-                    on: {
-                      click: function($event) {
-                        _vm.disabled = true
-                      }
-                    }
-                  },
-                  [_vm._v("Отменить")]
-                )
-              ],
-              1
-            )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "mt-4" },
-      [
-        _c(
-          "v-row",
-          { staticClass: "fill-height" },
-          [
-            _c(
-              "v-col",
-              [
-                _c(
-                  "v-sheet",
-                  { attrs: { height: "64", outlined: "" } },
-                  [
-                    _c(
-                      "v-toolbar",
-                      { attrs: { flat: "", color: "white" } },
-                      [
-                        _c(
-                          "v-btn",
-                          {
-                            staticClass: "mr-4",
-                            attrs: { outlined: "", color: "grey darken-2" },
-                            on: { click: _vm.setToday }
-                          },
-                          [_vm._v("\n              Сегодня\n            ")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: {
-                              fab: "",
-                              text: "",
-                              small: "",
-                              color: "grey darken-2"
-                            },
-                            on: { click: _vm.prev }
-                          },
-                          [
-                            _c("v-icon", { attrs: { small: "" } }, [
-                              _vm._v("mdi-chevron-left")
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: {
-                              fab: "",
-                              text: "",
-                              small: "",
-                              color: "grey darken-2"
-                            },
-                            on: { click: _vm.next }
-                          },
-                          [
-                            _c("v-icon", { attrs: { small: "" } }, [
-                              _vm._v("mdi-chevron-right")
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _vm.$refs.calendar
-                          ? _c("v-toolbar-title", [
-                              _vm._v(
-                                "\n              " +
-                                  _vm._s(_vm.$refs.calendar.title) +
-                                  "\n            "
-                              )
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("v-spacer"),
-                        _vm._v(" "),
-                        _c(
-                          "v-menu",
-                          {
-                            attrs: { bottom: "", right: "" },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "activator",
-                                fn: function(ref) {
-                                  var on = ref.on
-                                  var attrs = ref.attrs
-                                  return [
-                                    _c(
-                                      "v-btn",
-                                      _vm._g(
-                                        _vm._b(
-                                          {
-                                            attrs: {
-                                              outlined: "",
-                                              color: "grey darken-2"
-                                            }
-                                          },
-                                          "v-btn",
-                                          attrs,
-                                          false
-                                        ),
-                                        on
-                                      ),
-                                      [
-                                        _c("span", [
-                                          _vm._v(
-                                            _vm._s(_vm.typeToLabel[_vm.type])
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("v-icon", { attrs: { right: "" } }, [
-                                          _vm._v("mdi-menu-down")
-                                        ])
-                                      ],
-                                      1
-                                    )
-                                  ]
-                                }
-                              }
-                            ])
-                          },
-                          [
-                            _vm._v(" "),
-                            _c(
-                              "v-list",
-                              [
-                                _c(
-                                  "v-list-item",
-                                  {
-                                    on: {
-                                      click: function($event) {
-                                        _vm.type = "day"
-                                      }
-                                    }
-                                  },
-                                  [_c("v-list-item-title", [_vm._v("День")])],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-list-item",
-                                  {
-                                    on: {
-                                      click: function($event) {
-                                        _vm.type = "week"
-                                      }
-                                    }
-                                  },
-                                  [_c("v-list-item-title", [_vm._v("Неделя")])],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-list-item",
-                                  {
-                                    on: {
-                                      click: function($event) {
-                                        _vm.type = "month"
-                                      }
-                                    }
-                                  },
-                                  [_c("v-list-item-title", [_vm._v("Месяц")])],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "v-sheet",
-                  { attrs: { height: "600" } },
-                  [
-                    _c("v-calendar", {
-                      ref: "calendar",
-                      attrs: {
-                        color: "primary",
-                        events: _vm.events,
-                        "event-color": _vm.getEventColor,
-                        type: _vm.type
-                      },
+                },
+                [_vm._v("Изменить")]
+              )
+            : _c(
+                "div",
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "mr-4 mb-2",
+                      attrs: { color: "primary" },
                       on: {
-                        "click:event": _vm.showEvent,
-                        "click:more": _vm.viewDay,
-                        "click:date": _vm.viewDay,
-                        change: _vm.updateRange
-                      },
-                      model: {
-                        value: _vm.focus,
-                        callback: function($$v) {
-                          _vm.focus = $$v
-                        },
-                        expression: "focus"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "v-menu",
-                      {
-                        attrs: {
-                          "close-on-content-click": false,
-                          activator: _vm.selectedElement,
-                          "offset-x": ""
-                        },
-                        model: {
-                          value: _vm.selectedOpen,
-                          callback: function($$v) {
-                            _vm.selectedOpen = $$v
-                          },
-                          expression: "selectedOpen"
+                        click: function($event) {
+                          _vm.submit
+                          _vm.disabled = true
                         }
-                      },
-                      [
-                        _c(
-                          "v-card",
-                          {
-                            attrs: {
-                              color: "grey lighten-4",
-                              "min-width": "350px",
-                              flat: ""
-                            }
-                          },
-                          [
-                            _c(
-                              "v-toolbar",
-                              {
-                                attrs: {
-                                  color: _vm.selectedEvent.color,
-                                  dark: ""
-                                }
-                              },
-                              [
-                                _c(
-                                  "v-btn",
-                                  { attrs: { icon: "" } },
-                                  [_c("v-icon", [_vm._v("mdi-pencil")])],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c("v-toolbar-title", {
-                                  domProps: {
-                                    innerHTML: _vm._s(_vm.selectedEvent.name)
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("v-spacer"),
-                                _vm._v(" "),
-                                _c(
-                                  "v-btn",
-                                  { attrs: { icon: "" } },
-                                  [_c("v-icon", [_vm._v("mdi-heart")])],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-btn",
-                                  { attrs: { icon: "" } },
-                                  [_c("v-icon", [_vm._v("mdi-dots-vertical")])],
-                                  1
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c("v-card-text", [
-                              _c("span", {
-                                domProps: {
-                                  innerHTML: _vm._s(_vm.selectedEvent.details)
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "v-card-actions",
-                              [
-                                _c(
-                                  "v-btn",
-                                  {
-                                    attrs: { text: "", color: "secondary" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.selectedOpen = false
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                  Отмена\n                "
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div")
-  ])
+                      }
+                    },
+                    [_vm._v("Заполнить")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "mr-4 mb-12",
+                      on: {
+                        click: function($event) {
+                          _vm.disabled = true
+                        }
+                      }
+                    },
+                    [_vm._v("Отменить")]
+                  )
+                ],
+                1
+              )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div")
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1146,16 +818,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
 /* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VBtn */ "./node_modules/vuetify/lib/components/VBtn/index.js");
-/* harmony import */ var vuetify_lib_components_VCalendar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VCalendar */ "./node_modules/vuetify/lib/components/VCalendar/index.js");
-/* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
-/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
-/* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
-/* harmony import */ var vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VList */ "./node_modules/vuetify/lib/components/VList/index.js");
-/* harmony import */ var vuetify_lib_components_VMenu__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VMenu */ "./node_modules/vuetify/lib/components/VMenu/index.js");
-/* harmony import */ var vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VSelect */ "./node_modules/vuetify/lib/components/VSelect/index.js");
-/* harmony import */ var vuetify_lib_components_VSheet__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VSheet */ "./node_modules/vuetify/lib/components/VSheet/index.js");
-/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
-/* harmony import */ var vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuetify/lib/components/VToolbar */ "./node_modules/vuetify/lib/components/VToolbar/index.js");
+/* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
+/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
+/* harmony import */ var vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VSelect */ "./node_modules/vuetify/lib/components/VSelect/index.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
 
 
 
@@ -1183,19 +849,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCalendar: vuetify_lib_components_VCalendar__WEBPACK_IMPORTED_MODULE_5__["VCalendar"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__["VCardText"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VCol"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VContainer"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_8__["VIcon"],VList: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_9__["VList"],VListItem: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_9__["VListItem"],VListItemTitle: vuetify_lib_components_VList__WEBPACK_IMPORTED_MODULE_9__["VListItemTitle"],VMenu: vuetify_lib_components_VMenu__WEBPACK_IMPORTED_MODULE_10__["VMenu"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VRow"],VSelect: vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_11__["VSelect"],VSheet: vuetify_lib_components_VSheet__WEBPACK_IMPORTED_MODULE_12__["VSheet"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_13__["VTextField"],VToolbar: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_14__["VToolbar"],VToolbarTitle: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_14__["VToolbarTitle"]})
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardTitle"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VCol"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VRow"],VSelect: vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_7__["VSelect"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_8__["VTextField"]})
 
 
 /* hot reload */

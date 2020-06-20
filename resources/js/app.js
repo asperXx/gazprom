@@ -19,6 +19,8 @@ VueMarkdownEditor.use(vuepressTheme);
 
 Vue.use(VueMarkdownEditor);
 
+
+
 new Vue({
 	vuetify: Vuetify,
 	render: h => h(App),

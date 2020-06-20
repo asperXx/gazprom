@@ -1,11 +1,9 @@
 <template>
-  <v-card class="pa-3" width="95%">
-    <h2>Анкета пользователя</h2>
-    <form class="pt-0">
-      <v-container fluid>
+  <v-card class="pa-3 d-flex flex-column justify-center" width="95%">
+    <v-card-title>Анкета пользователя</v-card-title>
+    <form>  
         <v-row>
           <v-col cols="12" sm="6">
-
             <v-text-field
               v-model="user.name"
               :error-messages="nameErrors"
@@ -131,17 +129,15 @@
           </v-col>
 
         </v-row>
-
-      </v-container>
       
-      <v-btn class="mr-4" @click="disabled=false" v-if="disabled" color="primary">Изменить</v-btn>
+      <v-btn class="mr-4 mb-12" @click="disabled=false" v-if="disabled" color="primary">Изменить</v-btn>
       <div v-else>
-        <v-btn class="mr-4" @click="submit; disabled=true" color="primary">Заполнить</v-btn>
-        <v-btn class="mr-4" @click="disabled=true">Отменить</v-btn>
+        <v-btn class="mr-4 mb-2" @click="submit; disabled=true" color="primary">Заполнить</v-btn>
+        <v-btn class="mr-4 mb-12" @click="disabled=true">Отменить</v-btn>
       </div>      
     </form>
 
-    <div class="mt-4">
+    <!-- <div class="mt-4">
       <v-row class="fill-height">
         <v-col>
           <v-sheet height="64" outlined>
@@ -242,7 +238,7 @@
           </v-sheet>
         </v-col>
       </v-row>
-    </div>
+    </div> -->
 
     <div>
       

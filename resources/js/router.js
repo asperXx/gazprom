@@ -26,6 +26,12 @@ const router = new Router({
       meta: { requiresAuth: true, layout: 'main' }
     },
     {
+      path: '/questioning',
+      name: 'questioning',
+      component: () => import('./views/Survey.vue'),
+      meta: { requiresAuth: true, layout: 'main' }
+    },
+    {
       path: '/profile',
       name: 'profile',
       component: () => import('./components/Profile.vue'),

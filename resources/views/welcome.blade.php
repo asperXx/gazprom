@@ -21,6 +21,7 @@
         
     </div>
     <script type="text/javascript" src="js/app.js"></script>
+    <script src="https://surveyjs.azureedge.net/1.7.12/survey.vue.min.js"></script>
 </body>
 
 </html>
