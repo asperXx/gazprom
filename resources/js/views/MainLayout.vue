@@ -9,7 +9,8 @@
           </v-avatar>
           <v-list-item-content>
             <v-list-item-title class="title">{{ user.last_name}} {{ user.name }}</v-list-item-title>
-            <v-list-item-subtitle>{{ user_dep.department }}</v-list-item-subtitle>
+            <v-list-item-subtitle :onFlames="onFlames" >{{ user_dep.department }} <div class="fa fa-fire"> {{ flames }}  
+              </div></v-list-item-subtitle>
           </v-list-item-content>
         </div>
 
@@ -95,19 +96,18 @@
 import axios from "axios";
 import store from "./../store";
 export default {
-  props: {
-    source: String
-  },
-  data: () => ({
+    data: () => ({
     drawer: null,
     skill: 20,
     user: {},
     user_dep: {},
     email: "",
-    isLoggedIn: ""
+    isLoggedIn: "",
+    flames: JSON.parse(localStorage.getItem('user')).flames || ''
   }),
 
   created() {
+    // console.log(JSON.parse(localStorage.getItem('user')).flames);
     this.$vuetify.theme.dark = false;
   },
 
@@ -123,8 +123,11 @@ export default {
   methods: {
     async logout() {
       this.$router.push({ name: "logout" });
+    },
+    onFlames(data) {
+      console.log(data)
     }
-  }
+  },
 };
 </script>
 

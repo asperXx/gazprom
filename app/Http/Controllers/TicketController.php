@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ticket;
+use App\User;
 
 class TicketController extends Controller
 {
@@ -12,10 +13,10 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
         // dd($id);
-        $tickets = Ticket::where('user_id', $id)->get();
+        $tickets = Ticket::all();
         return response()->json(compact('tickets'));
     }
 
@@ -87,8 +88,19 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($title)
+    public function destroy($id)
     {
-        Ticket::where('title', $title)->delete();
+        Ticket::where('id', $id)->delete();
+    }
+
+    public function like(Request $request) {
+
+        $user_id = $request->get('user_id');
+        $ticket_id = $request->get('ticket_id');
+        Ticket::where('id', $ticket_id)->increment('flames');
+        User::where('id', $user_id)->decrement('flames');
+
+        $user = User::where('id', $user_id)->get();
+        return response()->json(compact('user'));
     }
 }

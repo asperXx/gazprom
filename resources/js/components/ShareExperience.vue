@@ -4,7 +4,6 @@
     <v-card
       v-if="isCreate"
       width="97%"
-      min-height="40%"
       class="d-flex flex-column pa-6 justify-space-between"
     >
       <h2>Создать статью</h2>
@@ -56,12 +55,12 @@
               </p>
               <v-card-actions class="d-flex flex-column justify-center align-center">
                 <v-spacer></v-spacer>
-                <div v-if="getPost.user_id == user_id" width="100%">
+                <div>
                     <v-row justify="center" align="center" >
-                        <v-col cols="12" sm="4" xs="4">
+                        <v-col cols="12" sm="4" xs="4" v-if="getPost.user_id == user_id">
                             <v-btn color="#0057B6" class="white--text " @click="deletePost(getPost.id)">Удалить</v-btn>
                         </v-col>
-                        <v-col  cols="12" sm="4" xs="4">
+                        <v-col  cols="12" sm="4" xs="4" v-if="getPost.user_id == user_id">
                             <v-btn color="#0057B6" class="white--text" @click="editPost(getPost.id)">Изменить</v-btn>
                         </v-col>
                         <v-col cols="12" sm="4" xs="4">

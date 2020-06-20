@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["survey"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[10],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vuetify-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Survey.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
@@ -15,7 +15,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var surveyjs_widgets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! surveyjs-widgets */ "./node_modules/surveyjs-widgets/surveyjs-widgets.js");
 /* harmony import */ var surveyjs_widgets__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(surveyjs_widgets__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_customwidget__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/customwidget */ "./resources/js/components/customwidget.js");
+/* harmony import */ var _components_customwidget__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/customwidget */ "./resources/js/components/customwidget.js");
+//
 //
 //
 //
@@ -41,7 +42,7 @@ surveyjs_widgets__WEBPACK_IMPORTED_MODULE_2__["sortablejs"](survey_vue__WEBPACK_
 surveyjs_widgets__WEBPACK_IMPORTED_MODULE_2__["ckeditor"](survey_vue__WEBPACK_IMPORTED_MODULE_0__);
 surveyjs_widgets__WEBPACK_IMPORTED_MODULE_2__["autocomplete"](survey_vue__WEBPACK_IMPORTED_MODULE_0__);
 surveyjs_widgets__WEBPACK_IMPORTED_MODULE_2__["bootstrapslider"](survey_vue__WEBPACK_IMPORTED_MODULE_0__);
-Object(_components_customwidget__WEBPACK_IMPORTED_MODULE_4__["init"])(survey_vue__WEBPACK_IMPORTED_MODULE_0__);
+Object(_components_customwidget__WEBPACK_IMPORTED_MODULE_3__["init"])(survey_vue__WEBPACK_IMPORTED_MODULE_0__);
 survey_vue__WEBPACK_IMPORTED_MODULE_0__["Serializer"].addProperty("question", "tag:number");
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -49,99 +50,35 @@ survey_vue__WEBPACK_IMPORTED_MODULE_0__["Serializer"].addProperty("question", "t
   },
   data: function data() {
     var json = {
-      title: "Product Feedback Survey Example",
-      showProgressBar: "top",
-      pages: [{
-        questions: [{
-          name: "date",
-          type: "datepicker",
-          inputType: "date",
-          title: "Your favorite date:",
-          dateFormat: "mm/dd/yy",
-          isRequired: true
+      "completedHtml": "Спасибо за то что проголосовали",
+      "pages": [{
+        "name": "page1",
+        "elements": [{
+          "type": "radiogroup",
+          "name": "question1",
+          "title": "цукфкфуцк",
+          "choices": ["item1", "item2", "item3"]
         }, {
-          type: "matrix",
-          name: "Quality",
-          title: "Please indicate if you agree or disagree with the following statements",
-          columns: [{
-            value: 1,
-            text: "Strongly Disagree"
-          }, {
-            value: 2,
-            text: "Disagree"
-          }, {
-            value: 3,
-            text: "Neutral"
-          }, {
-            value: 4,
-            text: "Agree"
-          }, {
-            value: 5,
-            text: "Strongly Agree"
-          }],
-          rows: [{
-            value: "affordable",
-            text: "Product is affordable"
-          }, {
-            value: "does what it claims",
-            text: "Product does what it claims"
-          }, {
-            value: "better then others",
-            text: "Product is better than other products on the market"
-          }, {
-            value: "easy to use",
-            text: "Product is easy to use"
-          }]
+          "type": "radiogroup",
+          "name": "question2",
+          "choices": ["item1", "item2", "item3"]
         }, {
-          type: "rating",
-          name: "satisfaction",
-          title: "How satisfied are you with the Product?",
-          mininumRateDescription: "Not Satisfied",
-          maximumRateDescription: "Completely satisfied"
-        }, {
-          type: "rating",
-          name: "recommend friends",
-          visibleIf: "{satisfaction} > 3",
-          title: "How likely are you to recommend the Product to a friend or co-worker?",
-          mininumRateDescription: "Will not recommend",
-          maximumRateDescription: "I will recommend"
-        }, {
-          type: "comment",
-          name: "suggestions",
-          title: "What would make you more satisfied with the Product?"
-        }]
-      }, {
-        questions: [{
-          type: "radiogroup",
-          name: "price to competitors",
-          title: "Compared to our competitors, do you feel the Product is",
-          choices: ["Less expensive", "Priced about the same", "More expensive", "Not sure"]
-        }, {
-          type: "radiogroup",
-          name: "price",
-          title: "Do you feel our current price is merited by our product?",
-          choices: ["correct|Yes, the price is about right", "low|No, the price is too low for your product", "high|No, the price is too high for your product"]
-        }, {
-          type: "multipletext",
-          name: "pricelimit",
-          title: "What is the... ",
-          items: [{
-            name: "mostamount",
-            title: "Most amount you would every pay for a product like ours"
-          }, {
-            name: "leastamount",
-            title: "The least amount you would feel comfortable paying"
-          }]
-        }]
-      }, {
-        questions: [{
-          type: "text",
-          name: "email",
-          title: 'Thank you for taking our survey. Please enter your email address, then press the "Submit" button.'
+          "type": "html",
+          "name": "question4"
         }]
       }]
     };
     var model = new survey_vue__WEBPACK_IMPORTED_MODULE_0__["Model"](json);
+    model.onComplete.add(function (result) {
+      console.log(result.data);
+      axios.post("/api/auth/storeSurvey", result.data, {
+        headers: {
+          "X-CSRF-TOKEN": window.Laravel.csrfToken
+        }
+      }).then(function (res) {
+        return console.log(res);
+      });
+    });
     return {
       survey: model
     };
@@ -218,9 +155,9 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _c("h2", [_vm._v("SurveyJS Library - a sample survey below")]),
+      _c("survey", { attrs: { survey: _vm.survey } }),
       _vm._v(" "),
-      _c("survey", { attrs: { survey: _vm.survey } })
+      _c("div", { attrs: { id: "surveyResult" } })
     ],
     1
   )
@@ -344,14 +281,15 @@ function init(Survey) {
 /*!***************************************!*\
   !*** ./resources/js/views/Survey.vue ***!
   \***************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Survey_vue_vue_type_template_id_e35db78e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Survey.vue?vue&type=template&id=e35db78e& */ "./resources/js/views/Survey.vue?vue&type=template&id=e35db78e&");
 /* harmony import */ var _Survey_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Survey.vue?vue&type=script&lang=js& */ "./resources/js/views/Survey.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Survey_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Survey.vue?vue&type=style&index=0&lang=css& */ "./resources/js/views/Survey.vue?vue&type=style&index=0&lang=css&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Survey_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Survey_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _Survey_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Survey.vue?vue&type=style&index=0&lang=css& */ "./resources/js/views/Survey.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -383,7 +321,7 @@ component.options.__file = "resources/js/views/Survey.vue"
 /*!****************************************************************!*\
   !*** ./resources/js/views/Survey.vue?vue&type=script&lang=js& ***!
   \****************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

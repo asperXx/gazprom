@@ -94,7 +94,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -306,7 +305,7 @@ var render = function() {
             "v-card",
             {
               staticClass: "d-flex flex-column pa-6 justify-space-between",
-              attrs: { width: "97%", "min-height": "40%" }
+              attrs: { width: "97%" }
             },
             [
               _c("h2", [_vm._v("Создать статью")]),
@@ -467,21 +466,20 @@ var render = function() {
                               [
                                 _c("v-spacer"),
                                 _vm._v(" "),
-                                getPost.user_id == _vm.user_id
-                                  ? _c(
-                                      "div",
-                                      { attrs: { width: "100%" } },
+                                _c(
+                                  "div",
+                                  [
+                                    _c(
+                                      "v-row",
+                                      {
+                                        attrs: {
+                                          justify: "center",
+                                          align: "center"
+                                        }
+                                      },
                                       [
-                                        _c(
-                                          "v-row",
-                                          {
-                                            attrs: {
-                                              justify: "center",
-                                              align: "center"
-                                            }
-                                          },
-                                          [
-                                            _c(
+                                        getPost.user_id == _vm.user_id
+                                          ? _c(
                                               "v-col",
                                               {
                                                 attrs: {
@@ -508,9 +506,11 @@ var render = function() {
                                                 )
                                               ],
                                               1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        getPost.user_id == _vm.user_id
+                                          ? _c(
                                               "v-col",
                                               {
                                                 attrs: {
@@ -537,62 +537,60 @@ var render = function() {
                                                 )
                                               ],
                                               1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-col",
-                                              {
-                                                attrs: {
-                                                  cols: "12",
-                                                  sm: "4",
-                                                  xs: "4"
-                                                }
-                                              },
-                                              [
-                                                _vm.checkLikes(getPost.id)
-                                                  ? _c(
-                                                      "div",
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-col",
+                                          {
+                                            attrs: {
+                                              cols: "12",
+                                              sm: "4",
+                                              xs: "4"
+                                            }
+                                          },
+                                          [
+                                            _vm.checkLikes(getPost.id)
+                                              ? _c(
+                                                  "div",
+                                                  [
+                                                    _c(
+                                                      "v-btn",
+                                                      {
+                                                        staticClass:
+                                                          "white--text",
+                                                        attrs: {
+                                                          color: "#0057B6"
+                                                        },
+                                                        on: {
+                                                          click: function(
+                                                            $event
+                                                          ) {
+                                                            return _vm.like(
+                                                              getPost.id
+                                                            )
+                                                          }
+                                                        }
+                                                      },
                                                       [
-                                                        _c(
-                                                          "v-btn",
-                                                          {
-                                                            staticClass:
-                                                              "white--text",
-                                                            attrs: {
-                                                              color: "#0057B6"
-                                                            },
-                                                            on: {
-                                                              click: function(
-                                                                $event
-                                                              ) {
-                                                                return _vm.like(
-                                                                  getPost.id
-                                                                )
-                                                              }
-                                                            }
-                                                          },
-                                                          [
-                                                            _c("v-icon", [
-                                                              _vm._v(
-                                                                "fa-thumbs-up"
-                                                              )
-                                                            ])
-                                                          ],
-                                                          1
-                                                        )
+                                                        _c("v-icon", [
+                                                          _vm._v("fa-thumbs-up")
+                                                        ])
                                                       ],
                                                       1
                                                     )
-                                                  : _vm._e()
-                                              ]
-                                            )
-                                          ],
-                                          1
+                                                  ],
+                                                  1
+                                                )
+                                              : _vm._e()
+                                          ]
                                         )
                                       ],
                                       1
                                     )
-                                  : _vm._e()
+                                  ],
+                                  1
+                                )
                               ],
                               1
                             )
