@@ -24,6 +24,17 @@
             value="IT"
           ></v-select>
 
+          <v-select
+            v-model="prop.status"
+            :items="levelItems"
+            :error-messages="selectErrors"
+            label="Уровень"
+            prepend-inner-icon="mdi-domain"
+            required
+            :disabled="disabled"
+            value="IT"
+          ></v-select>
+
         </v-form>
       </v-card-text>
       <v-card-actions>
@@ -68,6 +79,11 @@
               <p>
                 <span>Отел: {{ getProp.department }} </span>
               </p>
+            
+              <p>
+                <span>Уровень: {{ getProp.status }} </span>
+              </p>
+
               <p>
                 <span>Поддержали: {{ getProp.flames }} </span>
               </p>
@@ -108,6 +124,13 @@ export default {
             'IT-отдел',
             'Бухгалтерия'
         ],
+
+        levelItems: [
+          'Уровень отдела',
+          'Уровень филиала',
+          'Уровень региона'
+        ],
+
         isEdit: "false",
         editor: ClassicEditor,
         editorConfig: {
@@ -117,7 +140,8 @@ export default {
             title: '',
             body: '',
             user_id: '',
-            dep: ''
+            dep: '',
+            status: ''
         },
         getProps: {
 

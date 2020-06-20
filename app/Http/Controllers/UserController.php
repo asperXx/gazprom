@@ -9,8 +9,7 @@ use App\Department;
 class UserController extends Controller
 {
     public function update($id, Request $request) {
-        $dep = Department::where('department', $request->get('user_dep')['id'])->get('id');
-
+        $dep = Department::where('id', $request->get('user_dep')['id'])->get('id');
         $update = User::where('id', $id)->update([
             'last_name' => $request->get('user')['last_name'],
             'name' => $request->get('user')['name'],

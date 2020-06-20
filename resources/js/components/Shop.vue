@@ -43,20 +43,27 @@ export default {
         axios.get('/api/auth/getGoods')
         .then(res => {
             this.goods = res.data.shop
-            // console.log(this.goods)
         })
 
         axios.get('/api/auth/getMyGoods/' + this.user.id)
         .then(res => {
             this.mygoods = res.data.goods
-            console.log(res)
         })
     },
 
     methods: {
         buy(id) {
             axios.post('/api/auth/buygood', {'user_id': this.user.id, 'good_id': id})
-            .then(res => console.log(res))
+
+            axios.get('/api/auth/getGoods')
+            .then(res => {
+                this.goods = res.data.shop
+            })
+
+            axios.get('/api/auth/getMyGoods/' + this.user.id)
+            .then(res => {
+                this.mygoods = res.data.goods
+            })
         }
     }
 };

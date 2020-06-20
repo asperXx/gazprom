@@ -273,14 +273,10 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('/api/auth/depAll').then(function (res) {
-      console.log(res.data.dep_all);
-
       for (var i = 0; i < res.data.dep_all.length; i++) {
         _this.dep_all.push(res.data.dep_all[i].department);
-      } // console.log(this.dep_all)
-
+      }
     });
-    this.user_deps.length = 0;
 
     for (var i = 0; i < this.user_dep.length; i++) {
       this.user_deps.push(this.user_dep[i].department);
@@ -288,14 +284,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateUser: function updateUser() {
-      // console.log(this.user_dep.id)
       var data = {
         user: this.user,
         user_dep: this.user_dep,
         user_pos: this.user_pos
       };
       axios.put('/api/auth/updateUser/' + this.user.id, data).then(function (res) {
-        console.log(JSON.parse(res.config.data));
         localStorage.setItem('user', JSON.stringify(res.data.user[0]));
       });
     }

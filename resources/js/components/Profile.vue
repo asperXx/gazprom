@@ -258,16 +258,12 @@
     created() {
       axios.get('/api/auth/depAll')
       .then(res => {
-        console.log(res.data.dep_all)
 
         for (let i = 0; i < res.data.dep_all.length; i++) {
           this.dep_all.push(res.data.dep_all[i].department)
         }
 
-        // console.log(this.dep_all)
       });
-
-      this.user_deps.length = 0;
 
       for (let i = 0; i < this.user_dep.length; i++) {
         this.user_deps.push(this.user_dep[i].department);
@@ -277,8 +273,6 @@
     methods: {
       updateUser() {
 
-        // console.log(this.user_dep.id)
-
         var data = {
           user: this.user,
           user_dep: this.user_dep,
@@ -287,7 +281,6 @@
 
         axios.put('/api/auth/updateUser/' + this.user.id, data)
         .then(res => {
-          console.log(JSON.parse(res.config.data))
           localStorage.setItem('user', JSON.stringify(res.data.user[0]))
         })
       }

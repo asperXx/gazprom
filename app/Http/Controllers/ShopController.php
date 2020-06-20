@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class ShopController extends Controller
 {
     public function index() {
-        $shop = Shop::where('user_id', null)->get();
+        $shop = Shop::where('user_id',  0)->get();
 
         return response()->json(compact('shop'));
     }
@@ -45,11 +45,11 @@ class ShopController extends Controller
         $good = json_decode(Shop::where('id', $good_id)->get());
         $user = json_decode(User::where('id', $user_id)->get());
 
-        if ($user[0]->coins > $good[0]->price) {
+        if ($user[0]->flames > $good[0]->price) {
             
-            $user[0]->coins = $user[0]->coins - $good[0]->price;
+            $user[0]->flames = $user[0]->flames - $good[0]->price;
 
-            User::where('id', $user_id)->update(['coins' => $user[0]->coins]);
+            User::where('id', $user_id)->update(['flames' => $user[0]->flames]);
             Shop::where('id', $good_id)->update(['user_id' => $user_id]);
 
             return response()->json(['status' => 'Success']);

@@ -125,8 +125,6 @@ export default {
 
     this.user = JSON.parse(localStorage.getItem("user"));
     this.user_dep = JSON.parse(localStorage.getItem("user_dep"));
-
-    console.log(this.user_dep);
   },
 
   methods: {

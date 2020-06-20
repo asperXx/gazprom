@@ -40,7 +40,7 @@ class TicketController extends Controller
         $ticket = new Ticket;
         $ticket->title = $request->title;
         $ticket->body = $request->body;
-        $ticket->status = 0;
+        $ticket->status = $request->status;
         $ticket->department = $request->dep;
         $ticket->flames = 0;
         $ticket->user_id = $request->user_id;
@@ -99,7 +99,8 @@ class TicketController extends Controller
         $user_id = $request->get('user_id');
         $ticket_id = $request->get('ticket_id');
         
-        Ticket::where('id', $ticket_id)->increment('flames');
+        // $author_id = $request->get('')
+        // Ticket::where('id', $ticket_id)->increment('flames');
 
         User::where('id', $user_id)->decrement('flames');
 

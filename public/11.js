@@ -112,12 +112,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       depItems: ['IT-отдел', 'Бухгалтерия'],
+      levelItems: ['Уровень отдела', 'Уровень филиала', 'Уровень региона'],
       isEdit: "false",
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
       editorConfig: {// The configuration of the editor.
@@ -126,7 +143,8 @@ __webpack_require__.r(__webpack_exports__);
         title: '',
         body: '',
         user_id: '',
-        dep: ''
+        dep: '',
+        status: ''
       },
       getProps: {},
       user_id: '',
@@ -305,6 +323,25 @@ var render = function() {
                           },
                           expression: "prop.dep"
                         }
+                      }),
+                      _vm._v(" "),
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.levelItems,
+                          "error-messages": _vm.selectErrors,
+                          label: "Уровень",
+                          "prepend-inner-icon": "mdi-domain",
+                          required: "",
+                          disabled: _vm.disabled,
+                          value: "IT"
+                        },
+                        model: {
+                          value: _vm.prop.status,
+                          callback: function($$v) {
+                            _vm.$set(_vm.prop, "status", $$v)
+                          },
+                          expression: "prop.status"
+                        }
                       })
                     ],
                     1
@@ -415,6 +452,14 @@ var render = function() {
                               _c("span", [
                                 _vm._v(
                                   "Отел: " + _vm._s(getProp.department) + " "
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _c("span", [
+                                _vm._v(
+                                  "Уровень: " + _vm._s(getProp.status) + " "
                                 )
                               ])
                             ]),

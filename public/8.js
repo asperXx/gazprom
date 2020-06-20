@@ -51,20 +51,25 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('/api/auth/getGoods').then(function (res) {
-      _this.goods = res.data.shop; // console.log(this.goods)
+      _this.goods = res.data.shop;
     });
     axios.get('/api/auth/getMyGoods/' + this.user.id).then(function (res) {
       _this.mygoods = res.data.goods;
-      console.log(res);
     });
   },
   methods: {
     buy: function buy(id) {
+      var _this2 = this;
+
       axios.post('/api/auth/buygood', {
         'user_id': this.user.id,
         'good_id': id
-      }).then(function (res) {
-        return console.log(res);
+      });
+      axios.get('/api/auth/getGoods').then(function (res) {
+        _this2.goods = res.data.shop;
+      });
+      axios.get('/api/auth/getMyGoods/' + this.user.id).then(function (res) {
+        _this2.mygoods = res.data.goods;
       });
     }
   }
