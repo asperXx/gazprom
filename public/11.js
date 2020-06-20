@@ -95,11 +95,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      depItems: ['IT-отдел', 'Бухгалтерия'],
       isEdit: "false",
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
       editorConfig: {// The configuration of the editor.
@@ -107,13 +125,10 @@ __webpack_require__.r(__webpack_exports__);
       prop: {
         title: '',
         body: '',
-        user_id: ''
+        user_id: '',
+        dep: ''
       },
-      getProps: {
-        id: '',
-        title: '',
-        body: ''
-      },
+      getProps: {},
       user_id: '',
       isCreate: false,
       flames: JSON.parse(localStorage.getItem('user')).flames
@@ -128,28 +143,31 @@ __webpack_require__.r(__webpack_exports__);
       }
     }).then(function (res) {
       _this.getProps = res.data.tickets;
+      console.log(_this.getProps);
     });
   },
   methods: {
     create: function create() {
       var _this2 = this;
 
-      this.prop.user_id = JSON.parse(localStorage.getItem('user')).id;
-      axios.post('/api/auth/createProp', this.prop, {
-        headers: {
-          'X-CSRF-TOKEN': window.Laravel.csrfToken
-        }
-      }).then(function (res) {
-        _this2.prop.title = "";
-        _this2.prop.body = "";
-        axios.get('/api/auth/getMyProps/', {
+      if (this.prop.title != "" && this.prop.body != "" && this.prop.dep != "") {
+        this.prop.user_id = JSON.parse(localStorage.getItem('user')).id;
+        axios.post('/api/auth/createProp', this.prop, {
           headers: {
             'X-CSRF-TOKEN': window.Laravel.csrfToken
           }
         }).then(function (res) {
-          _this2.getProps = res.data.tickets;
+          _this2.prop.title = "";
+          _this2.prop.body = "";
+          axios.get('/api/auth/getMyProps/', {
+            headers: {
+              'X-CSRF-TOKEN': window.Laravel.csrfToken
+            }
+          }).then(function (res) {
+            _this2.getProps = res.data.tickets;
+          });
         });
-      });
+      }
     },
     deleteProp: function deleteProp(id) {
       var _this3 = this;
@@ -235,7 +253,7 @@ var render = function() {
                     [
                       _c("v-text-field", {
                         attrs: {
-                          label: "Название",
+                          label: "Решаемая проблема",
                           name: "title",
                           type: "text"
                         },
@@ -248,6 +266,8 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
+                      _c("p", [_vm._v("Описание решения")]),
+                      _vm._v(" "),
                       _c("ckeditor", {
                         attrs: { editor: _vm.editor, config: _vm.editorConfig },
                         model: {
@@ -256,6 +276,25 @@ var render = function() {
                             _vm.$set(_vm.prop, "body", $$v)
                           },
                           expression: "prop.body"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.depItems,
+                          "error-messages": _vm.selectErrors,
+                          label: "Отдел",
+                          "prepend-inner-icon": "mdi-domain",
+                          required: "",
+                          disabled: _vm.disabled,
+                          value: "IT"
+                        },
+                        model: {
+                          value: _vm.prop.dep,
+                          callback: function($$v) {
+                            _vm.$set(_vm.prop, "dep", $$v)
+                          },
+                          expression: "prop.dep"
                         }
                       })
                     ],
@@ -342,14 +381,14 @@ var render = function() {
                 _c(
                   "v-col",
                   {
-                    staticClass: "d-flex justify-center align-center sm-col-12 "
+                    staticClass: "d-flex justify-center align-center sm-col-12"
                   },
                   [
                     _c(
                       "v-card",
                       {
-                        staticClass: "ma-5 pa-10",
-                        attrs: { "max-width": "120vh" }
+                        staticClass: "mt-5 pa-6",
+                        attrs: { "min-width": "80%" }
                       },
                       [
                         _c(
@@ -372,6 +411,22 @@ var render = function() {
                               _c("span", {
                                 domProps: { innerHTML: _vm._s(getProp.body) }
                               })
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _c("span", [
+                                _vm._v(
+                                  "Отел: " + _vm._s(getProp.department) + " "
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _c("span", [
+                                _vm._v(
+                                  "Поддержали: " + _vm._s(getProp.flames) + " "
+                                )
+                              ])
                             ]),
                             _vm._v(" "),
                             _c(
@@ -434,35 +489,6 @@ var render = function() {
                                             }
                                           },
                                           [
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                staticClass: "white--text",
-                                                attrs: { color: "#0057B6" },
-                                                on: {
-                                                  click: function($event) {
-                                                    return _vm.editPost(
-                                                      getProp.id
-                                                    )
-                                                  }
-                                                }
-                                              },
-                                              [_vm._v("Изменить")]
-                                            )
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-col",
-                                          {
-                                            attrs: {
-                                              cols: "12",
-                                              sm: "4",
-                                              xs: "4"
-                                            }
-                                          },
-                                          [
                                             _vm.flames > 0
                                               ? _c(
                                                   "div",
@@ -471,7 +497,7 @@ var render = function() {
                                                       "v-btn",
                                                       {
                                                         staticClass:
-                                                          "white--text",
+                                                          "white--text ml-10",
                                                         attrs: {
                                                           color: "#0057B6"
                                                         },
@@ -553,7 +579,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
 /* harmony import */ var vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VForm */ "./node_modules/vuetify/lib/components/VForm/index.js");
 /* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
-/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
+/* harmony import */ var vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VSelect */ "./node_modules/vuetify/lib/components/VSelect/index.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
 
 
 
@@ -585,7 +612,8 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 
 
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VCol"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VContainer"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_7__["VForm"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_8__["VIcon"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VRow"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_9__["VTextField"]})
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VCol"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VContainer"],VForm: vuetify_lib_components_VForm__WEBPACK_IMPORTED_MODULE_7__["VForm"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_8__["VIcon"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VRow"],VSelect: vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_9__["VSelect"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_10__["VTextField"]})
 
 
 /* hot reload */

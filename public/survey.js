@@ -50,27 +50,46 @@ survey_vue__WEBPACK_IMPORTED_MODULE_0__["Serializer"].addProperty("question", "t
   },
   data: function data() {
     var json = {
-      "completedHtml": "Спасибо за то что проголосовали",
-      "pages": [{
-        "name": "page1",
-        "elements": [{
-          "type": "radiogroup",
-          "name": "question1",
-          "title": "цукфкфуцк",
-          "choices": ["item1", "item2", "item3"]
-        }, {
-          "type": "radiogroup",
-          "name": "question2",
-          "choices": ["item1", "item2", "item3"]
-        }, {
-          "type": "html",
-          "name": "question4"
+      "title": "Наша крутая форма опроса",
+      "description": "Пожалуйста, отвечайте честно!",
+      "logoWidth": 60,
+      "logoHeight": 60,
+      "questions": [{
+        "name": "name",
+        "type": "text",
+        "title": "Введите свое имя:",
+        "placeHolder": "Иван Иванов",
+        "isRequired": true
+      }, {
+        "name": "birthdate",
+        "type": "text",
+        "inputType": "date",
+        "title": "Дата рождения:",
+        "isRequired": true
+      }, {
+        "name": "color",
+        "type": "text",
+        "inputType": "color",
+        "title": "Любимый цвет:"
+      }, {
+        "name": "email",
+        "type": "text",
+        "inputType": "email",
+        "title": "Адрес электронной почти:",
+        "placeHolder": "example@example.com",
+        "isRequired": true,
+        "validators": [{
+          "type": "email"
         }]
       }]
     };
     var model = new survey_vue__WEBPACK_IMPORTED_MODULE_0__["Model"](json);
+    model.completeText = "Завершить";
     model.onComplete.add(function (result) {
       console.log(result.data);
+      model.onComplete.add(function (result) {
+        document.querySelector('#surveyResult').textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
+      });
       axios.post("/api/auth/storeSurvey", result.data, {
         headers: {
           "X-CSRF-TOKEN": window.Laravel.csrfToken

@@ -16,7 +16,7 @@ class TicketController extends Controller
     public function index()
     {
         // dd($id);
-        $tickets = Ticket::all();
+        $tickets = Ticket::orderBy('created_at', 'desc')->get();
         return response()->json(compact('tickets'));
     }
 
@@ -42,6 +42,8 @@ class TicketController extends Controller
         $ticket->title = $request->title;
         $ticket->body = $request->body;
         $ticket->status = 0;
+        $ticket->department = $request->dep;
+        $ticket->flames = 0;
         $ticket->user_id = $request->user_id;
 
         $ticket->save();

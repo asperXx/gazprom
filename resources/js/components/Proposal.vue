@@ -9,9 +9,21 @@
       <h2>Сформировать предложение</h2>
       <v-card-text>
         <v-form>
-          <v-text-field label="Название" name="title" type="text" v-model="prop.title"></v-text-field>
-
+          <v-text-field label="Решаемая проблема" name="title" type="text" v-model="prop.title"></v-text-field>
+          <p>Описание решения</p>
           <ckeditor :editor="editor" v-model="prop.body" :config="editorConfig"></ckeditor>
+
+          <v-select
+            v-model="prop.dep"
+            :items="depItems"
+            :error-messages="selectErrors"
+            label="Отдел"
+            prepend-inner-icon="mdi-domain"
+            required
+            :disabled="disabled"
+            value="IT"
+          ></v-select>
+
         </v-form>
       </v-card-text>
       <v-card-actions>
@@ -44,8 +56,8 @@
     <!-- <h2>Мои статьи</h2> -->
     <div v-for="getProp in getProps" :key="getProp.id">
       <v-row >
-        <v-col  class="d-flex justify-center align-center sm-col-12 ">
-          <v-card class="ma-5 pa-10"  max-width="120vh" >
+        <v-col class="d-flex justify-center align-center sm-col-12">
+          <v-card class="mt-5 pa-6" min-width="80%">
             <div>
               <router-link :to="{ name: 'showProp', params: { id: getProp.id } }">
                 <h3>{{ getProp.title }}</h3>
@@ -53,6 +65,13 @@
               <p>
                 <span v-html="getProp.body"></span>
               </p>
+              <p>
+                <span>Отел: {{ getProp.department }} </span>
+              </p>
+              <p>
+                <span>Поддержали: {{ getProp.flames }} </span>
+              </p>
+
               <v-card-actions class="d-flex flex-column justify-center align-center">
                 <v-spacer></v-spacer>
                 <div>
@@ -60,12 +79,10 @@
                         <v-col cols="12" sm="4" xs="4">
                             <v-btn color="#0057B6" class="white--text " @click="deleteProp(getProp.id)">Удалить</v-btn>
                         </v-col>
-                        <v-col  cols="12" sm="4" xs="4">
-                            <v-btn color="#0057B6" class="white--text" @click="editPost(getProp.id)">Изменить</v-btn>
-                        </v-col>
+
                         <v-col cols="12" sm="4" xs="4">
                             <div v-if="flames > 0">
-                                <v-btn color="#0057B6" class="white--text" @click="like(getProp.id)">
+                                <v-btn color="#0057B6" class="white--text ml-10" @click="like(getProp.id)">
                                     <v-icon>fa-fire</v-icon>
                                 </v-btn>
                             </div>
@@ -87,6 +104,10 @@ import store from './../store'
 export default {
     data () {
     return {
+        depItems: [
+            'IT-отдел',
+            'Бухгалтерия'
+        ],
         isEdit: "false",
         editor: ClassicEditor,
         editorConfig: {
@@ -96,11 +117,10 @@ export default {
             title: '',
             body: '',
             user_id: '',
+            dep: ''
         },
         getProps: {
-            id: '',
-            title: '',
-            body: '',
+
         },
         user_id: '',
         isCreate: false,
@@ -115,29 +135,33 @@ export default {
             }
         })
         .then(res => {
-            this.getProps = res.data.tickets;
+            this.getProps = res.data.tickets
+            console.log(this.getProps)
         })
     },
   methods: {
       create() {
-        this.prop.user_id = JSON.parse(localStorage.getItem('user')).id
-        axios.post('/api/auth/createProp', this.prop, {
-            headers: {
-                'X-CSRF-TOKEN': window.Laravel.csrfToken
-            }
-        })
-        .then(res => {
-            this.prop.title = ""
-            this.prop.body = ""
-            axios.get('/api/auth/getMyProps/', {
+        if (this.prop.title != "" && this.prop.body != "" && this.prop.dep != "") {
+            this.prop.user_id = JSON.parse(localStorage.getItem('user')).id
+            
+            axios.post('/api/auth/createProp', this.prop, {
                 headers: {
                     'X-CSRF-TOKEN': window.Laravel.csrfToken
                 }
             })
             .then(res => {
-                this.getProps = res.data.tickets;
+                this.prop.title = ""
+                this.prop.body = ""
+                axios.get('/api/auth/getMyProps/', {
+                    headers: {
+                        'X-CSRF-TOKEN': window.Laravel.csrfToken
+                    }
+                })
+                .then(res => {
+                    this.getProps = res.data.tickets;
+                })
             })
-        })
+        }
     },
 
     deleteProp(id) {
