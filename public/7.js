@@ -195,6 +195,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -233,11 +242,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       medals: [],
-      filter: ['Исполнительность', 'Надежность', 'Компетентность'],
+      filter: ['Динамичность', 'Надежность', 'Компетентность', 'Командность', 'Ответственность'],
       user: JSON.parse(localStorage.getItem('user')),
       user_pos: JSON.parse(localStorage.getItem('user_pos')),
       user_dep: JSON.parse(localStorage.getItem('user_dep')),
+      getterFires: 1,
       getterEmail: '',
+      quality: 'Динамичность',
       dep_all: [// 'Газпромбанк',
         // 'Газпромбанк СПб'
       ],
@@ -342,13 +353,15 @@ __webpack_require__.r(__webpack_exports__);
     sendFlame: function sendFlame() {
       var _this2 = this;
 
-      axios.get('/api/auth/sendFlame/' + JSON.parse(localStorage.getItem('user')).id + '/' + this.getterEmail).then(function (res) {
+      axios.post('/api/auth/sendFlame/', {
+        user: JSON.parse(localStorage.getItem('user')).id,
+        email: this.getterEmail,
+        flames: this.getterFires
+      }).then(function (res) {
         console.log(res.data.user[0]);
         _this2.getterEmail = "";
-        localStorage.setItem('user', JSON.stringify(res.data.user[0]));
-        _this2.$root.flame = res.data.user[0].flame;
-
-        _this2.$emit('getFlame', flame);
+        localStorage.setItem('user', JSON.stringify(res.data.user[0])); // this.$root.flame = res.data.user[0].flame
+        // this.$emit('getFlame', flame);
       });
     }
   }
@@ -388,7 +401,7 @@ var render = function() {
             _vm._l(_vm.medals, function(medal, id) {
               return _c(
                 "div",
-                { key: id, staticClass: "col-md-2 d-flex-wrap justify-center" },
+                { key: id, staticClass: "col-md-3 d-flex-wrap justify-center" },
                 [
                   _c("p", { staticStyle: { "text-align": "center" } }, [
                     _vm._v(
@@ -757,14 +770,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "form",
-            { staticClass: "pb-12" },
+            { staticClass: "pb-2 mb-2" },
             [
               _c(
                 "v-row",
                 [
                   _c(
                     "v-col",
-                    { attrs: { cols: "12", sm: "6", lg: "4" } },
+                    { attrs: { cols: "12", sm: "6", lg: "3" } },
                     [
                       _c("v-text-field", {
                         attrs: { label: "E-mail", required: "" },
@@ -782,10 +795,17 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-col",
-                    { attrs: { cols: "12", lg: "4", sm: "6" } },
+                    { attrs: { cols: "12", lg: "3", sm: "6" } },
                     [
                       _c("v-select", {
-                        attrs: { items: _vm.filter, label: "Причина" }
+                        attrs: { items: _vm.filter, label: "Качество" },
+                        model: {
+                          value: _vm.quality,
+                          callback: function($$v) {
+                            _vm.quality = $$v
+                          },
+                          expression: "quality"
+                        }
                       })
                     ],
                     1
@@ -793,7 +813,29 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-col",
-                    { attrs: { cols: "12", lg: "4", sm: "12" } },
+                    { attrs: { cols: "12", lg: "3", sm: "6" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Кол-во огоньков",
+                          required: "",
+                          "append-icon": "fa-fire"
+                        },
+                        model: {
+                          value: _vm.getterFires,
+                          callback: function($$v) {
+                            _vm.getterFires = $$v
+                          },
+                          expression: "getterFires"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", lg: "3", sm: "12" } },
                     [
                       _vm.disabled
                         ? _c(

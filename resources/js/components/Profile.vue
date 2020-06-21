@@ -3,7 +3,7 @@
   <v-card class="pa-3 d-flex flex-column justify-center mb-3" width="95%">
     <v-card-title>Достижения</v-card-title>
     <v-row>
-      <div class="col-md-2 d-flex-wrap justify-center" v-for="(medal, id) in medals" :key="id">
+      <div class="col-md-3 d-flex-wrap justify-center" v-for="(medal, id) in medals" :key="id">
         <p style="text-align: center;">
           {{ medal.title }}
           </p><v-avatar style="display:block; margin: 0 auto;">
@@ -156,22 +156,31 @@
   </v-card>
   <v-card class="pa-3 d-flex flex-column justify-center mt-3 mb-3" width="95%">
     <v-card-title>Отправить комплимент</v-card-title>
-    <form class="pb-12">  
+    <form class="pb-2 mb-2">  
         <v-row>
-          <v-col cols="12" sm="6" lg="4">
+          <v-col cols="12" sm="6" lg="3">
             <v-text-field
               v-model="getterEmail"
               label="E-mail"
               required
             ></v-text-field>
           </v-col>
-            <v-col cols="12" lg="4" sm="6">
+            <v-col cols="12" lg="3" sm="6">
               <v-select
+              v-model="quality"
                 :items="filter"
-                label="Причина"
+                label="Качество"
                 ></v-select>
               </v-col>
-            <v-col cols="12" lg="4" sm="12">
+            <v-col cols="12" lg="3" sm="6">
+              <v-text-field
+              v-model="getterFires"
+              label="Кол-во огоньков"
+              required
+              append-icon="fa-fire"
+            ></v-text-field>
+            </v-col>
+            <v-col cols="12" lg="3" sm="12">
               <v-btn class="mt-3" @click="sendFlame" v-if="disabled" color="primary">Отправить</v-btn>
             </v-col>
         </v-row>
@@ -205,12 +214,13 @@
 
     data: () => ({
       medals: [],
-      filter: ['Исполнительность', 'Надежность', 'Компетентность' ],
+      filter: ['Динамичность', 'Надежность', 'Компетентность', 'Командность', 'Ответственность' ],
       user: JSON.parse(localStorage.getItem('user')),
       user_pos: JSON.parse(localStorage.getItem('user_pos')),
       user_dep: JSON.parse(localStorage.getItem('user_dep')),
-
+      getterFires: 1,
       getterEmail: '',
+      quality: 'Динамичность',
       dep_all: [
         // 'Газпромбанк',
         // 'Газпромбанк СПб'
@@ -296,7 +306,7 @@
         return errors
       },
     },
-
+    
     created() {
       axios.get('/api/auth/depAll')
       .then(res => {
@@ -334,13 +344,13 @@
       },
 
       sendFlame() {
-        axios.get('/api/auth/sendFlame/' + JSON.parse(localStorage.getItem('user')).id + '/' + this.getterEmail)
+        axios.post('/api/auth/sendFlame/', {user: JSON.parse(localStorage.getItem('user')).id, email: this.getterEmail, flames: this.getterFires })
         .then(res => {
           console.log(res.data.user[0])
           this.getterEmail = ""
           localStorage.setItem('user', JSON.stringify(res.data.user[0]))
-          this.$root.flame = res.data.user[0].flame
-          this.$emit('getFlame', flame);
+          // this.$root.flame = res.data.user[0].flame
+          // this.$emit('getFlame', flame);
         })
       }
     }

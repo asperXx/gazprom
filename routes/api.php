@@ -43,7 +43,7 @@ Route::group(['prefix' => 'auth'], function() {
     Route::get('getGoods', 'ShopController@index');
     Route::get('getMyGoods/{id}', 'ShopController@getMyGoods');
 
-    Route::get('sendFlame/{user_id}/{email}', 'UserController@sendFlame');
+    Route::post('sendFlame', 'UserController@sendFlame');
 
     Route::post('poll', 'PollController@poll');
 

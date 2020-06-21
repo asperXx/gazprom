@@ -63,29 +63,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      itemGoods: '',
-      items: ['По возрастанию цены', 'По убыванию цены'],
+      itemGoods: "",
+      items: ["По возрастанию цены", "По убыванию цены"],
       goods: [],
       sortedGoods: [],
-      user: JSON.parse(localStorage.getItem('user')),
+      user: JSON.parse(localStorage.getItem("user")),
       mygoods: []
     };
   },
   created: function created() {
     var _this = this;
 
-    axios.get('/api/auth/getGoods').then(function (res) {
+    axios.get("/api/auth/getGoods").then(function (res) {
+      console.log(res);
       _this.goods = res.data.shop;
     });
-    axios.get('/api/auth/getMyGoods/' + this.user.id).then(function (res) {
+    axios.get("/api/auth/getMyGoods/" + this.user.id).then(function (res) {
       _this.mygoods = res.data.goods;
     });
   },
   methods: {
+    getBack: function getBack(pic) {
+      var style = "background-image: url(" + pic + ");";
+      return style;
+    },
     sortGoods: function sortGoods() {
-      if (this.itemGoods === 'По возрастанию цены') {
+      if (this.itemGoods === "По возрастанию цены") {
         this.goods.sort(function (a, b) {
-          return a.price < b.price ? 1 : -1;
+          return a.price > b.price ? 1 : -1;
         });
       } else {
         this.goods.sort(function (a, b) {
@@ -96,14 +101,16 @@ __webpack_require__.r(__webpack_exports__);
     buy: function buy(id) {
       var _this2 = this;
 
-      axios.post('/api/auth/buygood', {
-        'user_id': this.user.id,
-        'good_id': id
+      axios.post("/api/auth/buygood", {
+        user_id: this.user.id,
+        good_id: id
+      }).then(function (res) {
+        localStorage.setItem('user', JSON.stringify(res.data.user[0]));
       });
-      axios.get('/api/auth/getGoods').then(function (res) {
+      axios.get("/api/auth/getGoods").then(function (res) {
         _this2.goods = res.data.shop;
       });
-      axios.get('/api/auth/getMyGoods/' + this.user.id).then(function (res) {
+      axios.get("/api/auth/getMyGoods/" + this.user.id).then(function (res) {
         _this2.mygoods = res.data.goods;
       });
     }
@@ -124,7 +131,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card[data-v-90242c92] {position: relative; min-width: 400px; margin: 0px;}\n.text[data-v-90242c92] {color: #fff !important}\n.button[data-v-90242c92] {bottom:15px; position: absolute; right: 15px}\n.pic[data-v-90242c92] {display:block; position: relative; box-sizing: border-box; width:100%; height:200px; background-size: contain; background-position: center center;}\n.desc_wrap[data-v-90242c92] {height: 50px; position: relative; overflow: hidden;}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .card {\r\n  position: relative;\r\n  min-width: 400px;\r\n  margin: 0px;\r\n} */\n.text[data-v-90242c92] {\r\n  color: #fff !important;\n}\n.button[data-v-90242c92] {\r\n  bottom: 15px;\r\n  position: absolute;\r\n  right: 15px;\n}\n.pic[data-v-90242c92] {\r\n  display: block;\r\n  position: relative;\r\n  box-sizing: border-box;\r\n  width: 100%;\r\n  height: 200px;\r\n  background-size: contain;\r\n  background-position: center center;\n}\n.desc_wrap[data-v-90242c92] {\r\n  height: 50px;\r\n  position: relative;\r\n  overflow: hidden;\n}\r\n", ""]);
 
 // exports
 
@@ -178,7 +185,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticStyle: { width: "100%" } },
     [
       _c(
         "v-row",
@@ -212,30 +218,24 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-row",
-        _vm._l(_vm.goods, function(good) {
+        _vm._l(_vm.goods, function(good, id) {
           return _c(
             "v-col",
-            { key: good.id, attrs: { cols: "12", lg: "6" } },
+            { key: id, attrs: { cols: "12", sm: "6", md: "4" } },
             [
               _c(
                 "v-card",
-                { staticClass: "card" },
+                { staticClass: "card pa-3", attrs: { elevation: "5" } },
                 [
-                  _c("v-img", [
-                    _c("img", {
-                      attrs: {
-                        height: "200px",
-                        src:
-                          "https://avatars.mds.yandex.net/get-bunker/128809/2242b0f7baf7f84a7d0d6cd6020acd311fba9df8/orig"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", {}),
-                  _vm._v(" "),
                   _c("v-card-title", [_vm._v(_vm._s(good.title))]),
                   _vm._v(" "),
                   _c("v-card-text", [
+                    _c("div", {
+                      staticClass: "pic",
+                      style: _vm.getBack(good.img),
+                      attrs: { width: "100%" }
+                    }),
+                    _vm._v(" "),
                     _c("p", { staticClass: "desc_wrap" }, [
                       _vm._v(_vm._s(good.description))
                     ])
@@ -286,30 +286,35 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-row",
-        [
-          _c(
+        _vm._l(_vm.mygoods, function(mygood, id) {
+          return _c(
             "v-col",
-            { staticClass: "d-flex  justify-center align-center sm-col-12" },
-            _vm._l(_vm.mygoods, function(mygood) {
-              return _c(
+            { key: id, attrs: { cols: "12", sm: "6", md: "4" } },
+            [
+              _c(
                 "v-card",
-                {
-                  key: mygood.id,
-                  staticClass: "mt-5 pa-6",
-                  attrs: { "max-width": "900" }
-                },
+                { staticClass: "card pa-3", attrs: { elevation: "5" } },
                 [
-                  _c("div", [_vm._v(_vm._s(mygood.title))]),
+                  _c("v-card-title", [_vm._v(_vm._s(mygood.title))]),
                   _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(mygood.description))]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v("Цена: " + _vm._s(mygood.price))])
-                ]
+                  _c("v-card-text", [
+                    _c("div", {
+                      staticClass: "pic",
+                      style: _vm.getBack(mygood.img),
+                      attrs: { width: "100%" }
+                    }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "desc_wrap" }, [
+                      _vm._v(_vm._s(mygood.description))
+                    ])
+                  ])
+                ],
+                1
               )
-            }),
+            ],
             1
           )
-        ],
+        }),
         1
       )
     ],

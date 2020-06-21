@@ -113,9 +113,6 @@
         </v-row>
       </v-container>
     </v-main>
-    <v-footer class="mainFooter" app>
-      <span>&copy; 2020</span>
-    </v-footer>
   </v-app>
 </template>
 
@@ -169,17 +166,8 @@ export default {
   margin: 10px;
   flex-direction: column;
 }
-@import url(
-  https://fonts.googleapis.com/css?family=Arimo:400,400italic|Playfair+Display+SC:400,700&subset=latin,cyrillic
-);
-
-.logo {
-  font-family: "Playfair Display SC", serif;
-  font-weight: 500;
-  letter-spacing: 1px;
-  font-size: 24px;
-}
 * {
   text-decoration: none !important;
 }
+
 </style>

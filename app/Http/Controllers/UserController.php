@@ -34,24 +34,37 @@ class UserController extends Controller
         return response()->json(['dep_all' => $dep_all]);
     }
 
-    public function sendFlame($user_id, $email) {
-        User::where('id', $user_id)->decrement('flames');
-        User::where('email', $email)->increment('flames');
+    public function sendFlame(Request $request) {
 
-        $user = User::where('id', $user_id)->get();
+        for ($i = 0; $i < $request->get('flames'); $i++) {
+            User::where('id', $request->get('user'))->decrement('flames');
+            User::where('email', $request->get('email'))->increment('flames');
+        }
+
+        $user = User::where('id', $request->get('user'))->get();
         return response()->json(['user' => $user]);
     }
 
     public function chart() {
         $users = User::orderBy('flames', 'desc')->get();
-        $users_dep = [];
+
+        $users_deps = [];
+        $users_branches = [];
+        $user_medals = [];
 
         for ($i = 0; $i < count($users); $i++) {
+
             $dep = Department::where('id', $users[$i]['department_id'])->get('department');
-            array_push($users_dep, $dep);
+            array_push($users_deps, $dep);
+
+            $branch = DB::table('branches')->where('id', $users[$i]['branch_id'])->get('title');
+            array_push($users_branches, $branch);
+
+            $medals = DB::table('medals')->where('user_id', $users[$i]['id'])->get('href');
+            array_push($user_medals, $medals);
         }
 
-        return response()->json(['users' => $users, 'users_dep' => $users_dep]);
+        return response()->json(['users' => $users, 'users_dep' => $users_deps, 'users_branches' => $users_branches, 'medals' => $user_medals]);
     }
 
     public function medals($id) {

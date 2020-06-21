@@ -52,7 +52,9 @@ class ShopController extends Controller
             User::where('id', $user_id)->update(['flames' => $user[0]->flames]);
             Shop::where('id', $good_id)->update(['user_id' => $user_id]);
 
-            return response()->json(['status' => 'Success']);
+            $user = User::where('id', $request->get('user_id'))->get();
+
+            return response()->json(['status' => 'Success', 'user' => $user]);
         }
         return response()->json(['status' => 'Failure']);
 

@@ -16,7 +16,7 @@ const router = new Router({
     {
       path: '/proposal',
       name: 'proposal',
-      component: () => import('./components/Test.vue'),
+      component: () => import('./components/Proposal.vue'),
       meta: { requiresAuth: true, layout: 'main' }
     },
     {
@@ -71,12 +71,6 @@ const router = new Router({
       path: '/shop',
       name: 'shop',
       component: () => import('./components/ShopFire.vue'),
-      meta: { requiresAuth: true, layout: 'main' }
-    },
-    {
-      path: '/test',
-      name: 'test',
-      component: () => import('./components/Test.vue'),
       meta: { requiresAuth: true, layout: 'main' }
     },
     {
