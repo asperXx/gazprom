@@ -1,4 +1,6 @@
 <template>
+<div>
+  
   <v-card class="pa-3 d-flex flex-column justify-center" width="95%">
     <v-card-title>Анкета пользователя</v-card-title>
     <form>  
@@ -141,6 +143,30 @@
     </div>
 
   </v-card>
+  <v-card class="pa-3 d-flex flex-column justify-center mt-3" width="95%">
+    <v-card-title>Отправить огоньки</v-card-title>
+    <form>  
+        <v-row>
+          <v-col cols="4" sm="4">
+            <v-text-field
+              v-model="getterEmail"
+              label="E-mail"
+              required
+            ></v-text-field>
+          </v-col>
+            <v-col cols="4" sm="4">
+              <v-select
+                :items="filter"
+                label="Причина"
+                ></v-select>
+              </v-col>
+            <v-col cols="4" sm="4">
+              <v-btn class="mt-3" @click="sendFlame" v-if="disabled" color="primary">Отправить</v-btn>
+            </v-col>
+        </v-row>
+      </form>
+  </v-card>
+</div>
 </template>
 
 <script>
@@ -149,7 +175,6 @@
 
   export default {
     mixins: [validationMixin],
-
     validations: {
       name: { required },
       email: { required, email },
@@ -166,10 +191,12 @@
     },
 
     data: () => ({
+      filter: ['Исполнительность', 'Надежность', 'Компетентность' ],
       user: JSON.parse(localStorage.getItem('user')),
       user_pos: JSON.parse(localStorage.getItem('user_pos')),
       user_dep: JSON.parse(localStorage.getItem('user_dep')),
 
+      getterEmail: '',
       dep_all: [
         // 'Газпромбанк',
         // 'Газпромбанк СПб'
@@ -282,6 +309,14 @@
         axios.put('/api/auth/updateUser/' + this.user.id, data)
         .then(res => {
           localStorage.setItem('user', JSON.stringify(res.data.user[0]))
+        })
+      },
+
+      sendFlame() {
+        axios.get('/api/auth/sendFlame/' + JSON.parse(localStorage.getItem('user')).id + '/' + this.getterEmail)
+        .then(res => {
+          console.log(res)
+          this.getterEmail = ""
         })
       }
     }

@@ -1,10 +1,10 @@
 <template>
+<div>
   <v-card>
-    <!-- If you want to hide survey, comment the lines below -->
-    <!-- <h2>SurveyJS Library - a sample survey below</h2> -->
     <survey :survey="survey"></survey>
     <div id="surveyResult"></div>
   </v-card>
+</div>
 </template>
 
 <script>
@@ -17,7 +17,6 @@ import * as widgets from "surveyjs-widgets";
 
 import { init as customWidget } from "../components/customwidget";
 
-// widgets.icheck(SurveyVue);
 widgets.select2(SurveyVue);
 widgets.inputmask(SurveyVue);
 widgets.jquerybarrating(SurveyVue);
@@ -38,77 +37,89 @@ export default {
   },
   data() {
     var json = {
-    "title": "Наша крутая форма опроса",
-    "description": "Пожалуйста, отвечайте честно!",
-    "logoWidth": 60,
-    "logoHeight": 60,
-    "questions": [
+      pages: [
         {
-            "name": "name",
-            "type": "text",
-            "title": "Введите свое имя:",
-            "placeHolder": "Иван Иванов",
-            "isRequired": true
-        }, {
-            "name": "birthdate",
-            "type": "text",
-            "inputType": "date",
-            "title": "Дата рождения:",
-            "isRequired": true
-        }, {
-            "name": "color",
-            "type": "text",
-            "inputType": "color",
-            "title": "Любимый цвет:"
-        }, {
-            "name": "email",
-            "type": "text",
-            "inputType": "email",
-            "title": "Адрес электронной почти:",
-            "placeHolder": "example@example.com",
-            "isRequired": true,
-            "validators": [
+          name: "page1",
+          elements: [
+            {
+              type: "radiogroup",
+              name: "question1",
+              title:
+                "Оцените, насколько Вы удовлетворенны основными факторами трудовой жизни?",
+              choices: [
                 {
-                    "type": "email"
+                  value: "item1",
+                  text: "Удовлетворен"
+                },
+                {
+                  value: "item2",
+                  text: "Скорее удовлетворен"
+                },
+                {
+                  value: "item3",
+                  text: "Скорее неудовлетворен"
+                },
+                {
+                  value: "item4",
+                  text: "Неудовлетворен"
                 }
-            ]
+              ]
+            }
+          ]
         }
-    ]
-}
-
+      ],
+      "navigateToUrl": '/#/questioning',
+      "showCompletedPage": false,
+    };
 
     var model = new SurveyVue.Model(json);
-    model.completeText = "Завершить"
+    model.completeText = "Завершить";
 
     model.onComplete.add(function(result) {
       console.log(result.data);
-    model.onComplete
-    .add(function (result) {
-        document
-            .querySelector('#surveyResult')
-            .textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
-    });
-      axios.post("/api/auth/storeSurvey", result.data, {
+      axios
+        .post("/api/auth/poll", {'result': result.data, 'user_id': JSON.parse(localStorage.getItem('user')).id}, {
           headers: {
             "X-CSRF-TOKEN": window.Laravel.csrfToken
           }
         })
-        .then(res => console.log(res))
+        .then(res => {
+        axios.get('api/auth/checkStat')
+        .then(res => {
+            console.log(res.data.results.length)
+
+            for(let i = 0; i < res.data.results.length; i++) {
+                if (res.data.results[i].result = 'item1') {
+                    this.item1++;
+                }
+                else if (res.data.results[i].result = 'item2') {
+                    this.item2++;
+                }
+                else if (res.data.results[i].result = 'item3') {
+                    this.item3++;
+                }
+                else if (res.data.results[i].result = 'item4') {
+                    this.item4++;
+                }
+            }
+        })
+        });
     });
 
     return {
-      survey: model
+      survey: model,
+      
     };
   }
 };
 </script>
 
 <style>
-
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+
 </style>

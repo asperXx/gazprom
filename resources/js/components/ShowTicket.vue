@@ -3,7 +3,8 @@
     <v-card class="pl-5 pr-5 pt-3 pb-3" min-width="100%">
     <v-card-title>{{ ticket.title }}</v-card-title>
     <p v-html="ticket.body"></p>
-    <p>{{ ticket.flames }}</p>
+    <p>Отдел: {{ ticket.department }}</p>
+    <p>Поддержали: {{ ticket.flames }}</p>
     <hr />
     <h3>Комментарии</h3>
     <div v-for="(comment, id) in comments" :key="id">

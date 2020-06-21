@@ -3,6 +3,7 @@
     <v-btn v-if="!isCreate" @click="isCreate=true" class="align-self-start ml-5">Создать статью</v-btn>
     <v-select :items="items" label="Сортировать по дате" v-model="item" @change="sort"></v-select>
     <v-container>
+
     <v-card v-if="isCreate" min-width="97%" class="d-flex flex-column pa-6 justify-start">
       <v-card-text>
         <v-form>
@@ -37,12 +38,13 @@
       <hr />
       <br />
     </v-card>
+
     </v-container>
     <!-- <h2>Мои статьи</h2> -->
     <div v-for="(getPost, id) in getPosts" :key="getPost.id">
       <v-row>
         <v-col class="d-flex justify-center align-center sm-col-12">
-          <v-card class="ma-5 pa-10" max-width="120vh">
+          <v-card class="ma-5 pa-10" max-width="1000">
             <div>
               <router-link :to="{ name: 'showPost', params: { id: getPost.id } }">
                 <h3>{{ getPost.title }}</h3>

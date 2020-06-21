@@ -99,6 +99,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -478,7 +480,7 @@ var render = function() {
                       "v-card",
                       {
                         staticClass: "ma-5 pa-10",
-                        attrs: { "max-width": "120vh" }
+                        attrs: { "max-width": "1000" }
                       },
                       [
                         _c(

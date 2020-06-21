@@ -43,6 +43,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -123,7 +124,9 @@ var render = function() {
           _vm._v(" "),
           _c("p", { domProps: { innerHTML: _vm._s(_vm.ticket.body) } }),
           _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(_vm.ticket.flames))]),
+          _c("p", [_vm._v("Отдел: " + _vm._s(_vm.ticket.department))]),
+          _vm._v(" "),
+          _c("p", [_vm._v("Поддержали: " + _vm._s(_vm.ticket.flames))]),
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),

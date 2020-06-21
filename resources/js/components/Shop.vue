@@ -25,16 +25,7 @@
 export default {
     data () {
         return {
-            items: [
-                {'id': 0, 'name' : 'Скидка на обед', 'price' : 20, 'pic': 'https://avtozakony.ru/wp-content/uploads/2016/11/skidka-50-procentov1.jpg', 'desc' : "Description of bla bla and bla"},
-                {'id': 1, 'name' : 'Скидка на обед', 'price' : 20, 'pic': 'https://avtozakony.ru/wp-content/uploads/2016/11/skidka-50-procentov1.jpg', 'desc' : "Description of bla bla and bla"},
-                {'id': 2, 'name' : 'Скидка на обед', 'price' : 20, 'pic': 'https://avtozakony.ru/wp-content/uploads/2016/11/skidka-50-procentov1.jpg', 'desc' : "Description of bla bla and bla"},
-                {'id': 3, 'name' : 'Скидка на обед', 'price' : 20, 'pic': 'https://avtozakony.ru/wp-content/uploads/2016/11/skidka-50-procentov1.jpg', 'desc' : "Description of bla bla and bla"},
-                {'id': 4, 'name' : 'Скидка на обед', 'price' : 20, 'pic': 'https://avtozakony.ru/wp-content/uploads/2016/11/skidka-50-procentov1.jpg', 'desc' : "Description of bla bla and bla"},
-                {'id': 5, 'name' : 'Скидка на обед', 'price' : 20, 'pic': 'https://avtozakony.ru/wp-content/uploads/2016/11/skidka-50-procentov1.jpg', 'desc' : "Description of bla bla and bla"},
-                {'id': 6, 'name' : 'Скидка на обед', 'price' : 20, 'pic': 'https://avtozakony.ru/wp-content/uploads/2016/11/skidka-50-procentov1.jpg', 'desc' : "Description of bla bla and bla"},
-                {'id': 7, 'name' : 'Скидка на обед', 'price' : 20, 'pic': 'https://avtozakony.ru/wp-content/uploads/2016/11/skidka-50-procentov1.jpg', 'desc' : "Description of bla bla and bla"},
-            ],
+
         }
     },
     methods : {

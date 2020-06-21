@@ -76,7 +76,7 @@
         <v-select :items="itemSort" label="По дате" class="col-lg-4 col-mg-8"></v-select>
         </div>
       <div v-for="(getProp, id) in getProps" :key="id" class="card_wrap" :class="openWindow[getProp.id]" >
-        <v-card class="pa-3 card " rounded="20px" color='#0057B6'>
+        <v-card class="pa-3 card " rounded="20px">
           <v-card-title>
             <router-link :to="{ name: 'showTicket', params: { id: getProp.id } }">
               <h3 style="color: black;" v-html="getProp.title"></h3>
@@ -97,9 +97,11 @@
             <!-- <div>{{item.name}}</div> -->
             <v-spacer></v-spacer>
             <label class="mr-3 mb-0">
+              <router-link :to="{ name: 'showTicket', params: { id: getProp.id } }">
               <v-btn icon>
                 <v-icon>mdi-message-outline</v-icon>
               </v-btn>
+              </router-link>
               <!-- {{item.comments}} -->
             </label>
             <label class="mb-0">
@@ -272,7 +274,7 @@ export default {
   .talk_btn {text-decoration: none !important; color: rgb(0, 0, 0) !important; margin-top: 20px;}
   .row_wrap {position: relative; overflow: hidden; margin-right: -15px;}
   .card_wrap {position: relative; box-sizing: border-box; padding-right: 15px; width: 33.333333%; margin-bottom: 15px; float: left;}
-  .card {height: 250px; color: rgb(0, 0, 0) !important; }
+  .card {height: 350px; color: rgb(0, 0, 0) !important; }
   .card p {color: black;}
   .actions {position: absolute; width: 100%; left: 0; bottom: 0; padding: 16px; box-sizing: border-box;}
   .nonfloat {float: right;}

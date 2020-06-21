@@ -1,9 +1,9 @@
 <template>
     <div class="wrap_form">
         <h2>Поддержка</h2>
-        <hr>
+        <!-- <hr> -->
         <div>
-          <h3>Мои обращения</h3>
+          <!-- <h3>Мои обращения</h3> -->
           <div v-for="(feedback, id) in feedbacks" :key="id">
             <p>{{ feedback.created_at }}</p>
             <p>{{ feedback.feedback }}</p>

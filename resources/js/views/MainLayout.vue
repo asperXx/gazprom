@@ -23,7 +23,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link :to="'/test'">
+        <v-list-item link :to="'/proposal'">
           <v-list-item-action>
             <v-icon>mdi-view-dashboard</v-icon>
           </v-list-item-action>
@@ -43,7 +43,7 @@
 
         <v-list-item link :to="'/questioning'">
           <v-list-item-action>
-            <v-icon>fa-id-card</v-icon>
+            <v-icon>fa-poll</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Опросы</v-list-item-title>
@@ -61,10 +61,19 @@
 
         <v-list-item link :to="'/shop'">
           <v-list-item-action>
-            <v-icon>fa-question-circle</v-icon>
+            <v-icon>fa-shopping-cart</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Магазин</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link :to="'/faq'">
+          <v-list-item-action>
+            <v-icon>fa-question</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>FAQ</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 

@@ -32,4 +32,14 @@ class UserController extends Controller
         $dep_all = Department::all();
         return response()->json(['dep_all' => $dep_all]);
     }
+
+    public function sendFlame($user_id, $email) {
+        User::where('id', $user_id)->decrement('flames');
+        User::where('email', $email)->increment('flames');
+    }
+
+    public function chart() {
+        $users = User::orderBy('flames', 'desc')->get();
+        return response()->json(['users' => $users]);
+    }
 }

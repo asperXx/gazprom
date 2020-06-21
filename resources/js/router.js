@@ -16,7 +16,7 @@ const router = new Router({
     {
       path: '/proposal',
       name: 'proposal',
-      component: () => import('./components/Proposal.vue'),
+      component: () => import('./components/Test.vue'),
       meta: { requiresAuth: true, layout: 'main' }
     },
     {
@@ -28,7 +28,7 @@ const router = new Router({
     {
       path: '/questioning',
       name: 'questioning',
-      component: () => import('./views/Survey.vue'),
+      component: () => import('./views/SurveyMain.vue'),
       meta: { requiresAuth: true, layout: 'main' }
     },
     {
@@ -79,7 +79,18 @@ const router = new Router({
       component: () => import('./components/Test.vue'),
       meta: { requiresAuth: true, layout: 'main' }
     },
-
+    {
+      path: '/faq',
+      name: 'faq',
+      component: () => import('./components/faq.vue'),
+      meta: { requiresAuth: true, layout: 'main' }
+    },
+    {
+      path: '/chart',
+      name: 'chart',
+      component: () => import('./components/Chart.vue'),
+      meta: { requiresAuth: true, layout: 'main' }
+    },
   ]
 });
 

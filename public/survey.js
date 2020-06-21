@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["survey"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[15],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Survey.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************!*\
@@ -30,7 +30,6 @@ __webpack_require__.r(__webpack_exports__);
 var Survey = survey_vue__WEBPACK_IMPORTED_MODULE_0__["Survey"];
 Survey.cssType = "bootstrap";
 
- // widgets.icheck(SurveyVue);
 
 surveyjs_widgets__WEBPACK_IMPORTED_MODULE_2__["select2"](survey_vue__WEBPACK_IMPORTED_MODULE_0__);
 surveyjs_widgets__WEBPACK_IMPORTED_MODULE_2__["inputmask"](survey_vue__WEBPACK_IMPORTED_MODULE_0__);
@@ -50,52 +49,59 @@ survey_vue__WEBPACK_IMPORTED_MODULE_0__["Serializer"].addProperty("question", "t
   },
   data: function data() {
     var json = {
-      "title": "Наша крутая форма опроса",
-      "description": "Пожалуйста, отвечайте честно!",
-      "logoWidth": 60,
-      "logoHeight": 60,
-      "questions": [{
-        "name": "name",
-        "type": "text",
-        "title": "Введите свое имя:",
-        "placeHolder": "Иван Иванов",
-        "isRequired": true
-      }, {
-        "name": "birthdate",
-        "type": "text",
-        "inputType": "date",
-        "title": "Дата рождения:",
-        "isRequired": true
-      }, {
-        "name": "color",
-        "type": "text",
-        "inputType": "color",
-        "title": "Любимый цвет:"
-      }, {
-        "name": "email",
-        "type": "text",
-        "inputType": "email",
-        "title": "Адрес электронной почти:",
-        "placeHolder": "example@example.com",
-        "isRequired": true,
-        "validators": [{
-          "type": "email"
+      pages: [{
+        name: "page1",
+        elements: [{
+          type: "radiogroup",
+          name: "question1",
+          title: "Оцените, насколько Вы удовлетворенны основными факторами трудовой жизни?",
+          choices: [{
+            value: "item1",
+            text: "Удовлетворен"
+          }, {
+            value: "item2",
+            text: "Скорее удовлетворен"
+          }, {
+            value: "item3",
+            text: "Скорее неудовлетворен"
+          }, {
+            value: "item4",
+            text: "Неудовлетворен"
+          }]
         }]
-      }]
+      }],
+      "navigateToUrl": '/#/questioning',
+      "showCompletedPage": false
     };
     var model = new survey_vue__WEBPACK_IMPORTED_MODULE_0__["Model"](json);
     model.completeText = "Завершить";
     model.onComplete.add(function (result) {
+      var _this = this;
+
       console.log(result.data);
-      model.onComplete.add(function (result) {
-        document.querySelector('#surveyResult').textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
-      });
-      axios.post("/api/auth/storeSurvey", result.data, {
+      axios.post("/api/auth/poll", {
+        'result': result.data,
+        'user_id': JSON.parse(localStorage.getItem('user')).id
+      }, {
         headers: {
           "X-CSRF-TOKEN": window.Laravel.csrfToken
         }
       }).then(function (res) {
-        return console.log(res);
+        axios.get('api/auth/checkStat').then(function (res) {
+          console.log(res.data.results.length);
+
+          for (var i = 0; i < res.data.results.length; i++) {
+            if (res.data.results[i].result = 'item1') {
+              _this.item1++;
+            } else if (res.data.results[i].result = 'item2') {
+              _this.item2++;
+            } else if (res.data.results[i].result = 'item3') {
+              _this.item3++;
+            } else if (res.data.results[i].result = 'item4') {
+              _this.item4++;
+            }
+          }
+        });
       });
     });
     return {
@@ -118,7 +124,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#app {\r\n  font-family: \"Avenir\", Helvetica, Arial, sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  color: #2c3e50;\n}\r\n", ""]);
+exports.push([module.i, "\n#app {\r\n  font-family: \"Avenir\", Helvetica, Arial, sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  color: #2c3e50;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -171,11 +177,17 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-card",
+    "div",
     [
-      _c("survey", { attrs: { survey: _vm.survey } }),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "surveyResult" } })
+      _c(
+        "v-card",
+        [
+          _c("survey", { attrs: { survey: _vm.survey } }),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "surveyResult" } })
+        ],
+        1
+      )
     ],
     1
   )

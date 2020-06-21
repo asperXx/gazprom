@@ -188,22 +188,16 @@ var render = function() {
     [
       _c("h2", [_vm._v("Поддержка")]),
       _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
       _c(
         "div",
-        [
-          _c("h3", [_vm._v("Мои обращения")]),
-          _vm._v(" "),
-          _vm._l(_vm.feedbacks, function(feedback, id) {
-            return _c("div", { key: id }, [
-              _c("p", [_vm._v(_vm._s(feedback.created_at))]),
-              _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(feedback.feedback))])
-            ])
-          })
-        ],
-        2
+        _vm._l(_vm.feedbacks, function(feedback, id) {
+          return _c("div", { key: id }, [
+            _c("p", [_vm._v(_vm._s(feedback.created_at))]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(feedback.feedback))])
+          ])
+        }),
+        0
       ),
       _vm._v(" "),
       _c("hr"),
