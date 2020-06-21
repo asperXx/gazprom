@@ -1,6 +1,17 @@
 <template>
 <div>
-  
+  <v-card class="pa-3 d-flex flex-column justify-center mb-3" width="95%">
+    <v-card-title>Достижения</v-card-title>
+    <v-row>
+      <div class="col-md-2 d-flex-wrap justify-center" v-for="(medal, id) in medals" :key="id">
+        <p style="text-align: center;">
+          {{ medal.title }}
+          </p><v-avatar style="display:block; margin: 0 auto;">
+            <img :src="medal.href" />
+          </v-avatar>
+      </div>
+    </v-row>
+  </v-card>
   <v-card class="pa-3 d-flex flex-column justify-center" width="95%">
     <v-card-title>Анкета пользователя</v-card-title>
     <form>  
@@ -143,24 +154,24 @@
     </div>
 
   </v-card>
-  <v-card class="pa-3 d-flex flex-column justify-center mt-3" width="95%">
-    <v-card-title>Отправить огоньки</v-card-title>
-    <form>  
+  <v-card class="pa-3 d-flex flex-column justify-center mt-3 mb-3" width="95%">
+    <v-card-title>Отправить комплимент</v-card-title>
+    <form class="pb-12">  
         <v-row>
-          <v-col cols="4" sm="4">
+          <v-col cols="12" sm="6" lg="4">
             <v-text-field
               v-model="getterEmail"
               label="E-mail"
               required
             ></v-text-field>
           </v-col>
-            <v-col cols="4" sm="4">
+            <v-col cols="12" lg="4" sm="6">
               <v-select
                 :items="filter"
                 label="Причина"
                 ></v-select>
               </v-col>
-            <v-col cols="4" sm="4">
+            <v-col cols="12" lg="4" sm="12">
               <v-btn class="mt-3" @click="sendFlame" v-if="disabled" color="primary">Отправить</v-btn>
             </v-col>
         </v-row>
@@ -174,6 +185,8 @@
   import { required, maxLength, email } from 'vuelidate/lib/validators'
 
   export default {
+    props: ['flame'],
+
     mixins: [validationMixin],
     validations: {
       name: { required },
@@ -191,6 +204,7 @@
     },
 
     data: () => ({
+      medals: [],
       filter: ['Исполнительность', 'Надежность', 'Компетентность' ],
       user: JSON.parse(localStorage.getItem('user')),
       user_pos: JSON.parse(localStorage.getItem('user_pos')),
@@ -235,6 +249,7 @@
       colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
       names: ['Встреча', 'Праздник', 'PTO', 'Пустешествие', 'Событие', 'День рождения', 'Конференция', 'Вечеринка'],
     }),
+
     computed: {
       selectErrors () {
         const errors = []
@@ -295,6 +310,12 @@
       for (let i = 0; i < this.user_dep.length; i++) {
         this.user_deps.push(this.user_dep[i].department);
       }
+
+      axios.get('/api/auth/getMedals/' + this.user.id)
+      .then(res => {
+        this.medals = res.data.user_medals
+        console.log(this.medals)
+      })
     },
 
     methods: {
@@ -315,8 +336,11 @@
       sendFlame() {
         axios.get('/api/auth/sendFlame/' + JSON.parse(localStorage.getItem('user')).id + '/' + this.getterEmail)
         .then(res => {
-          console.log(res)
+          console.log(res.data.user[0])
           this.getterEmail = ""
+          localStorage.setItem('user', JSON.stringify(res.data.user[0]))
+          this.$root.flame = res.data.user[0].flame
+          this.$emit('getFlame', flame);
         })
       }
     }

@@ -63,6 +63,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["setInteractionMode"])('eager');
@@ -186,149 +189,156 @@ var render = function() {
     "div",
     { staticClass: "wrap_form" },
     [
-      _c("h2", [_vm._v("Поддержка")]),
-      _vm._v(" "),
       _c(
-        "div",
-        _vm._l(_vm.feedbacks, function(feedback, id) {
-          return _c("div", { key: id }, [
-            _c("p", [_vm._v(_vm._s(feedback.created_at))]),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(feedback.feedback))])
-          ])
-        }),
-        0
-      ),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("h3", [_vm._v("Отправить обращение")]),
-      _vm._v(" "),
-      _c("ValidationObserver", {
-        ref: "observer",
-        scopedSlots: _vm._u([
-          {
-            key: "default",
-            fn: function(ref) {
-              var validate = ref.validate
-              var reset = ref.reset
-              return [
-                _c(
-                  "form",
-                  [
-                    _c("ValidationProvider", {
-                      attrs: { name: "title", rules: "required|min:10" },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "default",
-                            fn: function(ref) {
-                              var errors = ref.errors
-                              return [
-                                _c("v-text-field", {
-                                  attrs: {
-                                    "error-messages": errors,
-                                    label: "Тема обращения",
-                                    required: ""
-                                  },
-                                  model: {
-                                    value: _vm.name,
-                                    callback: function($$v) {
-                                      _vm.name = $$v
-                                    },
-                                    expression: "name"
-                                  }
-                                })
-                              ]
-                            }
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    }),
-                    _vm._v(" "),
-                    _c("ValidationProvider", {
-                      attrs: { name: "email", rules: "required|email" },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "default",
-                            fn: function(ref) {
-                              var errors = ref.errors
-                              return [
-                                _c("v-text-field", {
-                                  attrs: {
-                                    "error-messages": errors,
-                                    label: "E-mail для обратной связи",
-                                    required: ""
-                                  },
-                                  model: {
-                                    value: _vm.email,
-                                    callback: function($$v) {
-                                      _vm.email = $$v
-                                    },
-                                    expression: "email"
-                                  }
-                                })
-                              ]
-                            }
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    }),
-                    _vm._v(" "),
-                    _c("ValidationProvider", {
-                      attrs: { name: "text", rules: "required" },
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "default",
-                            fn: function(ref) {
-                              var errors = ref.errors
-                              return [
-                                _c("v-textarea", {
-                                  attrs: {
-                                    label: "Текст обращения",
-                                    "error-messages": errors,
-                                    "aria-required": ""
-                                  },
-                                  model: {
-                                    value: _vm.text,
-                                    callback: function($$v) {
-                                      _vm.text = $$v
-                                    },
-                                    expression: "text"
-                                  }
-                                })
-                              ]
-                            }
-                          }
-                        ],
-                        null,
-                        true
-                      )
-                    }),
-                    _vm._v(" "),
+        "v-card",
+        { staticClass: "pa-5 ma-2" },
+        [
+          _c("v-card-title", [_vm._v("Поддержка")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            _vm._l(_vm.feedbacks, function(feedback, id) {
+              return _c("div", { key: id }, [
+                _c("p", [_vm._v(_vm._s(feedback.created_at))]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(feedback.feedback))])
+              ])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("h3", [_vm._v("Отправить обращение")]),
+          _vm._v(" "),
+          _c("ValidationObserver", {
+            ref: "observer",
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function(ref) {
+                  var validate = ref.validate
+                  var reset = ref.reset
+                  return [
                     _c(
-                      "v-btn",
-                      {
-                        staticClass: "mr-4 but",
-                        attrs: { color: "#0D356C" },
-                        on: { click: _vm.submit }
-                      },
-                      [_vm._v("Отправить")]
+                      "form",
+                      [
+                        _c("ValidationProvider", {
+                          attrs: { name: "title", rules: "required|min:10" },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var errors = ref.errors
+                                  return [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        "error-messages": errors,
+                                        label: "Тема обращения",
+                                        required: ""
+                                      },
+                                      model: {
+                                        value: _vm.name,
+                                        callback: function($$v) {
+                                          _vm.name = $$v
+                                        },
+                                        expression: "name"
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c("ValidationProvider", {
+                          attrs: { name: "email", rules: "required|email" },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var errors = ref.errors
+                                  return [
+                                    _c("v-text-field", {
+                                      attrs: {
+                                        "error-messages": errors,
+                                        label: "E-mail для обратной связи",
+                                        required: ""
+                                      },
+                                      model: {
+                                        value: _vm.email,
+                                        callback: function($$v) {
+                                          _vm.email = $$v
+                                        },
+                                        expression: "email"
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c("ValidationProvider", {
+                          attrs: { name: "text", rules: "required" },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var errors = ref.errors
+                                  return [
+                                    _c("v-textarea", {
+                                      attrs: {
+                                        label: "Текст обращения",
+                                        "error-messages": errors,
+                                        "aria-required": ""
+                                      },
+                                      model: {
+                                        value: _vm.text,
+                                        callback: function($$v) {
+                                          _vm.text = $$v
+                                        },
+                                        expression: "text"
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            true
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "v-btn",
+                          {
+                            staticClass: "mr-4 but",
+                            attrs: { color: "#0D356C" },
+                            on: { click: _vm.submit }
+                          },
+                          [_vm._v("Отправить")]
+                        )
+                      ],
+                      1
                     )
-                  ],
-                  1
-                )
-              ]
-            }
-          }
-        ])
-      })
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      )
     ],
     1
   )

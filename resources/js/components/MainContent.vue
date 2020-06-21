@@ -1,8 +1,5 @@
 <template>
-<div>
     <sliderMain />
-    
-    </div>
 </template>
 
 

@@ -2,7 +2,7 @@
     <v-container class="flex-column">
         <survey />
     <div class="sobaka">
-      <h2>Проголосовали</h2>
+      <h2>Проголосовали {{ checked }}</h2>
       <v-progress-linear
       color="blue-grey"
       height="25"
@@ -48,6 +48,7 @@ export default {
     },
     data() {
         return{
+            checked: '',
             item1: 0,
             item2: 0,
             item3: 0,
@@ -61,6 +62,8 @@ export default {
     created() {
         axios.get('api/auth/checkStat')
         .then(res => {
+            this.$emit('stat', this.checked);
+            this.checked = res.data.results.length
             // console.log(res.data.results[7].result)
 
             for(let i = 0; i < res.data.results.length; i++) {

@@ -184,9 +184,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['flame'],
   mixins: [vuelidate__WEBPACK_IMPORTED_MODULE_0__["validationMixin"]],
   validations: {
     name: {
@@ -220,6 +232,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      medals: [],
       filter: ['Исполнительность', 'Надежность', 'Компетентность'],
       user: JSON.parse(localStorage.getItem('user')),
       user_pos: JSON.parse(localStorage.getItem('user_pos')),
@@ -309,6 +322,11 @@ __webpack_require__.r(__webpack_exports__);
     for (var i = 0; i < this.user_dep.length; i++) {
       this.user_deps.push(this.user_dep[i].department);
     }
+
+    axios.get('/api/auth/getMedals/' + this.user.id).then(function (res) {
+      _this.medals = res.data.user_medals;
+      console.log(_this.medals);
+    });
   },
   methods: {
     updateUser: function updateUser() {
@@ -325,8 +343,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get('/api/auth/sendFlame/' + JSON.parse(localStorage.getItem('user')).id + '/' + this.getterEmail).then(function (res) {
-        console.log(res);
+        console.log(res.data.user[0]);
         _this2.getterEmail = "";
+        localStorage.setItem('user', JSON.stringify(res.data.user[0]));
+        _this2.$root.flame = res.data.user[0].flame;
+
+        _this2.$emit('getFlame', flame);
       });
     }
   }
@@ -352,6 +374,42 @@ var render = function() {
   return _c(
     "div",
     [
+      _c(
+        "v-card",
+        {
+          staticClass: "pa-3 d-flex flex-column justify-center mb-3",
+          attrs: { width: "95%" }
+        },
+        [
+          _c("v-card-title", [_vm._v("Достижения")]),
+          _vm._v(" "),
+          _c(
+            "v-row",
+            _vm._l(_vm.medals, function(medal, id) {
+              return _c(
+                "div",
+                { key: id, staticClass: "col-md-2 d-flex-wrap justify-center" },
+                [
+                  _c("p", { staticStyle: { "text-align": "center" } }, [
+                    _vm._v(
+                      "\r\n          " + _vm._s(medal.title) + "\r\n          "
+                    )
+                  ]),
+                  _c(
+                    "v-avatar",
+                    { staticStyle: { display: "block", margin: "0 auto" } },
+                    [_c("img", { attrs: { src: medal.href } })]
+                  )
+                ],
+                1
+              )
+            }),
+            0
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
       _c(
         "v-card",
         {
@@ -691,21 +749,22 @@ var render = function() {
       _c(
         "v-card",
         {
-          staticClass: "pa-3 d-flex flex-column justify-center mt-3",
+          staticClass: "pa-3 d-flex flex-column justify-center mt-3 mb-3",
           attrs: { width: "95%" }
         },
         [
-          _c("v-card-title", [_vm._v("Отправить огоньки")]),
+          _c("v-card-title", [_vm._v("Отправить комплимент")]),
           _vm._v(" "),
           _c(
             "form",
+            { staticClass: "pb-12" },
             [
               _c(
                 "v-row",
                 [
                   _c(
                     "v-col",
-                    { attrs: { cols: "4", sm: "4" } },
+                    { attrs: { cols: "12", sm: "6", lg: "4" } },
                     [
                       _c("v-text-field", {
                         attrs: { label: "E-mail", required: "" },
@@ -723,7 +782,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-col",
-                    { attrs: { cols: "4", sm: "4" } },
+                    { attrs: { cols: "12", lg: "4", sm: "6" } },
                     [
                       _c("v-select", {
                         attrs: { items: _vm.filter, label: "Причина" }
@@ -734,7 +793,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-col",
-                    { attrs: { cols: "4", sm: "4" } },
+                    { attrs: { cols: "12", lg: "4", sm: "12" } },
                     [
                       _vm.disabled
                         ? _c(

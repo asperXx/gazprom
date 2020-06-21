@@ -59,6 +59,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      checked: '',
       item1: 0,
       item2: 0,
       item3: 0,
@@ -73,7 +74,10 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('api/auth/checkStat').then(function (res) {
-      // console.log(res.data.results[7].result)
+      _this.$emit('stat', _this.checked);
+
+      _this.checked = res.data.results.length; // console.log(res.data.results[7].result)
+
       for (var i = 0; i < res.data.results.length; i++) {
         if (res.data.results[i].result == 'item1') {
           _this.item1++;
@@ -170,7 +174,7 @@ var render = function() {
         "div",
         { staticClass: "sobaka" },
         [
-          _c("h2", [_vm._v("Проголосовали")]),
+          _c("h2", [_vm._v("Проголосовали " + _vm._s(_vm.checked))]),
           _vm._v(" "),
           _c(
             "v-progress-linear",

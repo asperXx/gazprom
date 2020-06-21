@@ -26,7 +26,13 @@ class BlogController extends Controller
         $post->status = 0;
         $post->user_id = $request->user_id;
 
-        $post->save();
+        if($post->save()) {
+            $count = count(Blog::where('user_id', $request->user_id)->get());
+            
+            if ($count == 3) {
+                DB::table('users_medals')->where('id', $request->user_id)->insert(['user_id' => $request->user_id, 'medal_id' => '1']);
+            }
+        }
     }
 
     public function show($id)
@@ -67,4 +73,5 @@ class BlogController extends Controller
 
         DB::table('post_comments')->insert(['post_id' => $post_id, 'user_id' => $user['id'], 'comment' => $comment]);
     }
+
 }

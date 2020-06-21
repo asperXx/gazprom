@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-card class="pa-5 ma-2">
     <h2>FAQ</h2>
     <v-expansion-panels>
       <v-expansion-panel>
@@ -86,5 +86,5 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
-  </div>
+  </v-card>
 </template>

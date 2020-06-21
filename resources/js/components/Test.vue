@@ -76,8 +76,8 @@
         <v-select :items="itemSort" label="По дате" class="col-lg-4 col-mg-8"></v-select>
         </div>
       <div v-for="(getProp, id) in getProps" :key="id" class="card_wrap" :class="openWindow[getProp.id]" >
-        <v-card class="pa-3 card " rounded="20px">
-          <v-card-title>
+        <v-card class="pa-3 card " rounded="20px" :color="getProp.color">
+          <v-card-title style="word-break: none; color: white;">
             <router-link :to="{ name: 'showTicket', params: { id: getProp.id } }">
               <h3 style="color: black;" v-html="getProp.title"></h3>
               </router-link>
@@ -91,10 +91,6 @@
           </p>
 
           <v-card-actions align="center" class="actions">
-            <!-- <v-avatar class="mr-3"> -->
-              <!-- <img :src="item.pic" :alt="item.name"> -->
-            <!-- </v-avatar> -->
-            <!-- <div>{{item.name}}</div> -->
             <v-spacer></v-spacer>
             <label class="mr-3 mb-0">
               <router-link :to="{ name: 'showTicket', params: { id: getProp.id } }">
@@ -102,7 +98,6 @@
                 <v-icon>mdi-message-outline</v-icon>
               </v-btn>
               </router-link>
-              <!-- {{item.comments}} -->
             </label>
             <label class="mb-0">
               <v-btn @click="like(getProp.id, id)" icon>
@@ -129,6 +124,13 @@ export default {
 
   data: () => ({
     users: [],
+
+    color: [
+      "#0D356C",
+      "#508BE2",
+      "#65CC7B"
+    ],
+
     itemSort: ['По возрастанию', 'По убыванию'],
     depItems: [
             'IT-отдел',
@@ -210,6 +212,8 @@ export default {
                 })
                 .then(res => {
                     this.getProps = res.data.tickets;
+                    this.users = res.data.users
+                    console.log(this.users[0][0].last_name)
                 })
             })
         }
@@ -269,13 +273,17 @@ export default {
 </script>
 
 <style>
+* {
+  text-decoration:none !important;
+word-break: none !important;
+}
   .hide {display: none; text-align: center;}
   .hide p {text-align: justify;}
   .talk_btn {text-decoration: none !important; color: rgb(0, 0, 0) !important; margin-top: 20px;}
   .row_wrap {position: relative; overflow: hidden; margin-right: -15px;}
   .card_wrap {position: relative; box-sizing: border-box; padding-right: 15px; width: 33.333333%; margin-bottom: 15px; float: left;}
   .card {height: 350px; color: rgb(0, 0, 0) !important; }
-  .card p {color: black;}
+  .card p {color: rgb(0, 0, 0);}
   .actions {position: absolute; width: 100%; left: 0; bottom: 0; padding: 16px; box-sizing: border-box;}
   .nonfloat {float: right;}
   .openWind.card_wrap { width: 66.6666666%; height: auto;}
@@ -290,4 +298,8 @@ export default {
   @media (max-width: 670px) {
     .card_wrap {width: 100%; float: none;}
   }
+
+  .v-card__text, .v-card__title {
+  word-break: normal; /* maybe !important  */
+}
 </style>

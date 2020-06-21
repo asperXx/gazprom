@@ -29,6 +29,13 @@
         </v-btn>
   
     </v-form>
+    <v-btn
+          color="#0057B6"
+          class="white--text mb-12"
+          @click="deleteProp(ticket.id)"
+
+        >Удалить
+        </v-btn>
     </v-card>
   </v-container>
 </template>
@@ -64,7 +71,18 @@ export default {
                 this.users = res.data.users;
                 
             });
-        }
+        },
+        deleteProp(id) {
+          console.log(id)
+        axios.get('/api/auth/deleteProp/' + id, {
+            headers: {
+                'X-CSRF-TOKEN': window.Laravel.csrfToken
+            }
+        })
+        .then(res => {
+          this.$router.push('/proposal')
+        })
+    },
     },
 
   created() {

@@ -1,6 +1,7 @@
 <template>
     <div class="wrap_form">
-        <h2>Поддержка</h2>
+      <v-card class="pa-5 ma-2">
+        <v-card-title>Поддержка</v-card-title>
         <!-- <hr> -->
         <div>
           <!-- <h3>Мои обращения</h3> -->
@@ -40,6 +41,8 @@
                 <v-btn class="mr-4 but" color="#0D356C" @click="submit">Отправить</v-btn>
             </form>
         </ValidationObserver>
+      </v-card>
+
     </div>
   
 </template>

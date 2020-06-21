@@ -87,6 +87,7 @@ export default {
         axios.get('api/auth/checkStat')
         .then(res => {
             console.log(res.data.results.length)
+            this.checked = res.data.results.length
 
             for(let i = 0; i < res.data.results.length; i++) {
                 if (res.data.results[i].result = 'item1') {
@@ -108,8 +109,15 @@ export default {
 
     return {
       survey: model,
-      
+      checked: ''
     };
+  },
+  created() {
+    // axios.get('api/auth/checkStat')
+    //     .then(res => {
+    //         console.log(res.data.results.length)
+    //         this.checked = res.data.results.length
+    //     });
   }
 };
 </script>

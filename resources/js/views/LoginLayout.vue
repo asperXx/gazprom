@@ -19,6 +19,7 @@ flat
           prepend-icon="mdi-account"
           type="text"
           v-model="email"
+          placeholder="admin@admin.com"
         ></v-text-field>
 
         <v-text-field
@@ -28,6 +29,7 @@ flat
           prepend-icon="mdi-lock"
           type="password"
           v-model="password"
+          placeholder="123456"
         ></v-text-field>
       </v-form>
     </v-card-text>
@@ -38,6 +40,8 @@ flat
   </v-card>
 </div>
 </div>
+
+
 </template>
 
 <script>

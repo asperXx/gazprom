@@ -15,9 +15,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -102,14 +99,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       items: [{
-        src: "https://www.firestock.ru/wp-content/uploads/2015/08/Dollarphotoclub_79864456-700x466.jpg",
+        src: "https://assets.iwgplc.com/image/upload/Regus/Website/homepage-product-office-space.jpg",
         text: "Газпромбанк проверил темпы строительных работ мостового перехода через реку Обь в Новосибирске"
       }, {
-        src: "https://assets.iwgplc.com/image/upload/Regus/Website/homepage-product-office-space.jpg",
+        src: "https://www.firestock.ru/wp-content/uploads/2015/08/Dollarphotoclub_79864456-700x466.jpg",
         text: "Спецпредложение «Летний ставкобум» от Газпромбанка: кредит наличными от 50 тысяч рублей под 7,2 % годовых"
       }, {
         src: "https://static.tildacdn.com/tild3334-3461-4765-a263-363639623363/office.jpg",
@@ -164,7 +162,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.imgSlider[data-v-cd7a6476] {\r\n  opacity: 0.8;\n}\n.sobaka[data-v-cd7a6476] {\r\n        position: relative;\r\n        overflow: hidden;\n}\n.sliderTitle[data-v-cd7a6476] {\r\n  position: absolute;\r\n  bottom: 50px;\r\n  font-size: 25px;\r\n  font-weight: 56;\r\n  color: white;\r\n  -webkit-text-stroke-width: 1px;\r\n  -webkit-text-stroke-color: black;\n}\n@media only screen and (max-width: 1920px) {\n.sliderM[data-v-cd7a6476] {\r\n    width: 1500px;\n}\n}\n@media (max-width: 1280px) {\n.sliderM[data-v-cd7a6476] {\r\n    top: -35px;\n}\n}\n@media (max-width: 720px) {\n.sliderM[data-v-cd7a6476] {\r\n    top: -35px;\r\n    text-align: center;\n}\n}\n@media (max-width: 480px) {\n.sliderM[data-v-cd7a6476] {\r\n    text-align: center;\n}\n}\r\n", ""]);
+exports.push([module.i, "\n.imgSlider[data-v-cd7a6476] {\r\n  opacity: 0.8;\n}\n.sobaka[data-v-cd7a6476] {\r\n      position: relative;\r\n      overflow: hidden;\n}\n.sliderTitle[data-v-cd7a6476] {\r\n  position: absolute;\r\n  bottom: 50px;\r\n  font-size: 25px;\r\n  font-weight: 56;\r\n  color: white;\r\n  -webkit-text-stroke-width: 1px;\r\n  -webkit-text-stroke-color: black;\n}\n@media only screen and (max-width: 1920px) {\n.sliderM[data-v-cd7a6476] {\r\n    width: 1500px;\n}\n}\n@media (max-width: 1280px) {\n.sliderM[data-v-cd7a6476] {\r\n    top: -35px;\n}\n}\n@media (max-width: 720px) {\n.sliderM[data-v-cd7a6476] {\r\n    top: -35px;\r\n    text-align: center;\n}\n}\n@media (max-width: 480px) {\n.sliderM[data-v-cd7a6476] {\r\n    text-align: center;\n}\n}\n.v-card__text[data-v-cd7a6476], .v-card__title[data-v-cd7a6476] {\r\n  word-break: normal; /* maybe !important  */\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -216,7 +214,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("sliderMain")], 1)
+  return _c("sliderMain")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -241,11 +239,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-container",
+    { attrs: { "flex-wrap": "" } },
     [
       _c(
         "v-card",
-        { staticClass: "pa-2 sliderM" },
+        { staticClass: "pa-2 sliderM mb-4" },
         [
           _c(
             "v-carousel",
@@ -278,39 +277,46 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "v-row",
-        _vm._l(_vm.events, function(event, i) {
-          return _c(
-            "v-col",
-            { key: i, attrs: { lg: "4", md: "6", cols: "12" } },
-            [
-              _c(
-                "v-card",
-                {
-                  staticClass:
-                    "flex-column align-space-between justify-center sobaka",
-                  attrs: { "min-height": "400px" }
-                },
+        "v-card",
+        [
+          _c(
+            "v-row",
+            { staticClass: "mb-12" },
+            _vm._l(_vm.events, function(event, i) {
+              return _c(
+                "v-col",
+                { key: i, attrs: { lg: "4", md: "6", cols: "12" } },
                 [
-                  _c("v-img", {
-                    staticClass: "top-0",
-                    attrs: {
-                      src: event.src,
-                      "max-width": "500px",
-                      "max-height": "200px"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("v-card-title", [_vm._v(_vm._s(event.title))]),
-                  _vm._v(" "),
-                  _c("v-card-text", [_vm._v(_vm._s(event.text))])
+                  _c(
+                    "v-card",
+                    {
+                      staticClass:
+                        "flex-column align-space-between justify-center sobaka",
+                      attrs: { "min-height": "400px" }
+                    },
+                    [
+                      _c("v-img", {
+                        staticClass: "top-0",
+                        attrs: {
+                          src: event.src,
+                          "max-width": "500px",
+                          "max-height": "200px"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-card-title", [_vm._v(_vm._s(event.title))]),
+                      _vm._v(" "),
+                      _c("v-card-text", [_vm._v(_vm._s(event.text))])
+                    ],
+                    1
+                  )
                 ],
                 1
               )
-            ],
+            }),
             1
           )
-        }),
+        ],
         1
       )
     ],

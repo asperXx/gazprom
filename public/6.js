@@ -130,17 +130,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       users: [],
+      color: ["#0D356C", "#508BE2", "#65CC7B"],
       itemSort: ['По возрастанию', 'По убыванию'],
       depItems: ['IT-отдел', 'Бухгалтерия'],
       levelItems: ['Уровень отдела', 'Уровень филиала', 'Уровень региона'],
@@ -210,6 +206,8 @@ __webpack_require__.r(__webpack_exports__);
             }
           }).then(function (res) {
             _this2.getProps = res.data.tickets;
+            _this2.users = res.data.users;
+            console.log(_this2.users[0][0].last_name);
           });
         });
       }
@@ -278,7 +276,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.hide {display: none; text-align: center;}\n.hide p {text-align: justify;}\n.talk_btn {text-decoration: none !important; color: rgb(0, 0, 0) !important; margin-top: 20px;}\n.row_wrap {position: relative; overflow: hidden; margin-right: -15px;}\n.card_wrap {position: relative; box-sizing: border-box; padding-right: 15px; width: 33.333333%; margin-bottom: 15px; float: left;}\n.card {height: 350px; color: rgb(0, 0, 0) !important;\n}\n.card p {color: black;}\n.actions {position: absolute; width: 100%; left: 0; bottom: 0; padding: 16px; box-sizing: border-box;}\n.nonfloat {float: right;}\n.openWind.card_wrap { width: 66.6666666%; height: auto;}\n.openWind.card_wrap .card { padding-bottom: 70px !important; height: 150vh;}\n.openWind .hide {display: block;}\n.buttext{position: absolute; bottom: 6px;}\n@media (max-width: 1000px) {\n.card_wrap {width: 50%;}\n.openWind.card_wrap{width: 100%;}\n}\n@media (max-width: 670px) {\n.card_wrap {width: 100%; float: none;}\n}\n", ""]);
+exports.push([module.i, "\n* {\r\n  text-decoration:none !important;\r\nword-break: none !important;\n}\n.hide {display: none; text-align: center;}\n.hide p {text-align: justify;}\n.talk_btn {text-decoration: none !important; color: rgb(0, 0, 0) !important; margin-top: 20px;}\n.row_wrap {position: relative; overflow: hidden; margin-right: -15px;}\n.card_wrap {position: relative; box-sizing: border-box; padding-right: 15px; width: 33.333333%; margin-bottom: 15px; float: left;}\n.card {height: 350px; color: rgb(0, 0, 0) !important;\n}\n.card p {color: rgb(0, 0, 0);}\n.actions {position: absolute; width: 100%; left: 0; bottom: 0; padding: 16px; box-sizing: border-box;}\n.nonfloat {float: right;}\n.openWind.card_wrap { width: 66.6666666%; height: auto;}\n.openWind.card_wrap .card { padding-bottom: 70px !important; height: 150vh;}\n.openWind .hide {display: block;}\n.buttext{position: absolute; bottom: 6px;}\n@media (max-width: 1000px) {\n.card_wrap {width: 50%;}\n.openWind.card_wrap{width: 100%;}\n}\n@media (max-width: 670px) {\n.card_wrap {width: 100%; float: none;}\n}\n.v-card__text, .v-card__title {\r\n  word-break: normal; /* maybe !important  */\n}\r\n", ""]);
 
 // exports
 
@@ -541,10 +539,16 @@ var render = function() {
                 [
                   _c(
                     "v-card",
-                    { staticClass: "pa-3 card ", attrs: { rounded: "20px" } },
+                    {
+                      staticClass: "pa-3 card ",
+                      attrs: { rounded: "20px", color: getProp.color }
+                    },
                     [
                       _c(
                         "v-card-title",
+                        {
+                          staticStyle: { "word-break": "none", color: "white" }
+                        },
                         [
                           _c(
                             "router-link",

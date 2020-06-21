@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class ShopController extends Controller
 {
     public function index() {
-        $shop = Shop::where('user_id',  0)->get();
+        $shop = Shop::all();
 
         return response()->json(compact('shop'));
     }

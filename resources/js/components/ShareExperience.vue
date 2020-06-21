@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="d-flex flex-column justify-start">
-    <v-btn v-if="!isCreate" @click="isCreate=true" class="align-self-start ml-5">Создать статью</v-btn>
+    <v-btn v-if="!isCreate" @click="isCreate=true" class="align-self-center">Создать статью</v-btn>
     <v-select :items="items" label="Сортировать по дате" v-model="item" @change="sort"></v-select>
     <v-container>
 
@@ -40,9 +40,10 @@
     </v-card>
 
     </v-container>
+    
     <!-- <h2>Мои статьи</h2> -->
     <div v-for="(getPost, id) in getPosts" :key="getPost.id">
-      <v-row>
+      <v-row v-if="!isLoad">
         <v-col class="d-flex justify-center align-center sm-col-12">
           <v-card class="ma-5 pa-10" max-width="1000">
             <div>
@@ -93,6 +94,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 export default {
   data() {
     return {
+      isLoad: false,
       item:'',
       items: ['По возрастанию', 'По убыванию'],
       isCreate: false,
@@ -122,6 +124,7 @@ export default {
     
     this.user_id = JSON.parse(localStorage.getItem("user")).id;
     console.log("USer id " + this.user_id);
+    this.isLoad = true;
     axios
       .put(
         "/api/auth/getMyPosts/" + this.user_id,
@@ -135,6 +138,7 @@ export default {
       .then(res => {
         this.getPosts = res.data.posts;
         this.likes = res.data.likes;
+        this.isLoad = false;
       });
   },
   methods: {
@@ -298,3 +302,9 @@ export default {
   }
 };
 </script>
+
+<style> 
+.v-card__text, .v-card__title {
+  word-break: normal; /* maybe !important  */
+}
+</style>

@@ -25,3 +25,9 @@ export default {
     }
 }
 </script>
+
+<style>
+* {
+word-break: none !important;
+}
+</style>

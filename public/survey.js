@@ -89,6 +89,7 @@ survey_vue__WEBPACK_IMPORTED_MODULE_0__["Serializer"].addProperty("question", "t
       }).then(function (res) {
         axios.get('api/auth/checkStat').then(function (res) {
           console.log(res.data.results.length);
+          _this.checked = res.data.results.length;
 
           for (var i = 0; i < res.data.results.length; i++) {
             if (res.data.results[i].result = 'item1') {
@@ -105,8 +106,15 @@ survey_vue__WEBPACK_IMPORTED_MODULE_0__["Serializer"].addProperty("question", "t
       });
     });
     return {
-      survey: model
+      survey: model,
+      checked: ''
     };
+  },
+  created: function created() {// axios.get('api/auth/checkStat')
+    //     .then(res => {
+    //         console.log(res.data.results.length)
+    //         this.checked = res.data.results.length
+    //     });
   }
 });
 

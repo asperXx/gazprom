@@ -36,6 +36,14 @@ class TicketController extends Controller
 
     public function store(Request $request)
     {
+        $colors = [
+            "#0D356C",
+            "#508BE2",
+            "#65CC7B"
+        ];
+
+        $color = $colors[rand(0, count($colors))];
+
         $ticket = new Ticket;
         $ticket->title = $request->title;
         $ticket->body = $request->body;
@@ -43,6 +51,7 @@ class TicketController extends Controller
         $ticket->department = $request->dep;
         $ticket->flames = 0;
         $ticket->user_id = $request->user_id;
+        $ticket->color = $color;
 
         $ticket->save();
     }

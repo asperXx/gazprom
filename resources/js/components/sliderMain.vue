@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-card class="pa-2 sliderM">
+  <v-container flex-wrap>
+    <v-card class="pa-2 sliderM mb-4">
       <v-carousel dark>
         <v-carousel-item
           class="imgSlider"
@@ -14,19 +14,20 @@
         </v-carousel-item>
       </v-carousel>
     </v-card>
-    <v-row>
-      <v-col lg="4" md="6" cols="12"
-      v-for="(event,i) in events"
-          :key="i">
+  <v-card>
+    <v-row class="mb-12">
+      <v-col lg="4" md="6" cols="12" v-for="(event,i) in events"
+          :key="i"
+      >
         <v-card class="flex-column align-space-between justify-center sobaka" min-height="400px" >
-          
           <v-img class="top-0" :src="event.src" max-width="500px" max-height="200px"></v-img>
           <v-card-title>{{event.title}}</v-card-title>
           <v-card-text>{{event.text}}</v-card-text>
         </v-card>
       </v-col>
     </v-row>
-  </div>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -35,11 +36,11 @@ export default {
     return {
       items: [
         {
-          src:"https://www.firestock.ru/wp-content/uploads/2015/08/Dollarphotoclub_79864456-700x466.jpg",
+          src:"https://assets.iwgplc.com/image/upload/Regus/Website/homepage-product-office-space.jpg",
           text:"Газпромбанк проверил темпы строительных работ мостового перехода через реку Обь в Новосибирске"
         },
         {
-          src: "https://assets.iwgplc.com/image/upload/Regus/Website/homepage-product-office-space.jpg",
+          src: "https://www.firestock.ru/wp-content/uploads/2015/08/Dollarphotoclub_79864456-700x466.jpg",
           text:"Спецпредложение «Летний ставкобум» от Газпромбанка: кредит наличными от 50 тысяч рублей под 7,2 % годовых"
         },
         {
@@ -95,8 +96,8 @@ export default {
   opacity: 0.8;
 }
 .sobaka {
-        position: relative;
-        overflow: hidden;
+      position: relative;
+      overflow: hidden;
     }
 .sliderTitle {
   position: absolute;
@@ -129,4 +130,8 @@ export default {
     text-align: center;
   }
 }
+.v-card__text, .v-card__title {
+  word-break: normal; /* maybe !important  */
+}
+
 </style>

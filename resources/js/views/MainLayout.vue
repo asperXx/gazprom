@@ -23,6 +23,15 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link :to="'/chart'">
+          <v-list-item-action>
+            <v-icon>fa-dragon</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Огненные сотрудники</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item link :to="'/proposal'">
           <v-list-item-action>
             <v-icon>mdi-view-dashboard</v-icon>
@@ -134,6 +143,10 @@ export default {
 
     this.user = JSON.parse(localStorage.getItem("user"));
     this.user_dep = JSON.parse(localStorage.getItem("user_dep"));
+  },
+
+  updated() {
+    this.flames = JSON.parse(localStorage.getItem('user')).flames
   },
 
   methods: {

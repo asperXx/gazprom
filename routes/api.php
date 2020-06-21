@@ -50,4 +50,6 @@ Route::group(['prefix' => 'auth'], function() {
     Route::get('checkStat', 'PollController@index');
 
     Route::get('chart', 'UserController@chart');
+
+    Route::get('getMedals/{id}', 'UserController@medals');
 });

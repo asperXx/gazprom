@@ -44,6 +44,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -75,10 +82,22 @@ __webpack_require__.r(__webpack_exports__);
         _this.comments = res.data.comments;
         _this.users = res.data.users;
       });
+    },
+    deleteProp: function deleteProp(id) {
+      var _this2 = this;
+
+      console.log(id);
+      axios.get('/api/auth/deleteProp/' + id, {
+        headers: {
+          'X-CSRF-TOKEN': window.Laravel.csrfToken
+        }
+      }).then(function (res) {
+        _this2.$router.push('/proposal');
+      });
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     console.log("Created");
     console.log(this.$route.params.id);
@@ -88,10 +107,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     }).then(function (res) {
       console.log(res.data.comments[0]);
-      _this2.ticket = res.data.ticket[0];
-      _this2.comments = res.data.comments;
-      _this2.users = res.data.users;
-      console.log(_this2.users);
+      _this3.ticket = res.data.ticket[0];
+      _this3.comments = res.data.comments;
+      _this3.users = res.data.users;
+      console.log(_this3.users);
     });
   }
 });
@@ -208,6 +227,20 @@ var render = function() {
               )
             ],
             1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "white--text mb-12",
+              attrs: { color: "#0057B6" },
+              on: {
+                click: function($event) {
+                  return _vm.deleteProp(_vm.ticket.id)
+                }
+              }
+            },
+            [_vm._v("Удалить\n      ")]
           )
         ],
         2

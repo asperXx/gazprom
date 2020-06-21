@@ -60,54 +60,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      dialog: false,
       itemGoods: '',
       items: ['По возрастанию цены', 'По убыванию цены'],
       goods: [],
@@ -169,7 +124,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card[data-v-90242c92] {position: relative; min-width: 400px; margin: 30px}\n.text[data-v-90242c92] {color: #fff !important}\n.button[data-v-90242c92] {bottom:6px;}\n.pic[data-v-90242c92] {display:block; position: relative; box-sizing: border-box; width:100%; height:200px; background-size: contain; background-position: center center;}\n.desc_wrap[data-v-90242c92] {height: 50px; position: relative; overflow: hidden;}\n", ""]);
+exports.push([module.i, "\n.card[data-v-90242c92] {position: relative; min-width: 400px; margin: 0px;}\n.text[data-v-90242c92] {color: #fff !important}\n.button[data-v-90242c92] {bottom:15px; position: absolute; right: 15px}\n.pic[data-v-90242c92] {display:block; position: relative; box-sizing: border-box; width:100%; height:200px; background-size: contain; background-position: center center;}\n.desc_wrap[data-v-90242c92] {height: 50px; position: relative; overflow: hidden;}\n", ""]);
 
 // exports
 
@@ -222,132 +177,32 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-container",
-    { attrs: { "flex-column": "" } },
+    "div",
+    { staticStyle: { width: "100%" } },
     [
       _c(
         "v-row",
+        { staticClass: "align-items-center justify-content-between" },
         [
+          _c("v-col", { attrs: { cols: "4" } }, [
+            _c("h2", [_vm._v("Магазин поощрений")])
+          ]),
+          _vm._v(" "),
           _c(
-            "v-dialog",
-            {
-              staticClass: "text-center buttonRules",
-              attrs: { width: "500" },
-              scopedSlots: _vm._u([
-                {
-                  key: "activator",
-                  fn: function(ref) {
-                    var on = ref.on
-                    var attrs = ref.attrs
-                    return [
-                      _c(
-                        "v-btn",
-                        _vm._g(
-                          _vm._b(
-                            { attrs: { color: "primary lighten-2", dark: "" } },
-                            "v-btn",
-                            attrs,
-                            false
-                          ),
-                          on
-                        ),
-                        [_vm._v("\n          Правила\n        ")]
-                      )
-                    ]
-                  }
-                }
-              ]),
-              model: {
-                value: _vm.dialog,
-                callback: function($$v) {
-                  _vm.dialog = $$v
-                },
-                expression: "dialog"
-              }
-            },
+            "v-col",
+            { attrs: { cols: "4" } },
             [
-              _vm._v(" "),
-              _c(
-                "v-card",
-                [
-                  _c(
-                    "v-card-title",
-                    {
-                      staticClass: "headline grey lighten-2",
-                      attrs: { "primary-title": "" }
-                    },
-                    [
-                      _vm._v(
-                        "\n          Политика использования Огоньков\n        "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("v-card-text", [
-                    _c("ol", [
-                      _c("li", [
-                        _vm._v(
-                          "Каждому сотруднику за вход в систему выдаётся по 1 огоньку 1 раз в день."
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", [
-                        _vm._v(
-                          "Валюта может быть использована сотрудниками в качестве комплемента своим коллегам. Сотрудник выбирает качество коллеги, характеризующее его работу (компетентность, надежность, динамичность, командность, ответственность), и указывает количество огоньков для передачи."
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", [
-                        _vm._v(
-                          "При внесении статьи в пункт «Предложения», сотруднику начисляются огоньки, в зависимости от типа статьи:\n• решение проблемы - 50 огоньков, в случае, если же идея принимается ответственным подразделением (решение остается на сайте, но голосование закрывается) сотрудник получает общую сумму огоньков, равную количеству огоньков, которым проголосовали за его статью (блок предложения выделяется синим градиентом в зависимости от количества набранных огоньков)."
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", [
-                        _vm._v(
-                          "Проблема – 25 огоньков, в случае же, если проблема признана сотрудниками актуальной (блок проблемы выделяется красным градиентом при 100 набранных огоньков), то огоньки набранные статьей и последующие начисляются автору."
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", [
-                        _vm._v(
-                          "При написании статьи в пункте «Делимся опытом», пользователь получает фиксированную сумму – 50 огоньков + лайки за статью, конвертированные в огоньки в соотношении 1:1.\nОгоньки можно тратить во внутреннем магазине, где представлены различные мерчи, купоны и сертификаты от партнеров."
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", [
-                        _vm._v(
-                          "В случае, когда пользователь проголосовал огоньками за решение проблемы, которое было принято ответственным подразделением к исполнению – пользователь получает удвоенное количество огоньков, инвестированных в статью."
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("v-divider"),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-actions",
-                    [
-                      _c("v-spacer"),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { color: "primary", text: "" },
-                          on: {
-                            click: function($event) {
-                              _vm.dialog = false
-                            }
-                          }
-                        },
-                        [_vm._v("\n            Закрыть\n          ")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
+              _c("v-select", {
+                attrs: { items: _vm.items, label: "Сортировка" },
+                on: { change: _vm.sortGoods },
+                model: {
+                  value: _vm.itemGoods,
+                  callback: function($$v) {
+                    _vm.itemGoods = $$v
+                  },
+                  expression: "itemGoods"
+                }
+              })
             ],
             1
           )
@@ -355,35 +210,29 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-select", {
-        attrs: { items: _vm.items, label: "Сортировка" },
-        on: { change: _vm.sortGoods },
-        model: {
-          value: _vm.itemGoods,
-          callback: function($$v) {
-            _vm.itemGoods = $$v
-          },
-          expression: "itemGoods"
-        }
-      }),
-      _vm._v(" "),
-      _c("h2", [_vm._v("Магазин поощрений")]),
-      _vm._v(" "),
       _c(
         "v-row",
-        { staticClass: "row_row" },
-        [
-          _c(
+        _vm._l(_vm.goods, function(good) {
+          return _c(
             "v-col",
-            {
-              staticClass: "d-flex flex-row",
-              attrs: { cols: "12", md: "8", lg: "4" }
-            },
-            _vm._l(_vm.goods, function(good) {
-              return _c(
+            { key: good.id, attrs: { cols: "12", lg: "6" } },
+            [
+              _c(
                 "v-card",
-                { key: good.id, staticClass: "card pa-3" },
+                { staticClass: "card" },
                 [
+                  _c("v-img", [
+                    _c("img", {
+                      attrs: {
+                        height: "200px",
+                        src:
+                          "https://avatars.mds.yandex.net/get-bunker/128809/2242b0f7baf7f84a7d0d6cd6020acd311fba9df8/orig"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", {}),
+                  _vm._v(" "),
                   _c("v-card-title", [_vm._v(_vm._s(good.title))]),
                   _vm._v(" "),
                   _c("v-card-text", [
@@ -424,10 +273,10 @@ var render = function() {
                 ],
                 1
               )
-            }),
+            ],
             1
           )
-        ],
+        }),
         1
       ),
       _vm._v(" "),
