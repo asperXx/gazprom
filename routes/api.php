@@ -13,6 +13,12 @@ Route::group(['prefix' => 'auth'], function() {
     Route::get('showProp/{id}', 'TicketController@show');
     Route::get('deleteProp/{title}', 'TicketController@destroy');
 
+    Route::post('postComment', 'TicketController@comment');
+    Route::post('postCommentBlog', 'BlogController@comment');
+
+    Route::post('postFeedback', 'FeedBackController@create');
+    Route::get('getMyFeedbacks/{id}', 'FeedBackController@getMyFeedbacks');
+
     Route::post('propLike', 'TicketController@like');
 });
 

@@ -53,6 +53,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["setInteractionMode"])('eager');
@@ -73,12 +84,28 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('email', _objectSpre
   data: function data() {
     return {
       name: '',
-      email: ''
+      email: '',
+      text: '',
+      feedbacks: []
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('api/auth/getMyFeedbacks/' + JSON.parse(localStorage.getItem('user')).id).then(function (res) {
+      console.log(res.data.feedbacks[0]);
+      _this.feedbacks = res.data.feedbacks;
+    });
   },
   methods: {
     submit: function submit() {
-      this.$refs.observer.validate();
+      // if (this.$refs.observer.validate()) {
+      axios.post('/api/auth/postFeedback', {
+        feedback: this.text,
+        user_id: JSON.parse(localStorage.getItem('user')).id
+      }).then(function (res) {
+        return console.log(res);
+      }); // }
     },
     clear: function clear() {
       this.name = '';
@@ -161,6 +188,28 @@ var render = function() {
     { staticClass: "wrap_form" },
     [
       _c("h2", [_vm._v("Поддержка")]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "div",
+        [
+          _c("h3", [_vm._v("Мои обращения")]),
+          _vm._v(" "),
+          _vm._l(_vm.feedbacks, function(feedback, id) {
+            return _c("div", { key: id }, [
+              _c("p", [_vm._v(_vm._s(feedback.created_at))]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(feedback.feedback))])
+            ])
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("h3", [_vm._v("Отправить обращение")]),
       _vm._v(" "),
       _c("ValidationObserver", {
         ref: "observer",

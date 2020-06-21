@@ -62,6 +62,11 @@ class TicketController extends Controller
         return response()->json(compact('ticket', 'comments', 'users'));
     }
 
+    public function getUser($id) {
+        $user = User::where('id', $id)->get();
+        return response()->json()->compact('user');
+    }
+
     public function edit($id)
     {
         //
@@ -94,7 +99,11 @@ class TicketController extends Controller
         return response()->json(compact('user'));
     }
 
-    public function checkLike() {
+    public function comment(Request $request) {
+        $comment = $request->get('comment');
+        $user = $request->get('user');
+        $ticket_id = $request->get('ticket_id');
 
+        DB::table('ticket_comments')->insert(['ticket_id' => $ticket_id, 'user_id' => $user['id'], 'comment' => $comment]);
     }
 }

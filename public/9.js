@@ -18,28 +18,78 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       post: {},
-      likes: {},
-      countLikes: 0
+      users: [],
+      likes: 0,
+      comments: [],
+      comment: ''
     };
   },
+  methods: {
+    postComment: function postComment(id) {
+      var _this = this;
+
+      axios.post('/api/auth/postCommentBlog', {
+        comment: this.comment,
+        user: JSON.parse(localStorage.getItem('user')),
+        post_id: this.post.id
+      }).then(function (res) {
+        return console.log(res);
+      });
+      this.comment = "";
+      axios.get("/api/auth/showPost/" + this.$route.params.id, {
+        headers: {
+          "X-CSRF-TOKEN": window.Laravel.csrfToken
+        }
+      }).then(function (res) {
+        _this.post = res.data.post[0];
+        _this.comments = res.data.comments;
+        _this.users = res.data.users;
+        _this.likes = res.data.likes.length;
+      });
+    }
+  },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     console.log("Created");
     console.log(this.$route.params.id);
-    axios.get('/api/auth/showPost/' + this.$route.params.id, {
+    axios.get("/api/auth/showPost/" + this.$route.params.id, {
       headers: {
-        'X-CSRF-TOKEN': window.Laravel.csrfToken
+        "X-CSRF-TOKEN": window.Laravel.csrfToken
       }
     }).then(function (res) {
-      console.log(res);
-      _this.post = res.data.post[0];
-      _this.likes = res.data.likes;
-      _this.countLikes = _this.likes.length;
+      _this2.post = res.data.post[0];
+      _this2.likes = res.data.likes.length;
+      _this2.comments = res.data.comments;
+      _this2.users = res.data.users;
     });
   }
 });
@@ -61,15 +111,99 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("p", [_vm._v("Post")]),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.post))]),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.likes))]),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.countLikes))])
-  ])
+  return _c(
+    "div",
+    [
+      _c("h2", [_vm._v(_vm._s(_vm.post.title))]),
+      _vm._v(" "),
+      _c("p", { domProps: { innerHTML: _vm._s(_vm.post.body) } }),
+      _vm._v(" "),
+      _c("p", [_vm._v("Лайков: " + _vm._s(_vm.likes))]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("h3", [_vm._v("Комментарии")]),
+      _vm._v(" "),
+      _vm._l(_vm.comments, function(comment, id) {
+        return _c(
+          "div",
+          { key: id },
+          [
+            _c(
+              "v-alert",
+              { attrs: { text: "", color: "info" } },
+              [
+                _c("div", [_vm._v(_vm._s(comment.created_at))]),
+                _vm._v(" "),
+                _c("div", [_vm._v(_vm._s(comment.comment))]),
+                _vm._v(" "),
+                _c("v-divider", {
+                  staticClass: "my-4 info",
+                  staticStyle: { opacity: "0.22" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "v-row",
+                  { attrs: { align: "center", "no-gutters": "" } },
+                  [
+                    _c("v-col", { staticClass: "grow" }, [
+                      _vm._v(
+                        "Пользователь: " +
+                          _vm._s(_vm.users[id][0].last_name) +
+                          " " +
+                          _vm._s(_vm.users[id][0].name)
+                      )
+                    ])
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      }),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "v-form",
+        [
+          _c("v-text-field", {
+            attrs: {
+              label: "Оставить комментарий",
+              name: "title",
+              type: "text"
+            },
+            model: {
+              value: _vm.comment,
+              callback: function($$v) {
+                _vm.comment = $$v
+              },
+              expression: "comment"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "white--text mb-12",
+              attrs: { color: "#0057B6" },
+              on: {
+                click: function($event) {
+                  return _vm.postComment(_vm.comment.id)
+                }
+              }
+            },
+            [_vm._v("Отправить\n      ")]
+          )
+        ],
+        1
+      )
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

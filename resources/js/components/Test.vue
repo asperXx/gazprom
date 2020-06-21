@@ -81,7 +81,7 @@
             <p style="color: black;" v-html="getProp.body.substr(0, 100)"></p>
           </v-card-text>
           
-          <p class="text-left mt-15">
+          <p class="text-left mt-15 buttext">
               {{ users[id][0].last_name }} {{ users[id][0].name }}
           </p>
 
@@ -274,6 +274,7 @@ export default {
   .openWind.card_wrap { width: 66.6666666%; height: auto;}
   .openWind.card_wrap .card { padding-bottom: 70px !important; height: 150vh;}
   .openWind .hide {display: block;}
+  .buttext{position: absolute; bottom: 6px;}
 
   @media (max-width: 1000px) {
     .card_wrap {width: 50%;}

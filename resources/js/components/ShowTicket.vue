@@ -1,46 +1,86 @@
 <template>
-    <div>
-        <h2>{{ ticket.title }}</h2>
-        <p v-html="ticket.body"></p>
-        <p>{{ ticket.flames }}</p>
-        <hr>
-        <h3>Комментарии</h3>
-        <v-alert text color="info">
-            <div>Maecenas nec odio et ante tincidunt tempus. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Curabitur turpis.</div>
-            <v-divider
-        class="my-4 info"
-        style="opacity: 0.22"
-      ></v-divider>
-      <v-row
-        align="center"
-        no-gutters
-      >
-        <v-col class="grow">Пользователь</v-col>
+  <div>
+    <h2>{{ ticket.title }}</h2>
+    <p v-html="ticket.body"></p>
+    <p>{{ ticket.flames }}</p>
+    <hr />
+    <h3>Комментарии</h3>
+    <div v-for="(comment, id) in comments" :key="id">
+      <v-alert text color="info">
+          <div>{{ comment.created_at }}</div>
+        <div>{{ comment.comment }}</div>
+        <v-divider class="my-4 info" style="opacity: 0.22"></v-divider>
+        <v-row align="center" no-gutters>
+          <v-col class="grow">Пользователь: {{ users[id][0].last_name }} {{ users[id][0].name }}</v-col>
         </v-row>
-        </v-alert>
+      </v-alert>
     </div>
+    <hr>
+    <v-form>
+        <v-text-field label="Оставить комментарий" name="title" type="text" v-model="comment"></v-text-field>
+        <v-btn
+          color="#0057B6"
+          class="white--text mb-12"
+          @click="postComment(comment.id)"
+
+        >Отправить
+        </v-btn>
+
+    </v-form>
+
+  </div>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                ticket: {}
-            }
-        },
+export default {
+  data() {
+    return {
+      ticket: {},
+      comments: [],
+      users: [],
 
-        created() {
-            console.log("Created")
-            console.log(this.$route.params.id)
-            axios.get('/api/auth/showProp/' + this.$route.params.id, {
+      comment: ''
+    };
+  },
+
+    methods: {
+        postComment (id) {
+            axios.post('/api/auth/postComment', { comment: this.comment, user: JSON.parse(localStorage.getItem('user')), ticket_id: this.ticket.id})
+            .then(res => console.log(res))
+
+            this.comment = ""
+            axios
+            .get("/api/auth/showProp/" + this.$route.params.id, {
                 headers: {
-                    'X-CSRF-TOKEN': window.Laravel.csrfToken
+                "X-CSRF-TOKEN": window.Laravel.csrfToken
                 }
             })
             .then(res => {
-                console.log(res)
-                this.ticket = res.data.ticket[0]
-            })
+                console.log(res.data.comments[0]);
+                this.ticket = res.data.ticket[0];
+                this.comments = res.data.comments;
+                this.users = res.data.users;
+                
+            });
         }
-    }
+    },
+
+  created() {
+    console.log("Created");
+    console.log(this.$route.params.id);
+    axios
+      .get("/api/auth/showProp/" + this.$route.params.id, {
+        headers: {
+          "X-CSRF-TOKEN": window.Laravel.csrfToken
+        }
+      })
+      .then(res => {
+        console.log(res.data.comments[0]);
+        this.ticket = res.data.ticket[0];
+        this.comments = res.data.comments;
+        this.users = res.data.users;
+        console.log(this.users);
+      });
+  }
+};
 </script>

@@ -270,7 +270,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.hide {display: none; text-align: center;}\n.hide p {text-align: justify;}\n.talk_btn {text-decoration: none !important; color: rgb(0, 0, 0) !important; margin-top: 20px;}\n.row_wrap {position: relative; overflow: hidden; margin-right: -15px;}\n.card_wrap {position: relative; box-sizing: border-box; padding-right: 15px; width: 33.333333%; margin-bottom: 15px; float: left;}\n.card {height: 250px; color: rgb(0, 0, 0) !important;\n}\n.card p {color: black;}\n.actions {position: absolute; width: 100%; left: 0; bottom: 0; padding: 16px; box-sizing: border-box;}\n.nonfloat {float: right;}\n.openWind.card_wrap { width: 66.6666666%; height: auto;}\n.openWind.card_wrap .card { padding-bottom: 70px !important; height: 150vh;}\n.openWind .hide {display: block;}\n@media (max-width: 1000px) {\n.card_wrap {width: 50%;}\n.openWind.card_wrap{width: 100%;}\n}\n@media (max-width: 670px) {\n.card_wrap {width: 100%; float: none;}\n}\n", ""]);
+exports.push([module.i, "\n.hide {display: none; text-align: center;}\n.hide p {text-align: justify;}\n.talk_btn {text-decoration: none !important; color: rgb(0, 0, 0) !important; margin-top: 20px;}\n.row_wrap {position: relative; overflow: hidden; margin-right: -15px;}\n.card_wrap {position: relative; box-sizing: border-box; padding-right: 15px; width: 33.333333%; margin-bottom: 15px; float: left;}\n.card {height: 250px; color: rgb(0, 0, 0) !important;\n}\n.card p {color: black;}\n.actions {position: absolute; width: 100%; left: 0; bottom: 0; padding: 16px; box-sizing: border-box;}\n.nonfloat {float: right;}\n.openWind.card_wrap { width: 66.6666666%; height: auto;}\n.openWind.card_wrap .card { padding-bottom: 70px !important; height: 150vh;}\n.openWind .hide {display: block;}\n.buttext{position: absolute; bottom: 6px;}\n@media (max-width: 1000px) {\n.card_wrap {width: 50%;}\n.openWind.card_wrap{width: 100%;}\n}\n@media (max-width: 670px) {\n.card_wrap {width: 100%; float: none;}\n}\n", ""]);
 
 // exports
 
@@ -548,7 +548,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("p", { staticClass: "text-left mt-15" }, [
+                    _c("p", { staticClass: "text-left mt-15 buttext" }, [
                       _vm._v(
                         "\n              " +
                           _vm._s(_vm.users[id][0].last_name) +

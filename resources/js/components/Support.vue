@@ -1,6 +1,17 @@
 <template>
     <div class="wrap_form">
         <h2>Поддержка</h2>
+        <hr>
+        <div>
+          <h3>Мои обращения</h3>
+
+          <div v-for="(feedback, id) in feedbacks" :key="id">
+            <p>{{ feedback.created_at }}</p>
+            <p>{{ feedback.feedback }}</p>
+          </div>
+        </div>
+        <hr>
+        <h3>Отправить обращение</h3>
         <ValidationObserver ref="observer" v-slot="{ validate, reset }">
             <form>
                 <ValidationProvider v-slot="{ errors }" name="title" rules="required|min:10">
@@ -63,11 +74,24 @@
     data: () => ({
       name: '',
       email: '',
+      text: '',
+      feedbacks: []
     }),
+
+    created() {
+      axios.get('api/auth/getMyFeedbacks/' + JSON.parse(localStorage.getItem('user')).id)
+      .then(res => {
+        console.log(res.data.feedbacks[0])
+        this.feedbacks = res.data.feedbacks
+      })
+    },
 
     methods: {
       submit () {
-        this.$refs.observer.validate()
+        // if (this.$refs.observer.validate()) {
+          axios.post('/api/auth/postFeedback', {feedback: this.text, user_id: JSON.parse(localStorage.getItem('user')).id})
+          .then(res => console.log(res))
+        // }
       },
       clear () {
         this.name = ''

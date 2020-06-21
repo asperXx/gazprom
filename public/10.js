@@ -32,24 +32,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      ticket: {}
+      ticket: {},
+      comments: [],
+      users: [],
+      comment: ''
     };
   },
+  methods: {
+    postComment: function postComment(id) {
+      var _this = this;
+
+      axios.post('/api/auth/postComment', {
+        comment: this.comment,
+        user: JSON.parse(localStorage.getItem('user')),
+        ticket_id: this.ticket.id
+      }).then(function (res) {
+        return console.log(res);
+      });
+      this.comment = "";
+      axios.get("/api/auth/showProp/" + this.$route.params.id, {
+        headers: {
+          "X-CSRF-TOKEN": window.Laravel.csrfToken
+        }
+      }).then(function (res) {
+        console.log(res.data.comments[0]);
+        _this.ticket = res.data.ticket[0];
+        _this.comments = res.data.comments;
+        _this.users = res.data.users;
+      });
+    }
+  },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     console.log("Created");
     console.log(this.$route.params.id);
-    axios.get('/api/auth/showProp/' + this.$route.params.id, {
+    axios.get("/api/auth/showProp/" + this.$route.params.id, {
       headers: {
-        'X-CSRF-TOKEN': window.Laravel.csrfToken
+        "X-CSRF-TOKEN": window.Laravel.csrfToken
       }
     }).then(function (res) {
-      console.log(res);
-      _this.ticket = res.data.ticket[0];
+      console.log(res.data.comments[0]);
+      _this2.ticket = res.data.ticket[0];
+      _this2.comments = res.data.comments;
+      _this2.users = res.data.users;
+      console.log(_this2.users);
     });
   }
 });
@@ -84,32 +124,85 @@ var render = function() {
       _vm._v(" "),
       _c("h3", [_vm._v("Комментарии")]),
       _vm._v(" "),
-      _c(
-        "v-alert",
-        { attrs: { text: "", color: "info" } },
-        [
-          _c("div", [
-            _vm._v(
-              "Maecenas nec odio et ante tincidunt tempus. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Curabitur turpis."
+      _vm._l(_vm.comments, function(comment, id) {
+        return _c(
+          "div",
+          { key: id },
+          [
+            _c(
+              "v-alert",
+              { attrs: { text: "", color: "info" } },
+              [
+                _c("div", [_vm._v(_vm._s(comment.created_at))]),
+                _vm._v(" "),
+                _c("div", [_vm._v(_vm._s(comment.comment))]),
+                _vm._v(" "),
+                _c("v-divider", {
+                  staticClass: "my-4 info",
+                  staticStyle: { opacity: "0.22" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "v-row",
+                  { attrs: { align: "center", "no-gutters": "" } },
+                  [
+                    _c("v-col", { staticClass: "grow" }, [
+                      _vm._v(
+                        "Пользователь: " +
+                          _vm._s(_vm.users[id][0].last_name) +
+                          " " +
+                          _vm._s(_vm.users[id][0].name)
+                      )
+                    ])
+                  ],
+                  1
+                )
+              ],
+              1
             )
-          ]),
-          _vm._v(" "),
-          _c("v-divider", {
-            staticClass: "my-4 info",
-            staticStyle: { opacity: "0.22" }
+          ],
+          1
+        )
+      }),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "v-form",
+        [
+          _c("v-text-field", {
+            attrs: {
+              label: "Оставить комментарий",
+              name: "title",
+              type: "text"
+            },
+            model: {
+              value: _vm.comment,
+              callback: function($$v) {
+                _vm.comment = $$v
+              },
+              expression: "comment"
+            }
           }),
           _vm._v(" "),
           _c(
-            "v-row",
-            { attrs: { align: "center", "no-gutters": "" } },
-            [_c("v-col", { staticClass: "grow" }, [_vm._v("Пользователь")])],
-            1
+            "v-btn",
+            {
+              staticClass: "white--text mb-12",
+              attrs: { color: "#0057B6" },
+              on: {
+                click: function($event) {
+                  return _vm.postComment(_vm.comment.id)
+                }
+              }
+            },
+            [_vm._v("Отправить\n      ")]
           )
         ],
         1
       )
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []

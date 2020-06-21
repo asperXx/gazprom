@@ -382,7 +382,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Изменить")]
+                        [_vm._v("Сохранить")]
                       )
                     : _vm._e(),
                   _vm._v(" "),
@@ -527,9 +527,8 @@ var render = function() {
                                                     attrs: { color: "#0057B6" },
                                                     on: {
                                                       click: function($event) {
-                                                        return _vm.editPost(
-                                                          getPost.id
-                                                        )
+                                                        _vm.editPost(getPost.id)
+                                                        _vm.isCreate = true
                                                       }
                                                     }
                                                   },

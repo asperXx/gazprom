@@ -70,7 +70,7 @@ const router = new Router({
     {
       path: '/shop',
       name: 'shop',
-      component: () => import('./components/Shop.vue'),
+      component: () => import('./components/ShopFire.vue'),
       meta: { requiresAuth: true, layout: 'main' }
     },
     {

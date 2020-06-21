@@ -29,7 +29,7 @@
           class="white--text"
           @click="updatePost();isCreate=false;"
           to="/shareExperience"
-        >Изменить</v-btn>
+        >Сохранить</v-btn>
         <v-btn
           v-if="isEdit"
           color="#0057B6"
@@ -61,7 +61,7 @@
                             <v-btn color="#0057B6" class="white--text " @click="deletePost(getPost.id)">Удалить</v-btn>
                         </v-col>
                         <v-col  cols="12" sm="4" xs="4" v-if="getPost.user_id == user_id">
-                            <v-btn color="#0057B6" class="white--text" @click="editPost(getPost.id)">Изменить</v-btn>
+                            <v-btn color="#0057B6" class="white--text" @click="editPost(getPost.id); isCreate=true">Изменить</v-btn>
                         </v-col>
                         <v-col cols="12" sm="4" xs="4">
                             <div v-if="checkLikes(getPost.id)">

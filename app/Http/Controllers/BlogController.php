@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Blog;
 use DB;
+use App\User;
 
 class BlogController extends Controller
 {
@@ -30,11 +31,19 @@ class BlogController extends Controller
 
     public function show($id)
     {
+        $users = [];
+
+        $comments = DB::table('post_comments')->where('post_id', $id)->get();
+
+        for ($i = 0; $i < count($comments); $i++) {
+            array_push($users, User::where('id', $comments[$i]->user_id)->get());
+        }
+
         $post = Blog::where('id', $id)->get();
 
         $likes = DB::table('likes')->where('post_id', $id)->get();
 
-        return response()->json(compact('post', 'likes'));
+        return response()->json(compact('post', 'likes', 'comments', 'users'));
     }
 
     public function update($id, Request $request)
@@ -49,5 +58,13 @@ class BlogController extends Controller
 
     public function like(Request $request) {
         DB::table('likes')->insert(['user_id' => $request->get('user'), 'post_id' => $request->get('post')]);
+    }
+
+    public function comment(Request $request) {
+        $comment = $request->get('comment');
+        $user = $request->get('user');
+        $post_id = $request->get('post_id');
+
+        DB::table('post_comments')->insert(['post_id' => $post_id, 'user_id' => $user['id'], 'comment' => $comment]);
     }
 }
