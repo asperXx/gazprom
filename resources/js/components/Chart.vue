@@ -6,20 +6,21 @@
 export default {
   data() {
     return {
-      chart: [],
       headers: [
-        { text: "ФИО", align: "start", sortable: false, value: "last_name" },
-        { text: "Отдел", value: "department" },
+        { text: "Фамилия", align: "start", value: "last_name" },
+        { text: "Имя", align: "start", value: "name" },
+        { text: "Отчетсво", align: "start", value: "second_name" },
+        // { text: "Отдел", value: "department" },
         { text: "Дата рождения", value: "birth_date" },
         { text: "Огоньки", value: "flames" },
       ],
-      users: this.chart
+      users: []
     };
   },
   created() {
     axios.get("api/auth/chart").then(res => {
-      console.log(res.data.users);
-      this.chart = res.data.users;
+      console.log(res.data.users[0]);
+      this.users = res.data.users;
     });
   }
 };

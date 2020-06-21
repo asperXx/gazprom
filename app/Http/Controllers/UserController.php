@@ -40,6 +40,13 @@ class UserController extends Controller
 
     public function chart() {
         $users = User::orderBy('flames', 'desc')->get();
-        return response()->json(['users' => $users]);
+        $users_dep = [];
+
+        for ($i = 0; $i < count($users); $i++) {
+            $dep = Department::where('id', $users[$i]['department_id'])->get('department');
+            array_push($users_dep, $dep);
+        }
+
+        return response()->json(['users' => $users, 'users_dep' => $users_dep]);
     }
 }

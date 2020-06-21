@@ -16,31 +16,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      chart: [],
       headers: [{
-        text: "ФИО",
+        text: "Фамилия",
         align: "start",
-        sortable: false,
         value: "last_name"
       }, {
-        text: "Отдел",
-        value: "department"
+        text: "Имя",
+        align: "start",
+        value: "name"
       }, {
+        text: "Отчетсво",
+        align: "start",
+        value: "second_name"
+      }, // { text: "Отдел", value: "department" },
+      {
         text: "Дата рождения",
         value: "birth_date"
       }, {
         text: "Огоньки",
         value: "flames"
       }],
-      users: this.chart
+      users: []
     };
   },
   created: function created() {
     var _this = this;
 
     axios.get("api/auth/chart").then(function (res) {
-      console.log(res.data.users);
-      _this.chart = res.data.users;
+      console.log(res.data.users[0]);
+      _this.users = res.data.users;
     });
   }
 });
