@@ -59,7 +59,7 @@ methods: {
 
     this.$store.dispatch('login', { email, password })
 
-   .then(() => this.$router.push({name: 'profile'}))
+   .then(() => this.$router.push({name: 'mainContent'}))
    .catch(err => console.log(err))
   },
 },

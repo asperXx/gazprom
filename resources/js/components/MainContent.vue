@@ -1,18 +1,7 @@
 <template>
 <div>
     <sliderMain />
-    <v-row>
-      <v-col lg="4" md="6" cols="12"
-      v-for="(event,i) in events"
-          :key="i">
-        <v-card class="d-flex flex-column align-center justify-center" relative height="400px">
-          
-          <v-img class="top-0" :src="event.src" width="500px" height="200px"></v-img>
-          <v-card-title>{{event.title}}</v-card-title>
-          <v-card-text>{{event.text}}</v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    
     </div>
 </template>
 
@@ -25,20 +14,6 @@ export default {
     },
     data() {
     return {
-      items: [
-        {
-          src:"https://www.firestock.ru/wp-content/uploads/2015/08/Dollarphotoclub_79864456-700x466.jpg",
-          text:"Газпромбанк проверил темпы строительных работ мостового перехода через реку Обь в Новосибирске"
-        },
-        {
-          src: "https://assets.iwgplc.com/image/upload/Regus/Website/homepage-product-office-space.jpg",
-          text:"Спецпредложение «Летний ставкобум» от Газпромбанка: кредит наличными от 50 тысяч рублей под 7,2 % годовых"
-        },
-        {
-          src:"https://static.tildacdn.com/tild3334-3461-4765-a263-363639623363/office.jpg",
-          text:"Газпромбанк опубликовал результаты деятельности за 1 квартал 2020 года в соответствии с Международными стандартами финансовой отчетности (МСФО), показав чистую прибыль в размере 18,4 млрд. руб."
-        }
-      ],
       events: [
         {
           title: "Sustainability. To be or not to be - Устоять или вырасти",
@@ -82,35 +57,3 @@ export default {
 };
 </script>
 
-<style scoped>
-@media only screen and (max-width: 1920px) {
-  .sliderM {
-    width: 1500px;
-  }
-}
-@media (max-width: 1280px) {
-  .sliderM {
-    top: -35px;
-  }
-}
-@media (max-width: 720px) {
-  .sliderM {
-    top: -35px;
-    width: 720px;
-  }
-}
-
-.imgSlider {
-  opacity: 0.8;
-}
-
-.sliderTitle {
-  position: absolute;
-  bottom: 50px;
-  font-size: 25px;
-  font-weight: 56;
-  color: white;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
-}
-</style>

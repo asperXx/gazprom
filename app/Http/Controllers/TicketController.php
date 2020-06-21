@@ -5,36 +5,35 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Ticket;
 use App\User;
+use DB;
 
 class TicketController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $tickets = Ticket::orderBy('created_at', 'desc')->get();
-        return response()->json(compact('tickets'));
+        $id_array = [];
+        $users = [];
+
+        for ($i = 0; $i < count($tickets); $i++) {
+            array_push($id_array, $tickets[$i]->user_id);
+        }
+
+        // dd($id_array);
+
+        for ($i = 0; $i < count($id_array); $i++) {
+            array_push($users, User::where('id', $id_array[$i])->get());
+        }
+
+        return response()->json(compact('tickets', 'users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $ticket = new Ticket;
@@ -48,47 +47,31 @@ class TicketController extends Controller
         $ticket->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($title)
+    public function show($id)
     {
-        $ticket = Ticket::where('title', $title)->get();
-        return response()->json(compact('ticket'));
+        $ticket = Ticket::where('id', $id)->get();
+        $users = [];
+
+        $comments = DB::table('ticket_comments')->where('ticket_id', $id)->get();
+
+        for ($i = 0; $i < count($comments); $i++) {
+            array_push($users, User::where('id', $comments[$i]->user_id)->get());
+        }
+
+        // dd($comments);
+        return response()->json(compact('ticket', 'comments', 'users'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         Ticket::where('id', $id)->delete();
@@ -100,11 +83,18 @@ class TicketController extends Controller
         $ticket_id = $request->get('ticket_id');
         
         // $author_id = $request->get('')
-        // Ticket::where('id', $ticket_id)->increment('flames');
+
+        Ticket::where('id', $ticket_id)->increment('flames');
 
         User::where('id', $user_id)->decrement('flames');
 
+        Ticket::where('id', $ticket_id)->update(['clicked' => 1]);
+
         $user = User::where('id', $user_id)->get();
         return response()->json(compact('user'));
+    }
+
+    public function checkLike() {
+
     }
 }

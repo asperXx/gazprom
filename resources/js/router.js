@@ -73,6 +73,13 @@ const router = new Router({
       component: () => import('./components/Shop.vue'),
       meta: { requiresAuth: true, layout: 'main' }
     },
+    {
+      path: '/test',
+      name: 'test',
+      component: () => import('./components/Test.vue'),
+      meta: { requiresAuth: true, layout: 'main' }
+    },
+
   ]
 });
 

@@ -14,6 +14,18 @@
         </v-carousel-item>
       </v-carousel>
     </v-card>
+    <v-row>
+      <v-col lg="4" md="6" cols="12"
+      v-for="(event,i) in events"
+          :key="i">
+        <v-card class="flex-column align-space-between justify-center sobaka" min-height="400px" >
+          
+          <v-img class="top-0" :src="event.src" max-width="500px" max-height="200px"></v-img>
+          <v-card-title>{{event.title}}</v-card-title>
+          <v-card-text>{{event.text}}</v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -79,27 +91,13 @@ export default {
 </script>
 
 <style scoped>
-@media only screen and (max-width: 1920px) {
-  .sliderM {
-    width: 1500px;
-  }
-}
-@media (max-width: 1280px) {
-  .sliderM {
-    top: -35px;
-  }
-}
-@media (max-width: 720px) {
-  .sliderM {
-    top: -35px;
-    width: 720px;
-  }
-}
-
 .imgSlider {
   opacity: 0.8;
 }
-
+.sobaka {
+        position: relative;
+        overflow: hidden;
+    }
 .sliderTitle {
   position: absolute;
   bottom: 50px;
@@ -108,5 +106,27 @@ export default {
   color: white;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
+}
+@media only screen and (max-width: 1920px) {
+  .sliderM {
+    width: 1500px;
+  }
+}
+@media (max-width: 1280px) {
+  .sliderM {
+    top: -35px;
+    
+  }
+}
+@media (max-width: 720px) {
+  .sliderM {
+    top: -35px;
+    text-align: center;
+  }
+}
+@media (max-width: 480px) {
+  .sliderM {
+    text-align: center;
+  }
 }
 </style>

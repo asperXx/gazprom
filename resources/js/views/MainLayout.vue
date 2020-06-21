@@ -7,9 +7,9 @@
           <v-avatar class="profile" color="grey" size="150" tile>
             <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
           </v-avatar>
-          <v-list-item-content>
-            <v-list-item-title class="title">{{ user.last_name}} {{ user.name }}</v-list-item-title>
-            <v-list-item-subtitle :onFlames="onFlames" >{{ user_dep.department }} <div class="fa fa-fire"> {{ flames }}  
+          <v-list-item-content >
+            <v-list-item-title class="title text-center">{{ user.last_name}} {{ user.name }}</v-list-item-title>
+            <v-list-item-subtitle class="title text-center" :onFlames="onFlames" >{{ user_dep.department }} <div class="fa fa-fire"> {{ flames }}  
               </div></v-list-item-subtitle>
           </v-list-item-content>
         </div>
