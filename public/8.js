@@ -102,10 +102,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      page: 1,
       isLoad: false,
       item: '',
       items: ['По возрастанию', 'По убыванию'],
@@ -143,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
         "X-CSRF-TOKEN": window.Laravel.csrfToken
       }
     }).then(function (res) {
-      _this.getPosts = res.data.posts;
+      _this.getPosts = res.data.posts.data;
       _this.likes = res.data.likes;
       _this.isLoad = false;
     });
@@ -515,7 +524,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm._l(_vm.getPosts, function(getPost, id) {
+      _vm._l(_vm.getPosts, function(getPost) {
         return _c(
           "div",
           { key: getPost.id },
@@ -727,7 +736,26 @@ var render = function() {
           ],
           1
         )
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "text-center" },
+        [
+          _c("v-pagination", {
+            staticClass: "mb-12",
+            attrs: { length: 4, circle: "" },
+            model: {
+              value: _vm.page,
+              callback: function($$v) {
+                _vm.page = $$v
+              },
+              expression: "page"
+            }
+          })
+        ],
+        1
+      )
     ],
     2
   )

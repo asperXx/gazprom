@@ -42,7 +42,7 @@
     </v-container>
     
     <!-- <h2>Мои статьи</h2> -->
-    <div v-for="(getPost, id) in getPosts" :key="getPost.id">
+    <div v-for="getPost in getPosts" :key="getPost.id">
       <v-row v-if="!isLoad">
         <v-col class="d-flex justify-center align-center sm-col-12">
           <v-card class="ma-5 pa-10" max-width="1000">
@@ -86,6 +86,14 @@
         </v-col>
       </v-row>
     </div>
+    <div class="text-center">
+    <v-pagination
+      v-model="page"
+      :length="4"
+      circle
+      class="mb-12"
+    ></v-pagination>
+  </div>
   </v-container>
 </template>
 
@@ -94,6 +102,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 export default {
   data() {
     return {
+      page: 1,
       isLoad: false,
       item:'',
       items: ['По возрастанию', 'По убыванию'],
@@ -136,7 +145,7 @@ export default {
         }
       )
       .then(res => {
-        this.getPosts = res.data.posts;
+        this.getPosts = res.data.posts.data;
         this.likes = res.data.likes;
         this.isLoad = false;
       });

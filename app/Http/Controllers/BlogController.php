@@ -12,7 +12,9 @@ class BlogController extends Controller
 
     public function index(Request $request, $id)
     {
-        $posts = Blog::orderBy('created_at', 'desc')->get();
+        $posts = Blog::orderBy('created_at', 'desc')->paginate(5);
+        // dd($posts);
+
         $likes = DB::table('likes')->where('user_id', $request->get('user'))->get();
         return response()->json(compact('posts', 'likes'));
     }
