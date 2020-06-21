@@ -70,6 +70,11 @@
 
 <div>
     <div class="row_wrap">
+      <div class=" d-flex flex-row " cols="12">
+      <v-select :items="depItems" label="Фильтр по отделам" class="col-lg-4 col-mg-8"></v-select>
+        <v-select :items="levelItems" label="Фильтр по уровням" class="col-lg-4 col-mg-8"></v-select>
+        <v-select :items="itemSort" label="По дате" class="col-lg-4 col-mg-8"></v-select>
+        </div>
       <div v-for="(getProp, id) in getProps" :key="id" class="card_wrap" :class="openWindow[getProp.id]" >
         <v-card class="pa-3 card " rounded="20px" color='#0057B6'>
           <v-card-title>
@@ -122,7 +127,7 @@ export default {
 
   data: () => ({
     users: [],
-
+    itemSort: ['По возрастанию', 'По убыванию'],
     depItems: [
             'IT-отдел',
             'Бухгалтерия'

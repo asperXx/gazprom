@@ -94,10 +94,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      item: '',
+      items: ['По возрастанию', 'По убыванию'],
       isCreate: false,
       isEdit: "false",
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
@@ -136,6 +143,17 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    sort: function sort() {
+      if (this.itemGoods === 'По возрастанию') {
+        this.getPosts.sort(function (a, b) {
+          return a.price > b.price ? 1 : -1;
+        });
+      } else {
+        this.getPosts.sort(function (a, b) {
+          return a.price < b.price ? 1 : -1;
+        });
+      }
+    },
     checkLikes: function checkLikes(id) {
       for (var i = 0; i < this.likes.length; i++) {
         if (this.likes[i].post_id == id) {
@@ -300,119 +318,147 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _vm.isCreate
-        ? _c(
-            "v-card",
-            {
-              staticClass: "d-flex flex-column pa-6 justify-space-between",
-              attrs: { width: "97%" }
-            },
-            [
-              _c("h2", [_vm._v("Создать статью")]),
-              _vm._v(" "),
-              _c(
-                "v-card-text",
+      _c("v-select", {
+        attrs: { items: _vm.items, label: "Сортировать по дате" },
+        on: { change: _vm.sort },
+        model: {
+          value: _vm.item,
+          callback: function($$v) {
+            _vm.item = $$v
+          },
+          expression: "item"
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "v-container",
+        [
+          _vm.isCreate
+            ? _c(
+                "v-card",
+                {
+                  staticClass: "d-flex flex-column pa-6 justify-start",
+                  attrs: { "min-width": "97%" }
+                },
                 [
                   _c(
-                    "v-form",
+                    "v-card-text",
                     [
-                      _c("v-text-field", {
-                        attrs: {
-                          label: "Название",
-                          name: "title",
-                          type: "text"
-                        },
-                        model: {
-                          value: _vm.post.title,
-                          callback: function($$v) {
-                            _vm.$set(_vm.post, "title", $$v)
-                          },
-                          expression: "post.title"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("ckeditor", {
-                        attrs: { editor: _vm.editor, config: _vm.editorConfig },
-                        model: {
-                          value: _vm.post.body,
-                          callback: function($$v) {
-                            _vm.$set(_vm.post, "body", $$v)
-                          },
-                          expression: "post.body"
-                        }
-                      })
+                      _c(
+                        "v-form",
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              label: "Название",
+                              name: "title",
+                              type: "text"
+                            },
+                            model: {
+                              value: _vm.post.title,
+                              callback: function($$v) {
+                                _vm.$set(_vm.post, "title", $$v)
+                              },
+                              expression: "post.title"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("ckeditor", {
+                            attrs: {
+                              editor: _vm.editor,
+                              config: _vm.editorConfig
+                            },
+                            model: {
+                              value: _vm.post.body,
+                              callback: function($$v) {
+                                _vm.$set(_vm.post, "body", $$v)
+                              },
+                              expression: "post.body"
+                            }
+                          })
+                        ],
+                        1
+                      )
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _vm.isEdit
+                        ? _c(
+                            "v-btn",
+                            {
+                              staticClass: "white--text",
+                              attrs: {
+                                color: "#0057B6",
+                                to: "/shareExperience"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.isCreate = false
+                                }
+                              }
+                            },
+                            [_vm._v("Закрыть")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.isEdit
+                        ? _c(
+                            "v-btn",
+                            {
+                              staticClass: "white--text",
+                              attrs: {
+                                color: "#0057B6",
+                                to: "/shareExperience"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.updatePost()
+                                  _vm.isCreate = false
+                                }
+                              }
+                            },
+                            [_vm._v("Сохранить")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isEdit
+                        ? _c(
+                            "v-btn",
+                            {
+                              staticClass: "white--text",
+                              attrs: {
+                                color: "#0057B6",
+                                to: "/shareExperience"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.create()
+                                  _vm.isCreate = false
+                                }
+                              }
+                            },
+                            [_vm._v("Создать")]
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("br")
                 ],
                 1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-actions",
-                [
-                  _c("v-spacer"),
-                  _vm._v(" "),
-                  _vm.isEdit
-                    ? _c(
-                        "v-btn",
-                        {
-                          staticClass: "white--text",
-                          attrs: { color: "#0057B6", to: "/shareExperience" },
-                          on: {
-                            click: function($event) {
-                              _vm.isCreate = false
-                            }
-                          }
-                        },
-                        [_vm._v("Закрыть")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.isEdit
-                    ? _c(
-                        "v-btn",
-                        {
-                          staticClass: "white--text",
-                          attrs: { color: "#0057B6", to: "/shareExperience" },
-                          on: {
-                            click: function($event) {
-                              _vm.updatePost()
-                              _vm.isCreate = false
-                            }
-                          }
-                        },
-                        [_vm._v("Сохранить")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isEdit
-                    ? _c(
-                        "v-btn",
-                        {
-                          staticClass: "white--text",
-                          attrs: { color: "#0057B6", to: "/shareExperience" },
-                          on: {
-                            click: function($event) {
-                              _vm.create()
-                              _vm.isCreate = false
-                            }
-                          }
-                        },
-                        [_vm._v("Создать")]
-                      )
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _c("br")
-            ],
-            1
-          )
-        : _vm._e(),
+              )
+            : _vm._e()
+        ],
+        1
+      ),
       _vm._v(" "),
       _vm._l(_vm.getPosts, function(getPost, id) {
         return _c(
@@ -425,7 +471,7 @@ var render = function() {
                 _c(
                   "v-col",
                   {
-                    staticClass: "d-flex justify-center align-center sm-col-12 "
+                    staticClass: "d-flex justify-center align-center sm-col-12"
                   },
                   [
                     _c(
@@ -492,7 +538,7 @@ var render = function() {
                                                 _c(
                                                   "v-btn",
                                                   {
-                                                    staticClass: "white--text ",
+                                                    staticClass: "white--text",
                                                     attrs: { color: "#0057B6" },
                                                     on: {
                                                       click: function($event) {

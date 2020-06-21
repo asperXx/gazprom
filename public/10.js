@@ -42,6 +42,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -112,97 +113,104 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-container",
     [
-      _c("h2", [_vm._v(_vm._s(_vm.ticket.title))]),
-      _vm._v(" "),
-      _c("p", { domProps: { innerHTML: _vm._s(_vm.ticket.body) } }),
-      _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.ticket.flames))]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("h3", [_vm._v("Комментарии")]),
-      _vm._v(" "),
-      _vm._l(_vm.comments, function(comment, id) {
-        return _c(
-          "div",
-          { key: id },
-          [
-            _c(
-              "v-alert",
-              { attrs: { text: "", color: "info" } },
+      _c(
+        "v-card",
+        { staticClass: "pl-5 pr-5 pt-3 pb-3", attrs: { "min-width": "100%" } },
+        [
+          _c("v-card-title", [_vm._v(_vm._s(_vm.ticket.title))]),
+          _vm._v(" "),
+          _c("p", { domProps: { innerHTML: _vm._s(_vm.ticket.body) } }),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.ticket.flames))]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("h3", [_vm._v("Комментарии")]),
+          _vm._v(" "),
+          _vm._l(_vm.comments, function(comment, id) {
+            return _c(
+              "div",
+              { key: id },
               [
-                _c("div", [_vm._v(_vm._s(comment.created_at))]),
-                _vm._v(" "),
-                _c("div", [_vm._v(_vm._s(comment.comment))]),
-                _vm._v(" "),
-                _c("v-divider", {
-                  staticClass: "my-4 info",
-                  staticStyle: { opacity: "0.22" }
-                }),
-                _vm._v(" "),
                 _c(
-                  "v-row",
-                  { attrs: { align: "center", "no-gutters": "" } },
+                  "v-alert",
+                  { attrs: { text: "", color: "info" } },
                   [
-                    _c("v-col", { staticClass: "grow" }, [
-                      _vm._v(
-                        "Пользователь: " +
-                          _vm._s(_vm.users[id][0].last_name) +
-                          " " +
-                          _vm._s(_vm.users[id][0].name)
-                      )
-                    ])
+                    _c("div", [_vm._v(_vm._s(comment.created_at))]),
+                    _vm._v(" "),
+                    _c("div", [_vm._v(_vm._s(comment.comment))]),
+                    _vm._v(" "),
+                    _c("v-divider", {
+                      staticClass: "my-4 info",
+                      staticStyle: { opacity: "0.22" }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "v-row",
+                      { attrs: { align: "center", "no-gutters": "" } },
+                      [
+                        _c("v-col", { staticClass: "grow" }, [
+                          _vm._v(
+                            "Пользователь: " +
+                              _vm._s(_vm.users[id][0].last_name) +
+                              " " +
+                              _vm._s(_vm.users[id][0].name)
+                          )
+                        ])
+                      ],
+                      1
+                    )
                   ],
                   1
                 )
               ],
               1
             )
-          ],
-          1
-        )
-      }),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c(
-        "v-form",
-        [
-          _c("v-text-field", {
-            attrs: {
-              label: "Оставить комментарий",
-              name: "title",
-              type: "text"
-            },
-            model: {
-              value: _vm.comment,
-              callback: function($$v) {
-                _vm.comment = $$v
-              },
-              expression: "comment"
-            }
           }),
           _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
           _c(
-            "v-btn",
-            {
-              staticClass: "white--text mb-12",
-              attrs: { color: "#0057B6" },
-              on: {
-                click: function($event) {
-                  return _vm.postComment(_vm.comment.id)
+            "v-form",
+            [
+              _c("v-text-field", {
+                attrs: {
+                  label: "Оставить комментарий",
+                  name: "title",
+                  type: "text"
+                },
+                model: {
+                  value: _vm.comment,
+                  callback: function($$v) {
+                    _vm.comment = $$v
+                  },
+                  expression: "comment"
                 }
-              }
-            },
-            [_vm._v("Отправить\n      ")]
+              }),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  staticClass: "white--text mb-12",
+                  attrs: { color: "#0057B6" },
+                  on: {
+                    click: function($event) {
+                      return _vm.postComment(_vm.comment.id)
+                    }
+                  }
+                },
+                [_vm._v("Отправить\n      ")]
+              )
+            ],
+            1
           )
         ],
-        1
+        2
       )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []

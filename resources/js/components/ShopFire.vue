@@ -1,9 +1,15 @@
 <template>
     <v-container flex-column>
+      <v-select
+      :items="items"
+      label="Сортировка"
+      v-model="itemGoods"
+      @change="sortGoods"
+      ></v-select>
         <h2>Магазин поощрений</h2>
         <v-row class="row_row">
-            <v-col cols="12" sm="6" md="4" lg="3" v-for="good in goods" :key="good.id">
-              <v-card class="card pa-3">
+            <v-col cols="12" md="8" lg="4" class="d-flex flex-row">
+              <v-card class="card pa-3" v-for="good in goods" :key="good.id">
                 <v-card-title>{{ good.title }}</v-card-title>
                 <v-card-text>
                   <!-- <div :style="getBack(item.pic)" width="100%" class="pic"></div> -->
@@ -40,6 +46,8 @@ export default {
     
     data() {
         return {
+            itemGoods: '',
+            items: ['По возрастанию цены', 'По убыванию цены'],
             goods: [],
             user: JSON.parse(localStorage.getItem('user')),
             mygoods: [],
@@ -59,6 +67,13 @@ export default {
     },
 
     methods: {
+        sortGoods() {
+          if (this.itemGoods === 'По возрастанию цены') {
+            this.goods.sort((a, b) =>  a.price > b.price ? 1 : -1)
+          } else {
+            this.goods.sort((a, b) =>  a.price < b.price ? 1 : -1)
+          }
+        },
         buy(id) {
             axios.post('/api/auth/buygood', {'user_id': this.user.id, 'good_id': id})
 
@@ -77,9 +92,9 @@ export default {
 </script>
 
 <style scoped>
-  .card {position: relative; min-width: 400px;}
+  .card {position: relative; min-width: 400px; margin: 30px}
   .text {color: #fff !important}
-  .button {margin: 0 auto}
+  .button {bottom:6px;}
   .pic {display:block; position: relative; box-sizing: border-box; width:100%; height:200px; background-size: contain; background-position: center center;}
   .desc_wrap {height: 50px; position: relative; overflow: hidden;}
 </style>

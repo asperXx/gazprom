@@ -46,9 +46,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      itemGoods: '',
+      items: ['По возрастанию цены', 'По убыванию цены'],
       goods: [],
       user: JSON.parse(localStorage.getItem('user')),
       mygoods: []
@@ -65,6 +73,17 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    sortGoods: function sortGoods() {
+      if (this.itemGoods === 'По возрастанию цены') {
+        this.goods.sort(function (a, b) {
+          return a.price > b.price ? 1 : -1;
+        });
+      } else {
+        this.goods.sort(function (a, b) {
+          return a.price < b.price ? 1 : -1;
+        });
+      }
+    },
     buy: function buy(id) {
       var _this2 = this;
 
@@ -96,7 +115,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card[data-v-90242c92] {position: relative; min-width: 400px;}\n.text[data-v-90242c92] {color: #fff !important}\n.button[data-v-90242c92] {margin: 0 auto}\n.pic[data-v-90242c92] {display:block; position: relative; box-sizing: border-box; width:100%; height:200px; background-size: contain; background-position: center center;}\n.desc_wrap[data-v-90242c92] {height: 50px; position: relative; overflow: hidden;}\n", ""]);
+exports.push([module.i, "\n.card[data-v-90242c92] {position: relative; min-width: 400px; margin: 30px}\n.text[data-v-90242c92] {color: #fff !important}\n.button[data-v-90242c92] {bottom:6px;}\n.pic[data-v-90242c92] {display:block; position: relative; box-sizing: border-box; width:100%; height:200px; background-size: contain; background-position: center center;}\n.desc_wrap[data-v-90242c92] {height: 50px; position: relative; overflow: hidden;}\n", ""]);
 
 // exports
 
@@ -152,19 +171,34 @@ var render = function() {
     "v-container",
     { attrs: { "flex-column": "" } },
     [
+      _c("v-select", {
+        attrs: { items: _vm.items, label: "Сортировка" },
+        on: { change: _vm.sortGoods },
+        model: {
+          value: _vm.itemGoods,
+          callback: function($$v) {
+            _vm.itemGoods = $$v
+          },
+          expression: "itemGoods"
+        }
+      }),
+      _vm._v(" "),
       _c("h2", [_vm._v("Магазин поощрений")]),
       _vm._v(" "),
       _c(
         "v-row",
         { staticClass: "row_row" },
-        _vm._l(_vm.goods, function(good) {
-          return _c(
+        [
+          _c(
             "v-col",
-            { key: good.id, attrs: { cols: "12", sm: "6", md: "4", lg: "3" } },
-            [
-              _c(
+            {
+              staticClass: "d-flex flex-row",
+              attrs: { cols: "12", md: "8", lg: "4" }
+            },
+            _vm._l(_vm.goods, function(good) {
+              return _c(
                 "v-card",
-                { staticClass: "card pa-3" },
+                { key: good.id, staticClass: "card pa-3" },
                 [
                   _c("v-card-title", [_vm._v(_vm._s(good.title))]),
                   _vm._v(" "),
@@ -206,10 +240,10 @@ var render = function() {
                 ],
                 1
               )
-            ],
+            }),
             1
           )
-        }),
+        ],
         1
       ),
       _vm._v(" "),

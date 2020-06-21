@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <h2>{{ post.title }}</h2>
+  <v-container>
+    <v-card class="pl-5 pr-5 pt-3 pb-3" min-width="100%">
+    <v-card-title>{{ post.title }}</v-card-title>
     <p v-html="post.body"></p>
     <p>Лайков: {{ likes }}</p>
     <hr />
@@ -27,8 +28,8 @@
         </v-btn>
 
     </v-form>
-
-  </div>
+    </v-card>
+  </v-container>
 </template>
 
 <script>

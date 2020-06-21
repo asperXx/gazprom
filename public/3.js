@@ -12,6 +12,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
 /* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../store */ "./resources/js/store.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
 //
 //
 //
@@ -128,9 +133,12 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       depItems: ['IT-отдел', 'Бухгалтерия'],
       levelItems: ['Уровень отдела', 'Уровень филиала', 'Уровень региона'],
+      items: ['По возрастанию', 'По убыванию'],
       isEdit: "false",
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
       editorConfig: {// The configuration of the editor.
@@ -146,154 +154,152 @@ __webpack_require__.r(__webpack_exports__);
       user_id: '',
       isCreate: false,
       flames: JSON.parse(localStorage.getItem('user')).flames,
-      openWindow: {},
-      items: [{
-        'id': '1',
-        'title': 'Blablabla',
-        'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
-        'comments': 24,
-        'likes': 16,
-        "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
-        "name": "Просто Сережа",
-        'clicked': false,
-        'color': '#0057B6',
-        'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
-        'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
-      }, {
-        'id': '2',
-        'title': 'Blablabla',
-        'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
-        'comments': 24,
-        'likes': 16,
-        "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
-        "name": "Просто Сережа",
-        'clicked': true,
-        'color': '#65CC7B',
-        'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
-        'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
-      }, {
-        'id': '3',
-        'title': 'Blablabla',
-        'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
-        'comments': 24,
-        'likes': 16,
-        "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
-        "name": "Просто Сережа",
-        'clicked': false,
-        'color': '#F5984E',
-        'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
-        'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
-      }, {
-        'id': '4',
-        'title': 'Blablabla',
-        'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
-        'comments': 24,
-        'likes': 16,
-        "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
-        "name": "Просто Сережа",
-        'clicked': true,
-        'color': '#0057B6',
-        'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
-        'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
-      }, {
-        'id': '5',
-        'title': 'Blablabla',
-        'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
-        'comments': 24,
-        'likes': 16,
-        "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
-        "name": "Просто Сережа",
-        'clicked': false,
-        'color': '#0D356C',
-        'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
-        'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
-      }, {
-        'id': '6',
-        'title': 'Blablabla',
-        'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
-        'comments': 24,
-        'likes': 16,
-        "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
-        "name": "Просто Сережа",
-        'clicked': true,
-        'color': '#F5984E',
-        'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
-        'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
-      }, {
-        'id': '7',
-        'title': 'Blablabla',
-        'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
-        'comments': 24,
-        'likes': 16,
-        "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
-        "name": "Просто Сережа",
-        'clicked': false,
-        'color': '#0D356C',
-        'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
-        'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
-      }, {
-        'id': '8',
-        'title': 'Blablabla',
-        'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
-        'comments': 24,
-        'likes': 16,
-        "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
-        "name": "Просто Сережа",
-        'clicked': true,
-        'color': '#F5984E',
-        'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
-        'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
-      }, {
-        'id': '9',
-        'title': 'Blablabla',
-        'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
-        'comments': 24,
-        'likes': 16,
-        "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
-        "name": "Просто Сережа",
-        'clicked': false,
-        'color': '#0057B6',
-        'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
-        'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
-      }, {
-        'id': '10',
-        'title': 'Blablabla',
-        'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
-        'comments': 24,
-        'likes': 16,
-        "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
-        "name": "Просто Сережа",
-        'clicked': true,
-        'color': '#65CC7B',
-        'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
-        'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
-      }, {
-        'id': '11',
-        'title': 'Blablabla',
-        'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
-        'comments': 24,
-        'likes': 16,
-        "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
-        "name": "Просто Сережа",
-        'clicked': false,
-        'color': '#0D356C',
-        'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
-        'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
-      }, {
-        'id': '12',
-        'title': 'Blablabla',
-        'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
-        'comments': 24,
-        'likes': 16,
-        "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
-        "name": "Просто Сережа",
-        'clicked': true,
-        'color': '#0057B6',
-        'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
-        'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
-      }],
-      colors: ['primary', 'purple', 'deep-purple', 'cyan', 'green', 'orange', '#0057B6', '#0D356C']
-    };
+      openWindow: {}
+    }, _defineProperty(_ref, "items", [{
+      'id': '1',
+      'title': 'Blablabla',
+      'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
+      'comments': 24,
+      'likes': 16,
+      "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
+      "name": "Просто Сережа",
+      'clicked': false,
+      'color': '#0057B6',
+      'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
+      'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
+    }, {
+      'id': '2',
+      'title': 'Blablabla',
+      'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
+      'comments': 24,
+      'likes': 16,
+      "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
+      "name": "Просто Сережа",
+      'clicked': true,
+      'color': '#65CC7B',
+      'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
+      'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
+    }, {
+      'id': '3',
+      'title': 'Blablabla',
+      'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
+      'comments': 24,
+      'likes': 16,
+      "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
+      "name": "Просто Сережа",
+      'clicked': false,
+      'color': '#F5984E',
+      'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
+      'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
+    }, {
+      'id': '4',
+      'title': 'Blablabla',
+      'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
+      'comments': 24,
+      'likes': 16,
+      "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
+      "name": "Просто Сережа",
+      'clicked': true,
+      'color': '#0057B6',
+      'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
+      'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
+    }, {
+      'id': '5',
+      'title': 'Blablabla',
+      'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
+      'comments': 24,
+      'likes': 16,
+      "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
+      "name": "Просто Сережа",
+      'clicked': false,
+      'color': '#0D356C',
+      'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
+      'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
+    }, {
+      'id': '6',
+      'title': 'Blablabla',
+      'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
+      'comments': 24,
+      'likes': 16,
+      "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
+      "name": "Просто Сережа",
+      'clicked': true,
+      'color': '#F5984E',
+      'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
+      'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
+    }, {
+      'id': '7',
+      'title': 'Blablabla',
+      'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
+      'comments': 24,
+      'likes': 16,
+      "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
+      "name": "Просто Сережа",
+      'clicked': false,
+      'color': '#0D356C',
+      'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
+      'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
+    }, {
+      'id': '8',
+      'title': 'Blablabla',
+      'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
+      'comments': 24,
+      'likes': 16,
+      "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
+      "name": "Просто Сережа",
+      'clicked': true,
+      'color': '#F5984E',
+      'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
+      'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
+    }, {
+      'id': '9',
+      'title': 'Blablabla',
+      'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
+      'comments': 24,
+      'likes': 16,
+      "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
+      "name": "Просто Сережа",
+      'clicked': false,
+      'color': '#0057B6',
+      'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
+      'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
+    }, {
+      'id': '10',
+      'title': 'Blablabla',
+      'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
+      'comments': 24,
+      'likes': 16,
+      "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
+      "name": "Просто Сережа",
+      'clicked': true,
+      'color': '#65CC7B',
+      'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
+      'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
+    }, {
+      'id': '11',
+      'title': 'Blablabla',
+      'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
+      'comments': 24,
+      'likes': 16,
+      "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
+      "name": "Просто Сережа",
+      'clicked': false,
+      'color': '#0D356C',
+      'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
+      'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
+    }, {
+      'id': '12',
+      'title': 'Blablabla',
+      'desc': 'Et exercitation nisi laboris ea proident eu proident quis deserunt. Minim culpa fugiat voluptate elit nostrud duis culpa non anim. Consectetur pariatur do qui eiusmod non nulla anim exercitation voluptate eu cillum.',
+      'comments': 24,
+      'likes': 16,
+      "pic": "https://img2.freepng.ru/20180920/yko/kisspng-computer-icons-portable-network-graphics-avatar-ic-5ba3c66df14d32.3051789815374598219884.jpg",
+      "name": "Просто Сережа",
+      'clicked': true,
+      'color': '#0057B6',
+      'full_desc': 'Tempor voluptate commodo elit enim sit. Nisi deserunt adipisicing laborum ut in qui nulla cupidatat do Lorem non do voluptate officia. Do duis do quis irure adipisicing minim minim ipsum. Occaecat dolor do nostrud exercitation tempor veniam consectetur proident aliqua aliquip pariatur.',
+      'img': 'https://www.sostav.ru/images/news/2019/09/01/a2pzjhck.jpg'
+    }]), _defineProperty(_ref, "colors", ['primary', 'purple', 'deep-purple', 'cyan', 'green', 'orange', '#0057B6', '#0D356C']), _ref;
   },
   created: function created() {
     var _this = this;

@@ -4,7 +4,6 @@
         <hr>
         <div>
           <h3>Мои обращения</h3>
-
           <div v-for="(feedback, id) in feedbacks" :key="id">
             <p>{{ feedback.created_at }}</p>
             <p>{{ feedback.feedback }}</p>

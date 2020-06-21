@@ -1,16 +1,12 @@
 <template>
   <v-container fluid class="d-flex flex-column justify-start">
     <v-btn v-if="!isCreate" @click="isCreate=true" class="align-self-start ml-5">Создать статью</v-btn>
-    <v-card
-      v-if="isCreate"
-      width="97%"
-      class="d-flex flex-column pa-6 justify-space-between"
-    >
-      <h2>Создать статью</h2>
+    <v-select :items="items" label="Сортировать по дате" v-model="item" @change="sort"></v-select>
+    <v-container>
+    <v-card v-if="isCreate" min-width="97%" class="d-flex flex-column pa-6 justify-start">
       <v-card-text>
         <v-form>
           <v-text-field label="Название" name="title" type="text" v-model="post.title"></v-text-field>
-
           <ckeditor :editor="editor" v-model="post.body" :config="editorConfig"></ckeditor>
         </v-form>
       </v-card-text>
@@ -41,11 +37,12 @@
       <hr />
       <br />
     </v-card>
+    </v-container>
     <!-- <h2>Мои статьи</h2> -->
     <div v-for="(getPost, id) in getPosts" :key="getPost.id">
-      <v-row >
-        <v-col  class="d-flex justify-center align-center sm-col-12 ">
-          <v-card class="ma-5 pa-10"  max-width="120vh" >
+      <v-row>
+        <v-col class="d-flex justify-center align-center sm-col-12">
+          <v-card class="ma-5 pa-10" max-width="120vh">
             <div>
               <router-link :to="{ name: 'showPost', params: { id: getPost.id } }">
                 <h3>{{ getPost.title }}</h3>
@@ -56,21 +53,29 @@
               <v-card-actions class="d-flex flex-column justify-center align-center">
                 <v-spacer></v-spacer>
                 <div>
-                    <v-row justify="center" align="center" >
-                        <v-col cols="12" sm="4" xs="4" v-if="getPost.user_id == user_id">
-                            <v-btn color="#0057B6" class="white--text " @click="deletePost(getPost.id)">Удалить</v-btn>
-                        </v-col>
-                        <v-col  cols="12" sm="4" xs="4" v-if="getPost.user_id == user_id">
-                            <v-btn color="#0057B6" class="white--text" @click="editPost(getPost.id); isCreate=true">Изменить</v-btn>
-                        </v-col>
-                        <v-col cols="12" sm="4" xs="4">
-                            <div v-if="checkLikes(getPost.id)">
-                                <v-btn color="#0057B6" class="white--text" @click="like(getPost.id)">
-                                    <v-icon>fa-thumbs-up</v-icon>
-                                </v-btn>
-                            </div>
-                        </v-col>
-                    </v-row>
+                  <v-row justify="center" align="center">
+                    <v-col cols="12" sm="4" xs="4" v-if="getPost.user_id == user_id">
+                      <v-btn
+                        color="#0057B6"
+                        class="white--text"
+                        @click="deletePost(getPost.id)"
+                      >Удалить</v-btn>
+                    </v-col>
+                    <v-col cols="12" sm="4" xs="4" v-if="getPost.user_id == user_id">
+                      <v-btn
+                        color="#0057B6"
+                        class="white--text"
+                        @click="editPost(getPost.id); isCreate=true"
+                      >Изменить</v-btn>
+                    </v-col>
+                    <v-col cols="12" sm="4" xs="4">
+                      <div v-if="checkLikes(getPost.id)">
+                        <v-btn color="#0057B6" class="white--text" @click="like(getPost.id)">
+                          <v-icon>fa-thumbs-up</v-icon>
+                        </v-btn>
+                      </div>
+                    </v-col>
+                  </v-row>
                 </div>
               </v-card-actions>
             </div>
@@ -86,6 +91,8 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 export default {
   data() {
     return {
+      item:'',
+      items: ['По возрастанию', 'По убыванию'],
       isCreate: false,
       isEdit: "false",
       editor: ClassicEditor,
@@ -110,6 +117,7 @@ export default {
   },
 
   mounted() {
+    
     this.user_id = JSON.parse(localStorage.getItem("user")).id;
     console.log("USer id " + this.user_id);
     axios
@@ -128,6 +136,13 @@ export default {
       });
   },
   methods: {
+      sort() {
+          if (this.itemGoods === 'По возрастанию') {
+            this.getPosts.sort((a, b) =>  a.price > b.price ? 1 : -1)
+          } else {
+            this.getPosts.sort((a, b) =>  a.price < b.price ? 1 : -1)
+          }
+        },
     checkLikes(id) {
       for (let i = 0; i < this.likes.length; i++) {
         if (this.likes[i].post_id == id) {

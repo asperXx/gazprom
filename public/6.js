@@ -128,12 +128,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       users: [],
+      itemSort: ['По возрастанию', 'По убыванию'],
       depItems: ['IT-отдел', 'Бухгалтерия'],
       levelItems: ['Уровень отдела', 'Уровень филиала', 'Уровень региона'],
       isEdit: "false",
@@ -499,127 +505,153 @@ var render = function() {
         _c(
           "div",
           { staticClass: "row_wrap" },
-          _vm._l(_vm.getProps, function(getProp, id) {
-            return _c(
+          [
+            _c(
               "div",
-              {
-                key: id,
-                staticClass: "card_wrap",
-                class: _vm.openWindow[getProp.id]
-              },
+              { staticClass: " d-flex flex-row ", attrs: { cols: "12" } },
               [
-                _c(
-                  "v-card",
-                  {
-                    staticClass: "pa-3 card ",
-                    attrs: { rounded: "20px", color: "#0057B6" }
-                  },
-                  [
-                    _c(
-                      "v-card-title",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            attrs: {
-                              to: {
-                                name: "showTicket",
-                                params: { id: getProp.id }
-                              }
-                            }
-                          },
-                          [
-                            _c("h3", {
-                              staticStyle: { color: "black" },
-                              domProps: { innerHTML: _vm._s(getProp.title) }
-                            })
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("v-card-text", [
-                      _c("p", {
-                        staticStyle: { color: "black" },
-                        domProps: {
-                          innerHTML: _vm._s(getProp.body.substr(0, 100))
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "text-left mt-15 buttext" }, [
-                      _vm._v(
-                        "\n              " +
-                          _vm._s(_vm.users[id][0].last_name) +
-                          " " +
-                          _vm._s(_vm.users[id][0].name) +
-                          "\n          "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "v-card-actions",
-                      { staticClass: "actions", attrs: { align: "center" } },
-                      [
-                        _c("v-spacer"),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          { staticClass: "mr-3 mb-0" },
-                          [
-                            _c(
-                              "v-btn",
-                              { attrs: { icon: "" } },
-                              [_c("v-icon", [_vm._v("mdi-message-outline")])],
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          { staticClass: "mb-0" },
-                          [
-                            _c(
-                              "v-btn",
-                              {
-                                attrs: { icon: "" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.like(getProp.id, id)
-                                  }
-                                }
-                              },
-                              [
-                                getProp.clicked == 1
-                                  ? _c("v-icon", { attrs: { color: "red" } }, [
-                                      _vm._v("mdi-fire")
-                                    ])
-                                  : _c("v-icon", [_vm._v("mdi-fire")])
-                              ],
-                              1
-                            ),
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(getProp.flames) +
-                                "\n            "
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
+                _c("v-select", {
+                  staticClass: "col-lg-4 col-mg-8",
+                  attrs: { items: _vm.depItems, label: "Фильтр по отделам" }
+                }),
+                _vm._v(" "),
+                _c("v-select", {
+                  staticClass: "col-lg-4 col-mg-8",
+                  attrs: { items: _vm.levelItems, label: "Фильтр по уровням" }
+                }),
+                _vm._v(" "),
+                _c("v-select", {
+                  staticClass: "col-lg-4 col-mg-8",
+                  attrs: { items: _vm.itemSort, label: "По дате" }
+                })
               ],
               1
-            )
-          }),
-          0
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.getProps, function(getProp, id) {
+              return _c(
+                "div",
+                {
+                  key: id,
+                  staticClass: "card_wrap",
+                  class: _vm.openWindow[getProp.id]
+                },
+                [
+                  _c(
+                    "v-card",
+                    {
+                      staticClass: "pa-3 card ",
+                      attrs: { rounded: "20px", color: "#0057B6" }
+                    },
+                    [
+                      _c(
+                        "v-card-title",
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              attrs: {
+                                to: {
+                                  name: "showTicket",
+                                  params: { id: getProp.id }
+                                }
+                              }
+                            },
+                            [
+                              _c("h3", {
+                                staticStyle: { color: "black" },
+                                domProps: { innerHTML: _vm._s(getProp.title) }
+                              })
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-card-text", [
+                        _c("p", {
+                          staticStyle: { color: "black" },
+                          domProps: {
+                            innerHTML: _vm._s(getProp.body.substr(0, 100))
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "text-left mt-15 buttext" }, [
+                        _vm._v(
+                          "\n              " +
+                            _vm._s(_vm.users[id][0].last_name) +
+                            " " +
+                            _vm._s(_vm.users[id][0].name) +
+                            "\n          "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        { staticClass: "actions", attrs: { align: "center" } },
+                        [
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            { staticClass: "mr-3 mb-0" },
+                            [
+                              _c(
+                                "v-btn",
+                                { attrs: { icon: "" } },
+                                [_c("v-icon", [_vm._v("mdi-message-outline")])],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            { staticClass: "mb-0" },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { icon: "" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.like(getProp.id, id)
+                                    }
+                                  }
+                                },
+                                [
+                                  getProp.clicked == 1
+                                    ? _c(
+                                        "v-icon",
+                                        { attrs: { color: "red" } },
+                                        [_vm._v("mdi-fire")]
+                                      )
+                                    : _c("v-icon", [_vm._v("mdi-fire")])
+                                ],
+                                1
+                              ),
+                              _vm._v(
+                                "\n              " +
+                                  _vm._s(getProp.flames) +
+                                  "\n            "
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            })
+          ],
+          2
         )
       ])
     ],

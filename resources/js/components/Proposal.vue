@@ -2,7 +2,9 @@
   <v-container fluid class="d-flex flex-column justify-start">
 
     <!------------------------------------------------------------------------------------->
+    
     <v-btn v-if="!isCreate" @click="isCreate=true" class="align-self-center mb-5">Предложить</v-btn>
+   
     <v-card
       v-if="isCreate"
       width="97%"
@@ -70,6 +72,7 @@
 
 <div>
     <div class="row_wrap">
+        
       <div v-for="(item, id) in items" :key="id" class="card_wrap" :class="openWindow[item.id]" >
         <v-card class="pa-3 card " rounded="20px" :color="item.color" @click="ggwp(item.id)">
           <v-card-title><h3>{{ item.title }}</h3></v-card-title>
@@ -125,7 +128,7 @@ export default {
           'Уровень филиала',
           'Уровень региона'
         ],
-
+        items: ['По возрастанию', 'По убыванию'],
         isEdit: "false",
         editor: ClassicEditor,
         editorConfig: {

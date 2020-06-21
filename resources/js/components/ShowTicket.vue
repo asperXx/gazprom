@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <h2>{{ ticket.title }}</h2>
+  <v-container>
+    <v-card class="pl-5 pr-5 pt-3 pb-3" min-width="100%">
+    <v-card-title>{{ ticket.title }}</v-card-title>
     <p v-html="ticket.body"></p>
     <p>{{ ticket.flames }}</p>
     <hr />
@@ -25,10 +26,10 @@
 
         >Отправить
         </v-btn>
-
+  
     </v-form>
-
-  </div>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
